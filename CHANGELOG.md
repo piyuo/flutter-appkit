@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.0.1](https://github.com/piyuo/flutter-appkit/compare/v2.0.0...v2.0.1) (2025-07-19)
+
+
+### Bug Fixes
+
+* update example environment variables and fix README URL for consistency [#146](https://github.com/piyuo/flutter-appkit/issues/146) ([603ad1c](https://github.com/piyuo/flutter-appkit/commit/603ad1ce731acd686568f34c2d64eb2b4b4e0bac))
+
 ## [2.0.0](https://github.com/piyuo/flutter-appkit/compare/v1.0.0...v2.0.0) (2025-07-19)
 
 

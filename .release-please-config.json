@@ -1,8 +1,15 @@
 {
+    "release-type": "dart",
     "packages": {
         ".": {
-            "release-type": "dart",
-            "extra-files": ["README.md"]
+            "extra-files": [
+                {
+                    "path": "README.md",
+                    "type": "text",
+                    "replace-marker": "<!-- x-release-please-version -->",
+                    "search": "ref: v[\\d\\.]+"
+                }
+            ]
         }
     }
 }

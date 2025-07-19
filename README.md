@@ -59,7 +59,7 @@ Add this to your package's `pubspec.yaml` file:
 dependencies:
   flutter_appkit:
     git:
-      url: https://github.com/piyuo/flutter_appkit.git
+      url: https://github.com/piyuo/flutter-appkit.git
       ref: v2.0.0 <!-- x-release-please-version -->
 ```
 

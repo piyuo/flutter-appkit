@@ -2,13 +2,7 @@
     "packages": {
         ".": {
             "release-type": "dart",
-            "extra-files": [
-                {
-                    "type": "generic",
-                    "path": "README.md",
-                    "glob": false
-                }
-            ]
+            "extra-files": ["README.md"]
         }
     }
 }

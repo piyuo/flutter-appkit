@@ -54,6 +54,7 @@ A robust Flutter foundation library that provides essential application infrastr
 ## Installation
 
 Add this to your package's `pubspec.yaml` file:
+version: v2.0.0 <!-- x-release-please-version -->
 
 ```yaml
 dependencies:
@@ -61,6 +62,7 @@ dependencies:
     git:
       url: https://github.com/piyuo/flutter-appkit.git
       ref: v2.0.0 <!-- x-release-please-version -->
+
 ```
 
 ## Quick Start

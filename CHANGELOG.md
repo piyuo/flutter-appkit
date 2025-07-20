@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.0.2](https://github.com/piyuo/flutter-appkit/compare/v2.0.1...v2.0.2) (2025-07-20)
+
+
+### Bug Fixes
+
+* readme.md not found in release-please workflow [#153](https://github.com/piyuo/flutter-appkit/issues/153) ([54cfa9c](https://github.com/piyuo/flutter-appkit/commit/54cfa9cc62e4dc90f5a056c3d738522bbfb96544))
+* release-please not updating version in readme.md [#151](https://github.com/piyuo/flutter-appkit/issues/151) ([db38455](https://github.com/piyuo/flutter-appkit/commit/db38455041e92586fe3e5dd12d8371bd486b23ba))
+* release-please workflow does not update version in readme.md [#156](https://github.com/piyuo/flutter-appkit/issues/156) ([e371eb6](https://github.com/piyuo/flutter-appkit/commit/e371eb6339b1821970f2570381b4c41979136448))
+
 ## [2.0.1](https://github.com/piyuo/flutter-appkit/compare/v2.0.0...v2.0.1) (2025-07-19)
 
 

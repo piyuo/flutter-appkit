@@ -1,5 +1,6 @@
 {
     ".": {
-        "release-type": "dart"
+        "release-type": "dart",
+        "version": "2.0.1"
     }
 }

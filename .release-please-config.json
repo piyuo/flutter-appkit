@@ -1,8 +1,0 @@
-{
-    "packages": {
-        ".": {
-            "release-type": "dart",
-            "extra-files": ["README.md"]
-        }
-    }
-}

@@ -1,14 +1,8 @@
 {
-    "release-type": "dart",
     "packages": {
         ".": {
-            "extra-files": [
-                {
-                    "type": "regex",
-                    "path": "README.md",
-                    "pattern": "ref: (?<version>[0-9]+\\.[0-9]+\\.[0-9]+) "
-                }
-            ]
+            "release-type": "dart",
+            "extra-files": ["README.md"]
         }
     }
 }

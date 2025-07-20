@@ -24,10 +24,6 @@ jobs:
             upload_url: ${{ steps.release.outputs.upload_url }}
 
         steps:
-            - name: Checkout repo
-              uses: actions/checkout@v4
-            - name: Print README.md
-              run: cat README.md
             - name: Run Release Please
               id: release
               uses: googleapis/release-please-action@v4

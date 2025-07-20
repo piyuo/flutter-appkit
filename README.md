@@ -60,7 +60,7 @@ dependencies:
   flutter_appkit:
     git:
       url: https://github.com/piyuo/flutter-appkit.git
-      ref: 2.0.0 <!-- x-release-please-version -->
+      ref: 2.0.1 <!-- x-release-please-version -->
 
 ```
 

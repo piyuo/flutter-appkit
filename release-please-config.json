@@ -3,7 +3,9 @@
     "release-type": "dart",
     "packages": {
         ".": {
-            "tag-prefix": ""
+            "tag-prefix": "",
+            "include-component-in-tag": false,
+            "extra-files": ["README.md"]
         }
     }
 }

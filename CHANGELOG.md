@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.0.2](https://github.com/piyuo/flutter-appkit/compare/v2.0.1...v2.0.2) (2025-07-20)
+
+
+### Bug Fixes
+
+* enhance release-please configuration for clarity and compliance [#181](https://github.com/piyuo/flutter-appkit/issues/181) ([87c1171](https://github.com/piyuo/flutter-appkit/commit/87c1171f7944c7b7f2062bff93f1c88b8c9280e4))
+* readme.md not found in release-please workflow [#153](https://github.com/piyuo/flutter-appkit/issues/153) ([54cfa9c](https://github.com/piyuo/flutter-appkit/commit/54cfa9cc62e4dc90f5a056c3d738522bbfb96544))
+* release please error due to invalid extra-files or version-file in config [#170](https://github.com/piyuo/flutter-appkit/issues/170) ([5550df2](https://github.com/piyuo/flutter-appkit/commit/5550df255e9b65f351a0c0e62a59767c264075f4))
+* release please fails due to invalid version in release-please-manifest.json [#168](https://github.com/piyuo/flutter-appkit/issues/168) ([9840435](https://github.com/piyuo/flutter-appkit/commit/9840435807066749094189a0a924e1137a248936))
+* release-please fails due to missing manifest config [#179](https://github.com/piyuo/flutter-appkit/issues/179) ([afe3e2e](https://github.com/piyuo/flutter-appkit/commit/afe3e2e665b65af2a80895cb521e2789e59fd8b9))
+* release-please not updating version in readme.md [#151](https://github.com/piyuo/flutter-appkit/issues/151) ([db38455](https://github.com/piyuo/flutter-appkit/commit/db38455041e92586fe3e5dd12d8371bd486b23ba))
+* release-please workflow does not update version in readme.md [#156](https://github.com/piyuo/flutter-appkit/issues/156) ([e371eb6](https://github.com/piyuo/flutter-appkit/commit/e371eb6339b1821970f2570381b4c41979136448))
+* release-please workflow does not update version in readme.md [#158](https://github.com/piyuo/flutter-appkit/issues/158) ([43ba381](https://github.com/piyuo/flutter-appkit/commit/43ba3814fa811a4a07c01ceae6b8d929071754e8))
+
 ## [2.0.1](https://github.com/piyuo/flutter-appkit/compare/v2.0.0...v2.0.1) (2025-07-19)
 
 

@@ -54,7 +54,6 @@ A robust Flutter foundation library that provides essential application infrastr
 ## Installation
 
 Add this to your package's `pubspec.yaml` file:
-ref: 2.0.0 <!-- x-release-please-version -->
 
 ```yaml
 dependencies:

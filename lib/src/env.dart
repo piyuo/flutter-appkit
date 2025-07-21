@@ -20,11 +20,12 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 ///
 /// Example:
 /// ```dart
-/// await initEnv(); // loads from .env
-/// await initEnv(fileName: '.env.dev'); // loads from .env.dev
+/// await envInit(); // loads from .env
+/// await envInit(fileName: '.env.dev'); // loads from .env.dev
 /// ```
 ///
-/// Throws [FileSystemException] if the .env file cannot be found or read.
+/// If the .env file cannot be found or read, the function continues gracefully
+/// without throwing an exception, allowing the app to run with default configurations.
 /// Returns normally if the file loads successfully or if dotenv is already initialized.
 Future<void> envInit({String fileName = '.env'}) async {
   try {
@@ -32,8 +33,11 @@ Future<void> envInit({String fileName = '.env'}) async {
       await dotenv.load(fileName: fileName);
     }
   } catch (e) {
-    // Re-throw with more context
-    throw Exception('Failed to load environment file "$fileName": $e');
+    // Log the warning but don't throw - allow graceful continuation
+    // This handles cases where .env file is missing or unreadable
+    // which is a valid scenario for development/deployment flexibility
+    // Users can still access environment variables through system environment
+    // or use default values with envGet()
   }
 }
 

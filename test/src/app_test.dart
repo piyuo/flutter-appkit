@@ -172,6 +172,35 @@ void main() {
         bool shouldEnableForInvalid = invalidDSN.isNotEmpty;
         expect(shouldEnableForInvalid, true); // Logic only checks if non-empty
       });
+
+      testWidgets('appRun should handle missing .env file gracefully', (WidgetTester tester) async {
+        // This test verifies that the app can start even when .env file is missing
+        // The envInit() function should handle the missing file gracefully
+
+        bool appStartedSuccessfully = false;
+
+        try {
+          // This should not throw an exception even if .env file is missing
+          await tester.runAsync(() async {
+            await appRun(() => const MockWidget());
+            appStartedSuccessfully = true;
+          });
+
+          // Pump and settle to ensure the app has fully loaded
+          await tester.pumpAndSettle();
+
+          // Verify the app started successfully
+          expect(appStartedSuccessfully, true);
+
+          // Verify that our MockWidget is present
+          expect(find.text('Test App'), findsOneWidget);
+
+          // Verify global context is available
+          expect(globalContext, isNotNull);
+        } catch (e) {
+          fail('App should not crash when .env file is missing, but got: $e');
+        }
+      });
     });
 
     group('Integration tests', () {

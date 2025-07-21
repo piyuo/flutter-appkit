@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.1.0](https://github.com/piyuo/flutter-appkit/compare/v2.0.0...v2.1.0) (2025-07-21)
+
+
+### Features
+
+* integrate GlobalContext for improved error handling in showError function [#194](https://github.com/piyuo/flutter-appkit/issues/194) ([10a5080](https://github.com/piyuo/flutter-appkit/commit/10a50802bdd1a99d4a0c133eacea2d85ac528bed))
+
+
+### Bug Fixes
+
+* app crashes when no .env file is present [#194](https://github.com/piyuo/flutter-appkit/issues/194) ([7636e73](https://github.com/piyuo/flutter-appkit/commit/7636e73040aa2e091067cf189f724de8078a55b8))
+* update sentry_flutter to version 9.4.1 and remove GlobalContext from appRun function [#194](https://github.com/piyuo/flutter-appkit/issues/194) ([0674c80](https://github.com/piyuo/flutter-appkit/commit/0674c8003227c629991136f40af6ea257370789f))
+* update version in pubspec.lock and improve error handling in showError function [#194](https://github.com/piyuo/flutter-appkit/issues/194) ([3251ce5](https://github.com/piyuo/flutter-appkit/commit/3251ce5dd76e5408a2b4a235961c96e1579cba53))
+
 ## [2.0.0](https://github.com/piyuo/flutter-appkit/compare/v1.0.2...v2.0.0) (2025-07-20)
 
 

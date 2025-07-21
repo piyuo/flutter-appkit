@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.1.1](https://github.com/piyuo/flutter-appkit/compare/v2.1.0...v2.1.1) (2025-07-21)
+
+
+### Bug Fixes
+
+* remove assertionerror check in app.dart catched function and log all errors [#197](https://github.com/piyuo/flutter-appkit/issues/197) ([12fc552](https://github.com/piyuo/flutter-appkit/commit/12fc5528844257ad3879ddcebd8a9eeedbeac354))
+
 ## [2.1.0](https://github.com/piyuo/flutter-appkit/compare/v2.0.0...v2.1.0) (2025-07-21)
 
 

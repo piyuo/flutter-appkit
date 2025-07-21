@@ -147,8 +147,8 @@ void _setupErrorHandlers() {
 
 @visibleForTesting
 Future<void> catched(dynamic e, StackTrace? stack) async {
-  // Ignore assertion errors in development mode
-  if (e is AssertionError || e == null) {
+  // Only ignore null errors for safety
+  if (e == null) {
     return;
   }
 

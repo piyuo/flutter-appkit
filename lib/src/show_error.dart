@@ -23,26 +23,22 @@ import 'l10n/l10n.dart';
 /// Returns a [Future<bool>] indicating whether the user chose to report anonymously.
 /// In test environments where GlobalContext is not initialized, prints to console instead.
 Future<bool> showError(dynamic e, StackTrace? stack) async {
-  // Check if globalContext is available
-  try {
-    // Attempt to access globalContext - this will throw in test environments
-    final context = globalContext;
-
-    final result = await showCupertinoDialog<bool>(
-      context: context,
-      routeSettings: const RouteSettings(name: 'error_dialog'),
-      builder: (context) => _ErrorDialog(error: e),
-    );
-    return result ?? false;
-  } catch (contextError) {
+  if (!isGlobalContextEnabled) {
     // GlobalContext not available (likely in tests), print to console instead
     debugPrint('ERROR: $e');
     if (stack != null) {
       debugPrint('STACK TRACE: $stack');
     }
     debugPrint('Note: Error dialog not shown - GlobalContext not initialized (likely in test environment)');
-    return false; // Default to not reporting in test scenarios
+    return false;
   }
+
+  final result = await showCupertinoDialog<bool>(
+    context: globalContext,
+    routeSettings: const RouteSettings(name: 'error_dialog'),
+    builder: (context) => _ErrorDialog(error: e),
+  );
+  return result ?? false;
 }
 
 /// A stateful widget that shows an error dialog with an anonymous reporting checkbox.

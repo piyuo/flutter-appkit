@@ -63,6 +63,9 @@ BuildContext get globalContext {
   return state!.context;
 }
 
+/// Checks if global context is initialized.
+bool get isGlobalContextEnabled => _debugInitialized;
+
 /// Flag to track if GlobalContext has been initialized
 bool _debugInitialized = false;
 

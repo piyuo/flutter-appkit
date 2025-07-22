@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.3.0](https://github.com/piyuo/flutter-appkit/compare/v2.2.0...v2.3.0) (2025-07-22)
+
+
+### Features
+
+* add common network functions for connectivity and external actions [#203](https://github.com/piyuo/flutter-appkit/issues/203) ([f1fbdfb](https://github.com/piyuo/flutter-appkit/commit/f1fbdfb4f0dc3ac26a4c2ab1e49e04489bc5602f))
+
 ## [2.2.0](https://github.com/piyuo/flutter-appkit/compare/v2.1.1...v2.2.0) (2025-07-22)
 
 

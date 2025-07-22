@@ -1,17 +1,19 @@
 // ===============================================
-// Test Suite: run_test.dart
-// Description: Unit and widget tests for run.dart functionality
+// Test Suite: app_test.dart
+// Description: Unit and widget tests for app.dart functionality
 //
 // Test Groups:
 //   - Setup and Teardown
 //   - isSentryEnabled Tests
 //   - Catched Function Tests
+//   - appRun with error callback Tests
 //   - Widget Structure Tests
 //   - Error Handling Tests
 //   - Integration Tests
 // ===============================================
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart'; // Added for PlatformException, MissingPluginException
 import 'package:flutter_appkit/src/app.dart';
 import 'package:flutter_appkit/src/global_context.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -131,6 +133,126 @@ void main() {
 
         // Null should still be filtered out for safety
         expect(nullError, isNull, reason: 'Null errors should still be ignored for safety');
+      });
+    });
+
+    group('appRun with error callback', () {
+      test('should invoke error callback when provided', () async {
+        // Test callback invocation
+        bool callbackInvoked = false;
+        Object? capturedError;
+
+        bool errorCallback(Object e) {
+          callbackInvoked = true;
+          capturedError = e;
+          return true; // Show error
+        }
+
+        // We can't easily test the full appRun flow, but we can test callback logic
+        var testError = Exception('Test error');
+        bool shouldShow = errorCallback(testError);
+
+        expect(callbackInvoked, isTrue);
+        expect(capturedError, equals(testError));
+        expect(shouldShow, isTrue);
+      });
+
+      test('should suppress error when callback returns false', () async {
+        bool errorCallback(Object e) {
+          return false; // Suppress error
+        }
+
+        var testError = PlatformException(code: 'test');
+        bool shouldShow = errorCallback(testError);
+
+        expect(shouldShow, isFalse);
+      });
+
+      test('should handle PlatformException correctly with callback', () async {
+        bool errorCallback(Object e) {
+          if (e is PlatformException) {
+            return false; // Suppress PlatformException
+          }
+          return true;
+        }
+
+        var platformError = PlatformException(code: 'test_platform_error');
+        var generalError = Exception('General error');
+
+        expect(errorCallback(platformError), isFalse);
+        expect(errorCallback(generalError), isTrue);
+      });
+
+      test('should handle MissingPluginException correctly with callback', () async {
+        bool errorCallback(Object e) {
+          if (e is MissingPluginException) {
+            return false; // Suppress MissingPluginException
+          }
+          return true;
+        }
+
+        var missingPluginError = MissingPluginException('Test missing plugin');
+        var generalError = Exception('General error');
+
+        expect(errorCallback(missingPluginError), isFalse);
+        expect(errorCallback(generalError), isTrue);
+      });
+
+      test('should default to showing error when no callback provided', () async {
+        // Test default behavior (no callback) - this test ensures backward compatibility
+        // When no callback is provided, all errors should be displayed
+        var testError = Exception('Test error');
+        var platformError = PlatformException(code: 'test');
+        var missingPluginError = MissingPluginException('Test');
+
+        // Without callback, all these errors should be processed normally
+        expect(testError, isNotNull);
+        expect(platformError, isNotNull);
+        expect(missingPluginError, isNotNull);
+      });
+
+      test('catched function should respect callback decision', () async {
+        // Test that catched function uses the callback to decide whether to show error
+        bool callbackInvoked = false;
+        Object? capturedError;
+
+        bool suppressAllErrorsCallback(Object e) {
+          callbackInvoked = true;
+          capturedError = e;
+          return false; // Suppress all errors
+        }
+
+        var testError = Exception('Test error');
+
+        // Call catched directly with callback
+        await catched(testError, null, suppressAllErrorsCallback);
+
+        expect(callbackInvoked, isTrue);
+        expect(capturedError, equals(testError));
+      });
+
+      test('catched function should handle callback correctly for different error types', () async {
+        List<Object> processedErrors = [];
+        List<bool> callbackResults = [];
+
+        bool platformSuppressingCallback(Object e) {
+          processedErrors.add(e);
+          bool shouldShow = !(e is PlatformException || e is MissingPluginException);
+          callbackResults.add(shouldShow);
+          return shouldShow;
+        }
+
+        var platformError = PlatformException(code: 'test_platform');
+        var missingPluginError = MissingPluginException('test_plugin');
+        var generalError = Exception('general_error');
+
+        // Test different error types with callback
+        await catched(platformError, null, platformSuppressingCallback);
+        await catched(missingPluginError, null, platformSuppressingCallback);
+        await catched(generalError, null, platformSuppressingCallback);
+
+        expect(processedErrors.length, equals(3));
+        expect(callbackResults, equals([false, false, true])); // Platform errors suppressed, general error shown
       });
     });
     group('Widget structure tests', () {

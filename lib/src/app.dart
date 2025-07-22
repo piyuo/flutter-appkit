@@ -1,15 +1,16 @@
 // ===============================================
-// Module: run.dart
-// Description: Core initialization function for LibCLI with comprehensive error handling
+// Module: app.dart
+// Description: Core initialization function for Flutter AppKit with comprehensive error handling
 //
 // Sections:
 //   - Global State Variables
-//   - Main run() Function
+//   - Main appRun() Function
 //   - Error Handler Setup
 //   - Error Catching and Processing
 //
 // Features:
 //   - Sentry integration (optional)
+//   - Error callback for custom error handling
 //   - Riverpod state management setup
 //   - Multi-layer error handling
 //   - Talker logging integration
@@ -48,21 +49,33 @@ bool get isSentryEnabled {
 /// Initializes and runs a Flutter app with comprehensive error handling.
 ///
 /// The [suspect] function should return the root widget of your application.
+/// The optional [errorCallback] allows you to evaluate caught errors and decide
+/// whether to suppress or display them to the user.
+///
 /// Sentry crash reporting is automatically enabled when SENTRY_DSN environment
 /// variable is configured.
 ///
 /// Features:
 /// - Catches all unhandled exceptions
 /// - Optional Sentry integration for crash reporting
+/// - Optional error callback for custom error handling
 /// - Prevents multiple error dialogs
 /// - Logs errors using Talker
 /// - Riverpod state management setup
 ///
 /// Example:
 /// ```dart
-/// await run(() => MyApp());
+/// await appRun(() => MyApp());
+///
+/// // With error callback to suppress platform exceptions
+/// await appRun(() => MyApp(), errorCallback: (e) {
+///   if (e is PlatformException || e is MissingPluginException) {
+///     return false; // Don't show these errors to user
+///   }
+///   return true; // Show other errors
+/// });
 /// ```
-Future<void> appRun(Widget Function() suspect) async {
+Future<void> appRun(Widget Function() suspect, {bool Function(Object)? errorCallback}) async {
   runZonedGuarded<Future<void>>(
     () async {
       // Load environment variables from .env file
@@ -71,7 +84,7 @@ Future<void> appRun(Widget Function() suspect) async {
         TalkerRiverpodObserver(talker: talker),
       ], child: suspect());
 
-      _setupErrorHandlers();
+      _setupErrorHandlers(errorCallback);
 
       if (isSentryEnabled) {
         await _initWithSentry(appContent);
@@ -79,7 +92,7 @@ Future<void> appRun(Widget Function() suspect) async {
         _initWithoutSentry(appContent);
       }
     },
-    (Object e, StackTrace stack) => catched(e, stack),
+    (Object e, StackTrace stack) => catched(e, stack, errorCallback),
   );
 }
 
@@ -132,30 +145,41 @@ bool _isValidSentryDSN(String dsn) {
   }
 }
 
-void _setupErrorHandlers() {
+void _setupErrorHandlers(bool Function(Object)? errorCallback) {
   final originalOnError = FlutterError.onError;
   FlutterError.onError = (FlutterErrorDetails details) async {
-    await catched(details.exception, details.stack);
+    await catched(details.exception, details.stack, errorCallback);
     originalOnError?.call(details);
   };
 
   PlatformDispatcher.instance.onError = (error, stack) {
-    catched(error, stack);
+    catched(error, stack, errorCallback);
     return true;
   };
 }
 
 @visibleForTesting
-Future<void> catched(dynamic e, StackTrace? stack) async {
+Future<void> catched(dynamic e, StackTrace? stack, [bool Function(Object)? errorCallback]) async {
   // Only ignore null errors for safety
   if (e == null) {
     return;
   }
 
   try {
-    final reportAnonymously = await showError(e, stack);
-    logError(e, stackTrace: stack, sendToSentry: reportAnonymously);
-    if (reportAnonymously) {}
+    // Check if callback is provided and evaluate whether to show error
+    bool shouldShowError = true;
+    if (errorCallback != null) {
+      shouldShowError = errorCallback(e);
+    }
+
+    // Only show error dialog if callback allows it
+    if (shouldShowError) {
+      final reportAnonymously = await showError(e, stack);
+      logError(e, stackTrace: stack, sendToSentry: reportAnonymously);
+    } else {
+      // Still log the error but don't show dialog
+      logError(e, stackTrace: stack, sendToSentry: false);
+    }
   } catch (ex) {
     // Log the error and also print to console for debugging
     debugPrint('Error dialog display failed: $ex');

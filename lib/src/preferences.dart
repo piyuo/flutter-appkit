@@ -77,7 +77,7 @@ Future<void> prefSetBool(String key, bool? value) async {
   assert(key.isNotEmpty);
   logInfo('[preferences] set $key=$value');
   if (value == null) {
-    prefRemoveKey(key);
+    await prefRemoveKey(key);
     return;
   }
   final instance = await SharedPreferences.getInstance();
@@ -105,7 +105,7 @@ Future<void> prefSetInt(String key, int? value) async {
   assert(key.isNotEmpty);
   logInfo('[preferences] set $key=$value');
   if (value == null) {
-    prefRemoveKey(key);
+    await prefRemoveKey(key);
     return;
   }
   final instance = await SharedPreferences.getInstance();
@@ -133,7 +133,7 @@ Future<void> prefSetDouble(String key, double? value) async {
   assert(key.isNotEmpty);
   logInfo('[preferences] set $key=$value');
   if (value == null) {
-    prefRemoveKey(key);
+    await prefRemoveKey(key);
     return;
   }
   final instance = await SharedPreferences.getInstance();
@@ -161,7 +161,7 @@ Future<void> prefSetString(String key, String? value) async {
   assert(key.isNotEmpty);
   logInfo('[preferences] set $key=$value');
   if (value == null) {
-    prefRemoveKey(key);
+    await prefRemoveKey(key);
     return;
   }
   final instance = await SharedPreferences.getInstance();
@@ -180,9 +180,9 @@ Future<String?> prefGetStringWithExp(String key) async {
   if (exp != null) {
     final now = DateTime.now();
     if (exp.isBefore(now)) {
-      //expired
-      prefRemoveKey(key);
-      prefRemoveKey(key + expirationExt);
+      //expired - remove both keys atomically
+      await prefRemoveKey(key);
+      await prefRemoveKey(key + expirationExt);
       return null;
     }
   }
@@ -217,7 +217,7 @@ Future<DateTime?> prefGetDateTime(String key) async {
 Future<void> prefSetDateTime(String key, DateTime? value) async {
   assert(key.isNotEmpty);
   if (value == null) {
-    prefRemoveKey(key);
+    await prefRemoveKey(key);
     return;
   }
   String formatted = value.toString().substring(0, 19);

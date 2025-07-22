@@ -66,13 +66,13 @@ dependencies:
 
 ## Quick Start
 
-Replace your existing `runApp()` call with `run()`:
+Replace your existing `runApp()` call with `appRun()`:
 
 ```dart
 import 'package:flutter_appkit/flutter_appkit.dart';
 
 void main() {
-  run(() => MyApp());
+  appRun(() => MyApp());
 }
 ```
 
@@ -83,8 +83,17 @@ Here are the most frequently used functions in Flutter AppKit:
 ### App Initialization
 
 ```dart
-// Replace runApp() with appRun() for enhanced error handling
+// Basic usage - Replace runApp() with appRun() for enhanced error handling
 appRun(() => MyApp());
+
+// Advanced usage - With custom error handling callback
+appRun(() => MyApp(), errorCallback: (error) {
+  // Suppress platform-specific errors that don't affect user experience
+  if (error is PlatformException || error is MissingPluginException) {
+    return false; // Don't show error dialog to user
+  }
+  return true; // Show other errors to user
+});
 ```
 
 ### Environment Variables

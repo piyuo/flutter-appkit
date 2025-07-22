@@ -12,7 +12,7 @@ environment:
   sdk: '>=3.0.0 <4.0.0'
 
 dependencies:
-  sentry_flutter: ^9.4.0
+  sentry_flutter: ^9.5.0
   flutter:
     sdk: flutter
   flutter_localizations:
@@ -26,13 +26,14 @@ dependencies:
   talker_flutter: ^4.9.2
   talker_riverpod_logger: ^4.9.2
   flutter_dotenv: ^5.1.0
+  universal_io: ^2.2.2
 dev_dependencies:
   sentry_dart_plugin: ^3.1.0
   flutter_test:
     sdk: flutter
-  mockito: ^5.4.4
+  mockito: ^5.5.0
   flutter_lints: ^6.0.0
-  analyzer: ^7.7.0
+  analyzer: ^7.5.5
   build_runner: ^2.6.0
  #dependency_overrides:
   #meta: ^1.11.0 #cause flutter_test blocked

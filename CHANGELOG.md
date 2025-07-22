@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.2.0](https://github.com/piyuo/flutter-appkit/compare/v2.1.1...v2.2.0) (2025-07-22)
+
+
+### Features
+
+* add callback function to apprun for error handling [#200](https://github.com/piyuo/flutter-appkit/issues/200) ([b6646e6](https://github.com/piyuo/flutter-appkit/commit/b6646e65ac2905765ffa0bb5096eb7e7a3d07437))
+
+
+### Bug Fixes
+
+* **preferences:** resolve race conditions in preferences tests and implementation [#200](https://github.com/piyuo/flutter-appkit/issues/200) ([425bada](https://github.com/piyuo/flutter-appkit/commit/425bada848339109907ca5fb06bb385ecb32e909))
+* update README to reflect the correct usage of appRun() for application initialization [#200](https://github.com/piyuo/flutter-appkit/issues/200) ([dd4ea0c](https://github.com/piyuo/flutter-appkit/commit/dd4ea0c406187189e765a1455b54e30b3f2d1b40))
+
 ## [2.1.1](https://github.com/piyuo/flutter-appkit/compare/v2.1.0...v2.1.1) (2025-07-21)
 
 

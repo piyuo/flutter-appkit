@@ -1,6 +1,6 @@
-# Play
+# Example
 
-A project to develop libcli ui component
+A project to demo flutter_appkit component
 
 ## Setup
 

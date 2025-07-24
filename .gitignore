@@ -32,3 +32,4 @@ build/
 # gh pr create
 .PR_BODY.md
 sentry.properties
+.sentry-native/

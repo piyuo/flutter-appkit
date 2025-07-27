@@ -26,8 +26,22 @@ import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:talker_riverpod_logger/talker_riverpod_logger_observer.dart';
 
 import 'env.dart';
+import 'locale_notifier.dart';
 import 'logger.dart';
 import 'show_error.dart';
+
+/// Internal widget that watches the locale provider and rebuilds when locale changes
+class _LocaleAwareApp extends ConsumerWidget {
+  const _LocaleAwareApp({required this.suspect});
+
+  final Widget Function(Locale?) suspect;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final locale = ref.watch(localeProvider);
+    return suspect(locale);
+  }
+}
 
 // Cache the DSN validation result
 bool? _sentryEnabledCache;
@@ -49,6 +63,8 @@ bool get isSentryEnabled {
 /// Initializes and runs a Flutter app with comprehensive error handling.
 ///
 /// The [suspect] function should return the root widget of your application.
+/// It receives a [Locale?] parameter that updates whenever the locale changes,
+/// ensuring the app rebuilds when the user switches languages.
 /// The optional [errorCallback] allows you to evaluate caught errors and decide
 /// whether to suppress or display them to the user.
 ///
@@ -62,27 +78,28 @@ bool get isSentryEnabled {
 /// - Prevents multiple error dialogs
 /// - Logs errors using Talker
 /// - Riverpod state management setup
+/// - Locale-aware widget rebuilding
 ///
 /// Example:
 /// ```dart
-/// await appRun(() => MyApp());
+/// await appRun((locale) => MyApp(locale: locale));
 ///
 /// // With error callback to suppress platform exceptions
-/// await appRun(() => MyApp(), errorCallback: (e) {
+/// await appRun((locale) => MyApp(locale: locale), errorCallback: (e) {
 ///   if (e is PlatformException || e is MissingPluginException) {
 ///     return false; // Don't show these errors to user
 ///   }
 ///   return true; // Show other errors
 /// });
 /// ```
-Future<void> appRun(Widget Function() suspect, {bool Function(Object)? errorCallback}) async {
+Future<void> appRun(Widget Function(Locale?) suspect, {bool Function(Object)? errorCallback}) async {
   runZonedGuarded<Future<void>>(
     () async {
       // Load environment variables from .env file
       await envInit();
       final appContent = ProviderScope(observers: [
         TalkerRiverpodObserver(talker: talker),
-      ], child: suspect());
+      ], child: _LocaleAwareApp(suspect: suspect));
 
       _setupErrorHandlers(errorCallback);
 

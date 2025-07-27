@@ -10,16 +10,17 @@ import 'language_dropdown.dart';
 // Never hardcode API keys, tokens, or other sensitive information in source code
 // Environment variables are loaded from .env file using flutter_dotenv package
 main() async {
-  await appkit.appRun(() => const ExampleApp());
+  await appkit.appRun((locale) => ExampleApp(locale: locale));
 }
 
 class ExampleApp extends ConsumerWidget {
-  const ExampleApp({super.key});
+  const ExampleApp({super.key, this.locale});
+
+  final Locale? locale;
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final locale = ref.watch(appkit.localeProvider);
     return MaterialApp(
       title: 'flutter_appkit example',
       theme: ThemeData(

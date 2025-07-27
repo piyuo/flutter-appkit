@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.3.1](https://github.com/piyuo/flutter-appkit/compare/v2.3.0...v2.3.1) (2025-07-27)
+
+
+### Bug Fixes
+
+* correct localization variable name in LanguageDropdown and update script versioning and cleanup logic [#208](https://github.com/piyuo/flutter-appkit/issues/208) ([cbc8aa2](https://github.com/piyuo/flutter-appkit/commit/cbc8aa20f28ce8ad4f08bfbe2912c6b02dbfe9a2))
+* language switch failure when main app uses provider [#208](https://github.com/piyuo/flutter-appkit/issues/208) ([a67279f](https://github.com/piyuo/flutter-appkit/commit/a67279fd99c1b60e46336ffee80b1181cd4aa1ee))
+
 ## [2.3.0](https://github.com/piyuo/flutter-appkit/compare/v2.2.0...v2.3.0) (2025-07-22)
 
 

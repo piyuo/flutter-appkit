@@ -9,7 +9,7 @@ class LanguageDropdown extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final displayLabels = appkit.localeDisplayLabels;
     final locale = ref.watch(appkit.localeProvider);
-    final libcliLocalization = appkit.Localization.of(context);
+    final localization = appkit.Localization.of(context);
     return DropdownButton<Locale>(
       alignment: AlignmentDirectional.centerEnd,
       borderRadius: BorderRadius.circular(15),
@@ -24,7 +24,7 @@ class LanguageDropdown extends ConsumerWidget {
             children: [
               const Icon(Icons.language, size: 22),
               const SizedBox(width: 8),
-              Text(libcliLocalization.language, style: const TextStyle(fontSize: 15)),
+              Text(localization.language, style: const TextStyle(fontSize: 15)),
               const SizedBox(width: 8),
             ],
           ),
@@ -33,7 +33,7 @@ class LanguageDropdown extends ConsumerWidget {
               children: [
                 const Icon(Icons.language, size: 22),
                 const SizedBox(width: 8),
-                Text(libcliLocalization.language, style: const TextStyle(fontSize: 15)),
+                Text(localization.language, style: const TextStyle(fontSize: 15)),
                 const SizedBox(width: 8),
               ],
             );
@@ -54,7 +54,7 @@ class LanguageDropdown extends ConsumerWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(libcliLocalization.language, style: const TextStyle(fontSize: 15)),
+                      Text(localization.language, style: const TextStyle(fontSize: 15)),
                     ],
                   ),
                 ),

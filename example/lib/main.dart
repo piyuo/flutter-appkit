@@ -21,7 +21,7 @@ class ExampleApp extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final locale = ref.watch(appkit.localeProvider);
     return MaterialApp(
-      title: 'Libcli Example',
+      title: 'flutter_appkit example',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
           brightness: Brightness.light,

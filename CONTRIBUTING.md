@@ -93,7 +93,7 @@ src/
 
 ### Development Phase
 
-**Step 1: Write Tests & Develop**
+#### Step 1: Write Tests & Develop
 
 Write tests first, then implement the functionality to make tests pass:
 
@@ -103,7 +103,7 @@ Write tests first, then implement the functionality to make tests pass:
 # Continue iterating with tests and code
 ```
 
-**Step 2: Commit During Development**
+#### Step 2: Commit During Development**
 
 create your first commit with the proper format:
 

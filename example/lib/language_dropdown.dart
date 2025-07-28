@@ -10,7 +10,7 @@ class LanguageDropdown extends ConsumerWidget {
     final displayLabels = appkit.localeDisplayLabels;
     final locale = ref.watch(appkit.localeProvider);
     final localization = appkit.Localization.of(context);
-    return DropdownButton<Locale>(
+    return DropdownButton<Locale?>(
       alignment: AlignmentDirectional.centerEnd,
       borderRadius: BorderRadius.circular(15),
       dropdownColor: Colors.white,
@@ -43,7 +43,7 @@ class LanguageDropdown extends ConsumerWidget {
       onChanged: (Locale? newValue) => ref.read(appkit.localeProvider.notifier).set(newValue),
       items: [
         DropdownMenuItem<Locale>(
-          value: const Locale(' '),
+          value: null, // null represents system locale
           child: Padding(
             padding: const EdgeInsets.only(top: 4, left: 4),
             child: Row(

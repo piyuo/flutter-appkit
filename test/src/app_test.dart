@@ -129,7 +129,7 @@ void main() {
 
       test('should still ignore null errors for safety', () async {
         // Test that null errors are still handled appropriately
-        Object? nullError = null;
+        Object? nullError;
 
         // Null should still be filtered out for safety
         expect(nullError, isNull, reason: 'Null errors should still be ignored for safety');

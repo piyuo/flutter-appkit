@@ -347,11 +347,19 @@ These tools support local development, collaboration, and testing:
 
 The project includes automated dependency management tools:
 
-- **upgrade_deps.sh** – Automated script that updates all dependencies in `pubspec.yaml` to their latest versions. Run this script to keep your dependencies current without manual intervention:
+- **upgrade_deps.sh** – Comprehensive dependency upgrade script with enhanced error handling and step-by-step progress indicators. This script:
+  - ✅ Analyzes current dependencies and updates version constraints
+  - ✅ Upgrades all dependencies to their latest compatible versions
+  - ✅ Runs tests to verify compatibility after upgrade
+  - ✅ Provides clear error messages and colored output for easy debugging
+  - ✅ Includes robust error handling with detailed failure reporting
 
 ```bash
+# Run the automated dependency upgrade process
 ./scripts/upgrade_deps.sh
 ```
+
+The script will guide you through each step and provide clear feedback on success or failure, making dependency management safe and transparent.
 
 ## ✅ Best Practices to Follow
 

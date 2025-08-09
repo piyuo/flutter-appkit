@@ -69,11 +69,12 @@ bool get isSentryEnabled {
 /// whether to suppress or display them to the user.
 ///
 /// Sentry crash reporting is automatically enabled when SENTRY_DSN environment
-/// variable is configured.
+/// variable is configured. App Hang tracking is disabled by default to protect
+/// user's privacy, we must get user's permission in order to send sentry error report.
 ///
 /// Features:
 /// - Catches all unhandled exceptions
-/// - Optional Sentry integration for crash reporting
+/// - Optional Sentry integration for crash reporting (with App Hang tracking disabled)
 /// - Optional error callback for custom error handling
 /// - Prevents multiple error dialogs
 /// - Logs errors using Talker
@@ -124,6 +125,9 @@ Future<void> _initWithSentry(Widget appContent) async {
         options.sendDefaultPii = true;
         // Reduce debug noise in console
         options.debug = false;
+        // Disable App Hang tracking to to protect user's privacy,
+        // we must get user's permission in order to send sentry error report.
+        options.enableAppHangTracking = false;
         // Optional: Set log level to reduce warnings
         options.diagnosticLevel = SentryLevel.error;
         // Add environment detection

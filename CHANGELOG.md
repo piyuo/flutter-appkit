@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.3.2](https://github.com/piyuo/flutter-appkit/compare/v2.3.1...v2.3.2) (2025-08-09)
+
+
+### Bug Fixes
+
+* disable app hang tracking in sentry flutter sdk [#215](https://github.com/piyuo/flutter-appkit/issues/215) ([c3b852f](https://github.com/piyuo/flutter-appkit/commit/c3b852f6d9a4e8770ae006e7ebeb91df8948e3cc))
+
 ## [2.3.1](https://github.com/piyuo/flutter-appkit/compare/v2.3.0...v2.3.1) (2025-07-27)
 
 

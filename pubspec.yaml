@@ -17,7 +17,6 @@ dependencies:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
-  provider: ^6.1.2
   intl: ^0.20.2
   shared_preferences: ^2.5.3
   url_launcher: ^6.3.2

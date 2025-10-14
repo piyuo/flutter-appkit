@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.3.3](https://github.com/piyuo/flutter-appkit/compare/v2.3.2...v2.3.3) (2025-10-14)
+
+
+### Bug Fixes
+
+* sentra macos minimum development  issue [#220](https://github.com/piyuo/flutter-appkit/issues/220) ([ca83114](https://github.com/piyuo/flutter-appkit/commit/ca83114c87d489412d3228fc25e1cc9419eabfa7))
+* sentra macos minimum development target compatibility issue [#220](https://github.com/piyuo/flutter-appkit/issues/220) ([0707d30](https://github.com/piyuo/flutter-appkit/commit/0707d30c6425bd6a65851f2bd377cc96a4a57aeb))
+
 ## [2.3.2](https://github.com/piyuo/flutter-appkit/compare/v2.3.1...v2.3.2) (2025-08-09)
 
 

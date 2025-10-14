@@ -1,6 +1,6 @@
 // ===============================================
 // File: locale_notifier.dart
-// Overview: StateNotifier for managing app locale
+// Overview: Notifier for managing app locale
 //
 // Sections:
 //   - Imports
@@ -19,19 +19,19 @@ import 'locale.dart';
 import 'preferences.dart';
 
 /// Provides the current [Locale] and allows updating it.
-final localeProvider = StateNotifierProvider<LocaleNotifier, Locale?>((ref) {
-  return LocaleNotifier();
-});
+final localeProvider = NotifierProvider<LocaleNotifier, Locale?>(LocaleNotifier.new);
 
-/// StateNotifier for managing the app's locale.
+/// Notifier for managing the app's locale.
 ///
 /// Loads the locale from preferences on initialization, allows updating,
 /// and persists changes. Also updates [Intl.defaultLocale].
-class LocaleNotifier extends StateNotifier<Locale?> {
+class LocaleNotifier extends Notifier<Locale?> {
   bool _hasBeenExplicitlySet = false;
 
-  LocaleNotifier() : super(null) {
+  @override
+  Locale? build() {
     _load();
+    return null;
   }
 
   /// Loads the locale from preferences asynchronously.

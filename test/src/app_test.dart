@@ -49,7 +49,7 @@ void _mockSentryDisabled() {
 
 void _ensureEnvInitialized() {
   if (!dotenv.isInitialized) {
-    dotenv.testLoad(fileInput: 'API_URL=https://api.example.com\nSECRET_KEY=supersecret');
+    dotenv.loadFromString(envString: 'API_URL=https://api.example.com\nSECRET_KEY=supersecret');
   }
 }
 

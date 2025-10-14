@@ -28,6 +28,7 @@ final talker = Talker(
     settings: TalkerLoggerSettings(
       enableColors: false,
       lineSymbol: '',
+      //level: kDebugMode ? LogLevel.info : LogLevel.error,
     ),
     formatter: CleanLogFormatter(),
   ),

@@ -99,7 +99,7 @@ Future<void> appRun(Widget Function(Locale?) suspect, {bool Function(Object)? er
       // Load environment variables from .env file
       await envInit();
       final appContent = ProviderScope(observers: [
-        TalkerRiverpodObserver(talker: talker),
+        if (kDebugMode) TalkerRiverpodObserver(talker: talker),
       ], child: _LocaleAwareApp(suspect: suspect));
 
       _setupErrorHandlers(errorCallback);

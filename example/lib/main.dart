@@ -70,7 +70,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text('LibCLI Error Handling Demo'),
+          title: const Text('Error Handling Demo'),
         ),
         body: SingleChildScrollView(
           child: Center(

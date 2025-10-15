@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.3.5](https://github.com/piyuo/flutter-appkit/compare/v2.3.4...v2.3.5) (2025-10-15)
+
+
+### Bug Fixes
+
+* update kotlin and gradle versions to prevent future compatibility issues [#226](https://github.com/piyuo/flutter-appkit/issues/226) ([537d261](https://github.com/piyuo/flutter-appkit/commit/537d261efccebf3c24e290fb5a1158c001ab58d8))
+
 ## [2.3.4](https://github.com/piyuo/flutter-appkit/compare/v2.3.3...v2.3.4) (2025-10-14)
 
 

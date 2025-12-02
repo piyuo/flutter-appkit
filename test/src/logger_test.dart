@@ -70,9 +70,9 @@ void main() {
       final result = formatter.fmt(mockLogDetails, settings);
 
       // Should contain level and message
-      expect(result, contains('[loglevel.info]'));
+      expect(result, contains('[INFO]'));
       expect(result, contains('Test message'));
-      expect(result, matches(r'\d{2}:\d{2}:\d{2} \d{3}ms'));
+      expect(result, matches(r'\d{2}:\d{2}:\d{2}'));
     });
 
     test('handles null message gracefully', () {
@@ -88,7 +88,7 @@ void main() {
 
       final result = formatter.fmt(mockLogDetails, settings);
 
-      expect(result, contains('[loglevel.warning]'));
+      expect(result, contains('[WARNING]'));
       expect(result, isNot(contains('null')));
     });
 
@@ -105,8 +105,8 @@ void main() {
 
       final result = formatter.fmt(mockLogDetails, settings);
 
-      // Should format time with proper padding (HH:MM:SS MMMms)
-      expect(result, matches(r'\[loglevel\.debug\] \| \d{2}:\d{2}:\d{2} \d{3}ms \| Test'));
+      // Should format time with proper padding (HH:MM:SS)
+      expect(result, matches(r'\[DEBUG\] \d{2}:\d{2}:\d{2} \| Test'));
     });
   });
 
@@ -231,7 +231,7 @@ void main() {
   group('Talker Instance Configuration', () {
     test('talker instance has correct settings', () {
       // Verify talker is configured with expected settings
-      expect(talker.settings.useConsoleLogs, isTrue);
+      expect(talker.settings.useConsoleLogs, isFalse);
     });
 
     test('talker uses CleanLogFormatter', () {
@@ -303,8 +303,8 @@ void main() {
         final result = formatter.fmt(mockLogDetails, settings);
 
         // Note: LogLevel.toString() returns "LogLevel.xxx", so we need to extract just the level name
-        final levelName = level.toString().split('.').last;
-        expect(result, contains('[loglevel.$levelName]'));
+        final levelName = level.toString().split('.').last.toUpperCase();
+        expect(result, contains('[$levelName]'));
         expect(result, contains('Test ${level.toString()}'));
       }
     });
@@ -323,8 +323,8 @@ void main() {
       final formatter = CleanLogFormatter();
       final result = formatter.fmt(mockLogDetails, settings);
 
-      // Should have proper timestamp format: HH:MM:SS MMMms
-      expect(result, matches(r'\[loglevel\.info\] \| \d{2}:\d{2}:\d{2} \d{3}ms \| Timestamp test'));
+      // Should have proper timestamp format: HH:MM:SS
+      expect(result, matches(r'\[INFO\] \d{2}:\d{2}:\d{2} \| Timestamp test'));
     });
   });
 

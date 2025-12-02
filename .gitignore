@@ -33,3 +33,9 @@ build/
 .PR_BODY.md
 sentry.properties
 .sentry-native/
+
+# ios/macOS related
+Podfile.lock
+
+# Flutter plugins
+.flutter-plugins-dependencies

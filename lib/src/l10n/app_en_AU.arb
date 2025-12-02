@@ -1,7 +1,7 @@
 {
   "close": "Close",
-  "error_content": "An unexpected error occurred. You can send us a report to help us improve, or try again later.",
+  "error_content": "An unexpected error occurred. Please try again later.",
   "error_oops": "Oops, something went wrong",
-  "error_report_anonymously": "Help us improve by sending an anonymous report",
+  "error_report": "Help us improve by sending an anonymous report",
   "language": "System Language"
 }

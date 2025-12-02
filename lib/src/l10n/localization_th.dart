@@ -13,14 +13,13 @@ class LocalizationTh extends Localization {
 
   @override
   String get error_content =>
-      'เกิดข้อผิดพลาดที่ไม่คาดคิด คุณสามารถส่งรายงานให้เราเพื่อช่วยให้เราปรับปรุง หรือลองใหม่อีกครั้งในภายหลัง';
+      'เกิดข้อผิดพลาดที่ไม่คาดคิด โปรดลองใหม่อีกครั้งในภายหลัง';
 
   @override
   String get error_oops => 'อุปส์ มีบางอย่างผิดพลาด';
 
   @override
-  String get error_report_anonymously =>
-      'ช่วยให้เราปรับปรุงโดยส่งรายงานแบบไม่ระบุตัวตน';
+  String get error_report => 'ช่วยให้เราปรับปรุงโดยส่งรายงานแบบไม่ระบุตัวตน';
 
   @override
   String get language => 'ภาษาระบบ';

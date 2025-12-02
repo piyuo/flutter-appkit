@@ -13,13 +13,13 @@ class LocalizationHu extends Localization {
 
   @override
   String get error_content =>
-      'Váratlan hiba történt. Küldhet nekünk jelentést, hogy segítsen fejleszteni, vagy próbálja újra később.';
+      'Váratlan hiba történt. Kérjük, próbálja újra később.';
 
   @override
   String get error_oops => 'Hoppá, valami hiba történt';
 
   @override
-  String get error_report_anonymously =>
+  String get error_report =>
       'Segítsen fejleszteni egy névtelen jelentés küldésével';
 
   @override

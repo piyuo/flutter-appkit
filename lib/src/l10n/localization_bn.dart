@@ -13,13 +13,13 @@ class LocalizationBn extends Localization {
 
   @override
   String get error_content =>
-      'একটি অপ্রত্যাশিত ত্রুটি ঘটেছে। আমাদের উন্নত করতে সাহায্য করার জন্য আপনি আমাদের একটি রিপোর্ট পাঠাতে পারেন, অথবা পরে আবার চেষ্টা করতে পারেন।';
+      'একটি অপ্রত্যাশিত ত্রুটি ঘটেছে। অনুগ্রহ করে পরে আবার চেষ্টা করুন।';
 
   @override
   String get error_oops => 'উফ, কিছু একটা ভুল হয়েছে';
 
   @override
-  String get error_report_anonymously =>
+  String get error_report =>
       'একটি অজ্ঞাত রিপোর্ট পাঠিয়ে আমাদের উন্নত করতে সাহায্য করুন';
 
   @override
@@ -35,13 +35,13 @@ class LocalizationBnIn extends LocalizationBn {
 
   @override
   String get error_content =>
-      'একটি অপ্রত্যাশিত ত্রুটি ঘটেছে। আমাদের উন্নত করতে সাহায্য করার জন্য আপনি আমাদের একটি রিপোর্ট পাঠাতে পারেন, অথবা পরে আবার চেষ্টা করতে পারেন।';
+      'একটি অপ্রত্যাশিত ত্রুটি ঘটেছে। অনুগ্রহ করে পরে আবার চেষ্টা করুন।';
 
   @override
   String get error_oops => 'ওহো, কিছু একটা ভুল হয়েছে';
 
   @override
-  String get error_report_anonymously =>
+  String get error_report =>
       'একটি অজ্ঞাত রিপোর্ট পাঠিয়ে আমাদের উন্নত করতে সাহায্য করুন';
 
   @override

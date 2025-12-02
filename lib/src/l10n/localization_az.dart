@@ -13,13 +13,13 @@ class LocalizationAz extends Localization {
 
   @override
   String get error_content =>
-      'Gözlənilməz xəta baş verdi. Təkmilləşməyə kömək etmək üçün bizə hesabat göndərə bilərsiniz və ya sonra yenidən cəhd edə bilərsiniz.';
+      'Gözlənilməz xəta baş verdi. Zəhmət olmasa, bir az sonra yenidən cəhd edin.';
 
   @override
   String get error_oops => 'Ups, nəsə səhv getdi';
 
   @override
-  String get error_report_anonymously =>
+  String get error_report =>
       'Anonim hesabat göndərərək bizə təkmilləşməyə kömək edin';
 
   @override

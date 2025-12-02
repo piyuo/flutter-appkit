@@ -1,7 +1,7 @@
 {
   "close": "Sluiten",
-  "error_content": "Er is een onverwachte fout opgetreden. Je kunt ons een rapport sturen om ons te helpen verbeteren, of probeer het later opnieuw.",
+  "error_content": "Er is een onverwachte fout opgetreden. Probeer het later opnieuw.",
   "error_oops": "Oeps, er is iets misgelopen",
-  "error_report_anonymously": "Help ons verbeteren door een anoniem rapport te sturen",
+  "error_report": "Help ons verbeteren door een anoniem rapport te sturen",
   "language": "Systeemtaal"
 }

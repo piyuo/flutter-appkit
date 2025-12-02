@@ -244,7 +244,7 @@ abstract class Localization {
   /// No description provided for @error_content.
   ///
   /// In en, this message translates to:
-  /// **'An unexpected error occurred. You can send us a report to help us improve, or try again later.'**
+  /// **'An unexpected error occurred. Please try again later.'**
   String get error_content;
 
   /// No description provided for @error_oops.
@@ -253,11 +253,11 @@ abstract class Localization {
   /// **'Oops, something went wrong'**
   String get error_oops;
 
-  /// No description provided for @error_report_anonymously.
+  /// No description provided for @error_report.
   ///
   /// In en, this message translates to:
   /// **'Help us improve by sending an anonymous report'**
-  String get error_report_anonymously;
+  String get error_report;
 
   /// No description provided for @language.
   ///

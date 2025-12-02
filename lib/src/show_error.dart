@@ -14,6 +14,7 @@ import 'package:flutter/cupertino.dart';
 
 import 'global_context.dart';
 import 'l10n/l10n.dart';
+import 'preferences.dart';
 
 /// Displays a Cupertino error dialog with details and an anonymous report option.
 ///
@@ -57,42 +58,65 @@ class _ErrorDialogState extends State<_ErrorDialog> {
   bool _reportAnonymously = true;
 
   @override
+  void initState() {
+    super.initState();
+    _loadPreference();
+  }
+
+  Future<void> _loadPreference() async {
+    final saved = await prefGetBool('error_report_anonymously');
+    if (saved != null && mounted) {
+      setState(() {
+        _reportAnonymously = saved;
+      });
+    }
+  }
+
+  Future<void> _updatePreference(bool value) async {
+    setState(() {
+      _reportAnonymously = value;
+    });
+    await prefSetBool('error_report_anonymously', value);
+  }
+
+  @override
   Widget build(BuildContext context) {
     return CupertinoAlertDialog(
-      title: Row(children: [
-        Icon(
-          CupertinoIcons.exclamationmark_triangle_fill,
-          color: CupertinoColors.destructiveRed,
-          size: 48.0,
-        ),
-        // Error title text
-        Expanded(child: Text(context.l.error_oops)),
-      ]),
+      title: Text(context.l.error_content, style: const TextStyle(fontSize: 16.0)),
       content: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // General error message
-          Text(context.l.error_content),
           SizedBox(height: 10),
+          Text(widget.error.toString(), style: const TextStyle(fontSize: 16.0)),
           // Error details
-          Text(widget.error.toString(), style: const TextStyle(color: CupertinoColors.systemGrey)),
           SizedBox(height: 10),
           // Anonymous report checkbox and label
-          Row(children: [
-            CupertinoCheckbox(
-              value: _reportAnonymously,
-              onChanged: (bool? value) {
-                setState(() {
-                  _reportAnonymously = value ?? false;
-                });
-              },
-              activeColor: CupertinoColors.destructiveRed,
-            ),
-            Expanded(
-              child:
-                  Text(context.l.error_report_anonymously, style: const TextStyle(color: CupertinoColors.systemGrey)),
-            ),
-          ]),
+          GestureDetector(
+            onTap: () {
+              _updatePreference(!_reportAnonymously);
+            },
+            child: Row(children: [
+              Transform.scale(
+                scale: 1.5,
+                child: CupertinoCheckbox(
+                  value: _reportAnonymously,
+                  onChanged: (bool? value) {
+                    if (value != null) {
+                      _updatePreference(value);
+                    }
+                  },
+                  activeColor: CupertinoColors.destructiveRed,
+                ),
+              ),
+              SizedBox(width: 12),
+              Expanded(
+                child: Text(context.l.error_report,
+                    style: TextStyle(
+                        color: _reportAnonymously ? CupertinoColors.destructiveRed : CupertinoColors.activeBlue,
+                        fontSize: 14.0)),
+              ),
+            ]),
+          ),
         ],
       ),
       actions: [

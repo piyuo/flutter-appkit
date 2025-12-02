@@ -13,13 +13,13 @@ class LocalizationId extends Localization {
 
   @override
   String get error_content =>
-      'Terjadi kesalahan yang tidak terduga. Anda dapat mengirim laporan kepada kami untuk membantu kami berkembang, atau coba lagi nanti.';
+      'Terjadi kesalahan yang tidak terduga. Silakan coba lagi nanti.';
 
   @override
   String get error_oops => 'Ups, terjadi kesalahan';
 
   @override
-  String get error_report_anonymously =>
+  String get error_report =>
       'Bantu kami berkembang dengan mengirim laporan anonim';
 
   @override

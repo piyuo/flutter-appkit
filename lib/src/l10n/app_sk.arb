@@ -1,7 +1,7 @@
 {
   "close": "Zatvoriť",
-  "error_content": "Vyskytla sa neočakávaná chyba. Môžete nám poslať správu, ktorá nám pomôže sa zlepšiť, alebo to skúste neskôr znovu.",
+  "error_content": "Vyskytla sa neočakávaná chyba. Skúste to prosím neskôr.",
   "error_oops": "Ups, niečo sa pokazilo",
-  "error_report_anonymously": "Pomôžte nám zlepšiť sa zaslaním anonymnej správy",
+  "error_report": "Pomôžte nám zlepšiť sa zaslaním anonymnej správy",
   "language": "Systémový jazyk"
 }

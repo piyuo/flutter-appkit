@@ -13,13 +13,13 @@ class LocalizationKk extends Localization {
 
   @override
   String get error_content =>
-      'Күтпеген қате орын алды. Бізге жақсартуға көмектесу үшін есеп жібере аласыз немесе кейінірек қайталап көріңіз.';
+      'Күтпеген қате орын алды. Кейінірек қайталап көріңіз.';
 
   @override
   String get error_oops => 'Ойбай, бір нәрсе дұрыс болмады';
 
   @override
-  String get error_report_anonymously =>
+  String get error_report =>
       'Анонимді есеп жіберу арқылы жақсартуға көмектесіңіз';
 
   @override

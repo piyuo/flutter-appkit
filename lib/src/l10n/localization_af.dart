@@ -13,13 +13,13 @@ class LocalizationAf extends Localization {
 
   @override
   String get error_content =>
-      '\'n Onverwagse fout het voorgekom. Jy kan vir ons \'n verslag stuur om ons te help verbeter, of probeer later weer.';
+      '\'n Onverwagse fout het voorgekom. Probeer asseblief later weer.';
 
   @override
   String get error_oops => 'Oeps, iets het verkeerd gegaan';
 
   @override
-  String get error_report_anonymously =>
+  String get error_report =>
       'Help ons verbeteren door \'n anonieme verslag te stuur';
 
   @override

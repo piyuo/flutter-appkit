@@ -13,13 +13,13 @@ class LocalizationTa extends Localization {
 
   @override
   String get error_content =>
-      'எதிர்பாராத பிழை ஏற்பட்டது. எங்களை மேம்படுத்த உதவ எங்களுக்கு அறிக்கை அனுப்பலாம், அல்லது பின்னர் மீண்டும் முயற்சிக்கவும்.';
+      'எதிர்பாராத பிழை ஏற்பட்டது. தயவுசெய்து பின்னர் மீண்டும் முயற்சிக்கவும்.';
 
   @override
   String get error_oops => 'அடடா, ஏதோ தவறு நடந்துவிட்டது';
 
   @override
-  String get error_report_anonymously =>
+  String get error_report =>
       'அநாமதேய அறிக்கை அனுப்பி எங்களை மேம்படுத்த உதவுங்கள்';
 
   @override

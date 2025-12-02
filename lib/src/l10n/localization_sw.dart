@@ -13,14 +13,13 @@ class LocalizationSw extends Localization {
 
   @override
   String get error_content =>
-      'Hitilafu isiyotarajiwa imetokea. Unaweza kutuma ripoti kwetu ili kutusaidia kuboresha, au jaribu tena baadaye.';
+      'Hitilafu isiyotarajiwa imetokea. Tafadhali jaribu tena baadaye.';
 
   @override
   String get error_oops => 'Samahani, kuna hitilafu imetokea';
 
   @override
-  String get error_report_anonymously =>
-      'Tusaidie kuboresha kwa kutuma ripoti ya siri';
+  String get error_report => 'Tusaidie kuboresha kwa kutuma ripoti ya siri';
 
   @override
   String get language => 'Lugha ya Mfumo';

@@ -13,14 +13,13 @@ class LocalizationFa extends Localization {
 
   @override
   String get error_content =>
-      'یک خطای غیرمنتظره رخ داد. می‌توانید گزارشی برای ما ارسال کنید تا به بهبود ما کمک کنید، یا بعداً دوباره تلاش کنید.';
+      'یک خطای غیرمنتظره رخ داد. لطفاً بعداً دوباره تلاش کنید.';
 
   @override
   String get error_oops => 'اوه، مشکلی پیش آمد';
 
   @override
-  String get error_report_anonymously =>
-      'با ارسال گزارش ناشناس به بهبود ما کمک کنید';
+  String get error_report => 'با ارسال گزارش ناشناس به بهبود ما کمک کنید';
 
   @override
   String get language => 'زبان سیستم';

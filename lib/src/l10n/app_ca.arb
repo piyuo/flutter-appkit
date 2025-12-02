@@ -1,7 +1,7 @@
 {
   "close": "Tancar",
-  "error_content": "S'ha produït un error inesperat. Podeu enviar-nos un informe per ajudar-nos a millorar, o torneu-ho a provar més tard.",
+  "error_content": "S'ha produït un error inesperat. Si us plau, torneu-ho a provar més tard.",
   "error_oops": "Vaja, alguna cosa ha anat malament",
-  "error_report_anonymously": "Ajudeu-nos a millorar enviant un informe anònim",
+  "error_report": "Ajudeu-nos a millorar enviant un informe anònim",
   "language": "Idioma del sistema"
 }

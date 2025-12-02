@@ -13,13 +13,13 @@ class LocalizationSr extends Localization {
 
   @override
   String get error_content =>
-      'Догодила се неочекивана грешка. Можете нам послати извештај да нам помогнете да се побољшамо, или покушајте поново касније.';
+      'Догодила се неочекивана грешка. Молимо покушајте поново касније.';
 
   @override
   String get error_oops => 'Упс, нешто је пошло наопако';
 
   @override
-  String get error_report_anonymously =>
+  String get error_report =>
       'Помозите нам да се побољшамо слањем анонимне пријаве';
 
   @override

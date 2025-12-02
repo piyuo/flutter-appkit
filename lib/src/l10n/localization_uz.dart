@@ -13,13 +13,13 @@ class LocalizationUz extends Localization {
 
   @override
   String get error_content =>
-      'Kutilmagan xatolik yuz berdi. Bizni yaxshilashga yordam berish uchun bizga hisobot yuborishingiz mumkin, yoki keyinroq qayta urinib ko\'ring.';
+      'Kutilmagan xatolik yuz berdi. Iltimos, keyinroq qayta urinib ko\'ring.';
 
   @override
   String get error_oops => 'Voy, xatolik yuz berdi';
 
   @override
-  String get error_report_anonymously =>
+  String get error_report =>
       'Anonim hisobot yuborish orqali yaxshilashimizga yordam bering';
 
   @override

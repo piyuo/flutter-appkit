@@ -17,6 +17,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_appkit/src/global_context.dart';
 import 'package:flutter_appkit/src/l10n/localization.dart';
+import 'package:flutter_appkit/src/preferences.dart';
 import 'package:flutter_appkit/src/show_error.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -25,6 +26,7 @@ void main() {
     late Widget testApp;
 
     setUp(() {
+      initForTest({});
       testApp = CupertinoApp(
         localizationsDelegates: Localization.localizationsDelegates,
         supportedLocales: Localization.supportedLocales,
@@ -51,37 +53,15 @@ void main() {
       // Verify dialog is displayed
       expect(find.byType(CupertinoAlertDialog), findsOneWidget);
 
-      // Verify title structure
-      expect(find.byIcon(CupertinoIcons.exclamationmark_triangle_fill), findsOneWidget);
-      expect(find.text('Oops, something went wrong'), findsOneWidget);
+      // Verify title structure (updated to match new UI)
+      expect(find.text('An unexpected error occurred. Please try again later.'), findsOneWidget);
 
       // Verify content
-      expect(
-          find.text('An unexpected error occurred. You can send us a report to help us improve, or try again later.'),
-          findsOneWidget);
       expect(find.text('Exception: Test error message'), findsOneWidget);
 
       // Verify action button
       expect(find.text('Close'), findsOneWidget);
       expect(find.byType(CupertinoDialogAction), findsOneWidget);
-    });
-
-    testWidgets('displays correct icon with destructive red color', (WidgetTester tester) async {
-      await tester.pumpWidget(testApp);
-      await tester.pumpAndSettle();
-
-      final testError = Exception('Test error');
-
-      showError(testError, StackTrace.current);
-      await tester.pumpAndSettle();
-
-      // Find the icon widget and verify its properties
-      final iconFinder = find.byIcon(CupertinoIcons.exclamationmark_triangle_fill);
-      expect(iconFinder, findsOneWidget);
-
-      final Icon iconWidget = tester.widget(iconFinder);
-      expect(iconWidget.color, CupertinoColors.destructiveRed);
-      expect(iconWidget.size, 48.0);
     });
 
     testWidgets('displays error message with correct styling', (WidgetTester tester) async {
@@ -99,7 +79,7 @@ void main() {
 
       // Verify the text styling
       final Text errorTextWidget = tester.widget(errorTextFinder);
-      expect(errorTextWidget.style?.color, CupertinoColors.systemGrey);
+      expect(errorTextWidget.style?.fontSize, 16.0);
     });
 
     testWidgets('close button dismisses dialog', (WidgetTester tester) async {
@@ -182,25 +162,12 @@ void main() {
       showError(testError, StackTrace.current);
       await tester.pumpAndSettle();
 
-      // Find the title row
-      final rowFinder = find.descendant(
+      // Find the title text directly (no longer a Row)
+      final titleFinder = find.descendant(
         of: find.byType(CupertinoAlertDialog),
-        matching: find.byType(Row),
+        matching: find.text('An unexpected error occurred. Please try again later.'),
       );
-      expect(rowFinder, findsAtLeastNWidgets(1));
-
-      // Check that the row contains both icon and text
-      final iconInRow = find.descendant(
-        of: rowFinder.first,
-        matching: find.byIcon(CupertinoIcons.exclamationmark_triangle_fill),
-      );
-      final textInRow = find.descendant(
-        of: rowFinder.first,
-        matching: find.text('Oops, something went wrong'),
-      );
-
-      expect(iconInRow, findsOneWidget);
-      expect(textInRow, findsOneWidget);
+      expect(titleFinder, findsOneWidget);
     });
 
     testWidgets('content column layout is correct', (WidgetTester tester) async {
@@ -219,7 +186,7 @@ void main() {
       );
       expect(columnFinder, findsAtLeastNWidgets(1));
 
-      // Check for the SizedBox spacing with height 10 (should have two: one after error_content and one after error message)
+      // Check for the SizedBox spacing with height 10 (should have two now)
       final sizedBoxFinder = find.byWidgetPredicate(
         (widget) => widget is SizedBox && widget.height == 10.0,
       );
@@ -311,10 +278,7 @@ void main() {
       await tester.pumpAndSettle();
 
       // Verify English localization
-      expect(find.text('Oops, something went wrong'), findsOneWidget);
-      expect(
-          find.text('An unexpected error occurred. You can send us a report to help us improve, or try again later.'),
-          findsOneWidget);
+      expect(find.text('An unexpected error occurred. Please try again later.'), findsOneWidget);
       expect(find.text('Close'), findsOneWidget);
     });
   });
@@ -655,6 +619,38 @@ void main() {
       expect(checkedWidget.value, true);
     });
 
+    testWidgets('tapping checkbox label toggles checkbox', (WidgetTester tester) async {
+      await tester.pumpWidget(testApp);
+      await tester.pumpAndSettle();
+
+      final testError = Exception('Test error');
+
+      showError(testError, StackTrace.current);
+      await tester.pumpAndSettle();
+
+      // Find the checkbox
+      final checkboxFinder = find.byType(CupertinoCheckbox);
+      expect(tester.widget<CupertinoCheckbox>(checkboxFinder).value, true);
+
+      // Find the label text
+      final labelFinder = find.text('Help us improve by sending an anonymous report');
+      expect(labelFinder, findsOneWidget);
+
+      // Tap the label
+      await tester.tap(labelFinder);
+      await tester.pumpAndSettle();
+
+      // Verify checkbox is unchecked
+      expect(tester.widget<CupertinoCheckbox>(checkboxFinder).value, false);
+
+      // Tap the label again
+      await tester.tap(labelFinder);
+      await tester.pumpAndSettle();
+
+      // Verify checkbox is checked
+      expect(tester.widget<CupertinoCheckbox>(checkboxFinder).value, true);
+    });
+
     testWidgets('checkbox row layout is correct', (WidgetTester tester) async {
       await tester.pumpWidget(testApp);
       await tester.pumpAndSettle();
@@ -666,15 +662,16 @@ void main() {
 
       // Find the row containing checkbox and label
       final rowFinder = find.byWidgetPredicate(
-        (widget) => widget is Row && widget.children.any((child) => child is CupertinoCheckbox),
+        (widget) => widget is Row && widget.children.any((child) => child is Transform),
       );
       expect(rowFinder, findsOneWidget);
 
-      // Verify row contains both checkbox and text
+      // Verify row contains checkbox, spacer, and text
       final Row rowWidget = tester.widget(rowFinder);
-      expect(rowWidget.children.length, 2);
-      expect(rowWidget.children[0], isA<CupertinoCheckbox>());
-      expect(rowWidget.children[1], isA<Expanded>());
+      expect(rowWidget.children.length, 3);
+      expect(rowWidget.children[0], isA<Transform>());
+      expect(rowWidget.children[1], isA<SizedBox>());
+      expect(rowWidget.children[2], isA<Expanded>());
     });
 
     testWidgets('checkbox is positioned correctly in dialog content', (WidgetTester tester) async {
@@ -695,7 +692,7 @@ void main() {
 
       // Verify checkbox row is in the column
       final checkboxRowFinder = find.byWidgetPredicate(
-        (widget) => widget is Row && widget.children.any((child) => child is CupertinoCheckbox),
+        (widget) => widget is Row && widget.children.any((child) => child is Transform),
       );
 
       final checkboxInColumn = find.descendant(
@@ -748,6 +745,39 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(await result2, false);
+    });
+
+    testWidgets('persists checkbox state across dialogs', (WidgetTester tester) async {
+      // Ensure preference starts as true
+      await prefSetBool('error_report_anonymously', true);
+
+      await tester.pumpWidget(testApp);
+      await tester.pumpAndSettle();
+
+      final testError = Exception('Test error');
+
+      // Show first dialog
+      showError(testError, StackTrace.current);
+      await tester.pumpAndSettle();
+
+      // Uncheck the checkbox
+      await tester.tap(find.byType(CupertinoCheckbox));
+      await tester.pumpAndSettle();
+
+      // Close the dialog
+      await tester.tap(find.text('Close'));
+      await tester.pumpAndSettle();
+
+      // Show second dialog
+      showError(testError, StackTrace.current);
+      await tester.pumpAndSettle();
+
+      // Wait for preference to load
+      await tester.pump(const Duration(milliseconds: 100));
+
+      // Verify checkbox is still unchecked (loaded from preferences)
+      final checkboxFinder = find.byType(CupertinoCheckbox);
+      expect(tester.widget<CupertinoCheckbox>(checkboxFinder).value, false);
     });
   });
 }

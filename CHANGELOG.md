@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.4.0](https://github.com/piyuo/flutter-appkit/compare/v2.3.5...v2.4.0) (2025-12-02)
+
+
+### Features
+
+* improve global error dialog and checkbox usability [#231](https://github.com/piyuo/flutter-appkit/issues/231) ([dd3b526](https://github.com/piyuo/flutter-appkit/commit/dd3b5268010798ba151cb67da6ebda6d34fd117a))
+
 ## [2.3.5](https://github.com/piyuo/flutter-appkit/compare/v2.3.4...v2.3.5) (2025-10-15)
 
 

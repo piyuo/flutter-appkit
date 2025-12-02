@@ -13,14 +13,13 @@ class LocalizationEn extends Localization {
 
   @override
   String get error_content =>
-      'An unexpected error occurred. You can send us a report to help us improve, or try again later.';
+      'An unexpected error occurred. Please try again later.';
 
   @override
   String get error_oops => 'Oops, something went wrong';
 
   @override
-  String get error_report_anonymously =>
-      'Help us improve by sending an anonymous report';
+  String get error_report => 'Help us improve by sending an anonymous report';
 
   @override
   String get language => 'System Language';
@@ -35,14 +34,13 @@ class LocalizationEnAu extends LocalizationEn {
 
   @override
   String get error_content =>
-      'An unexpected error occurred. You can send us a report to help us improve, or try again later.';
+      'An unexpected error occurred. Please try again later.';
 
   @override
   String get error_oops => 'Oops, something went wrong';
 
   @override
-  String get error_report_anonymously =>
-      'Help us improve by sending an anonymous report';
+  String get error_report => 'Help us improve by sending an anonymous report';
 
   @override
   String get language => 'System Language';
@@ -57,14 +55,13 @@ class LocalizationEnCa extends LocalizationEn {
 
   @override
   String get error_content =>
-      'An unexpected error occurred. You can send us a report to help us improve, or try again later.';
+      'An unexpected error occurred. Please try again later.';
 
   @override
   String get error_oops => 'Oops, something went wrong';
 
   @override
-  String get error_report_anonymously =>
-      'Help us improve by sending an anonymous report';
+  String get error_report => 'Help us improve by sending an anonymous report';
 
   @override
   String get language => 'System Language';
@@ -79,14 +76,13 @@ class LocalizationEnGb extends LocalizationEn {
 
   @override
   String get error_content =>
-      'An unexpected error occurred. You can send us a report to help us improve, or try again later.';
+      'An unexpected error occurred. Please try again later.';
 
   @override
   String get error_oops => 'Oops, something went wrong';
 
   @override
-  String get error_report_anonymously =>
-      'Help us improve by sending an anonymous report';
+  String get error_report => 'Help us improve by sending an anonymous report';
 
   @override
   String get language => 'System Language';
@@ -101,14 +97,13 @@ class LocalizationEnIn extends LocalizationEn {
 
   @override
   String get error_content =>
-      'An unexpected error occurred. You can send us a report to help us improve, or try again later.';
+      'An unexpected error occurred. Please try again later.';
 
   @override
   String get error_oops => 'Oops, something went wrong';
 
   @override
-  String get error_report_anonymously =>
-      'Help us improve by sending an anonymous report';
+  String get error_report => 'Help us improve by sending an anonymous report';
 
   @override
   String get language => 'System Language';

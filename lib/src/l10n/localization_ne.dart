@@ -13,13 +13,13 @@ class LocalizationNe extends Localization {
 
   @override
   String get error_content =>
-      'अनपेक्षित त्रुटि भयो। हामीलाई सुधार गर्न मद्दत गर्नका लागि तपाईंले हामीलाई रिपोर्ट पठाउन सक्नुहुन्छ, वा पछि फेरि प्रयास गर्न सक्नुहुन्छ।';
+      'अनपेक्षित त्रुटि भयो। कृपया पछि फेरि प्रयास गर्नुहोस्।';
 
   @override
   String get error_oops => 'उफ्, केही गलत भयो';
 
   @override
-  String get error_report_anonymously =>
+  String get error_report =>
       'बेनामी रिपोर्ट पठाएर हामीलाई सुधार गर्न मद्दत गर्नुहोस्';
 
   @override

@@ -13,14 +13,13 @@ class LocalizationSl extends Localization {
 
   @override
   String get error_content =>
-      'Prišlo je do nepričakovane napake. Lahko nam pošljete poročilo, da nam pomagate izboljšati, ali poskusite znova pozneje.';
+      'Prišlo je do nepričakovane napake. Poskusite znova pozneje.';
 
   @override
   String get error_oops => 'Ups, nekaj je šlo narobe';
 
   @override
-  String get error_report_anonymously =>
-      'Pomagajte nam izboljšati z anonimnim poročilom';
+  String get error_report => 'Pomagajte nam izboljšati z anonimnim poročilom';
 
   @override
   String get language => 'Sistemski jezik';

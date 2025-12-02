@@ -13,14 +13,13 @@ class LocalizationGl extends Localization {
 
   @override
   String get error_content =>
-      'Ocorreu un erro inesperado. Podes enviarnos un informe para axudarnos a mellorar, ou téntao de novo máis tarde.';
+      'Ocorreu un erro inesperado. Téntao de novo máis tarde.';
 
   @override
   String get error_oops => 'Vaia, algo saíu mal';
 
   @override
-  String get error_report_anonymously =>
-      'Axúdanos a mellorar enviando un informe anónimo';
+  String get error_report => 'Axúdanos a mellorar enviando un informe anónimo';
 
   @override
   String get language => 'Idioma do sistema';

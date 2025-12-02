@@ -13,13 +13,13 @@ class LocalizationDe extends Localization {
 
   @override
   String get error_content =>
-      'Ein unerwarteter Fehler ist aufgetreten. Sie können uns einen Bericht senden, um uns zu helfen uns zu verbessern, oder versuchen Sie es später erneut.';
+      'Ein unerwarteter Fehler ist aufgetreten. Bitte versuchen Sie es später erneut.';
 
   @override
   String get error_oops => 'Hoppla, etwas ist schiefgelaufen';
 
   @override
-  String get error_report_anonymously =>
+  String get error_report =>
       'Helfen Sie uns zu verbessern, indem Sie einen anonymen Bericht senden';
 
   @override
@@ -35,13 +35,13 @@ class LocalizationDeAt extends LocalizationDe {
 
   @override
   String get error_content =>
-      'Ein unerwarteter Fehler ist aufgetreten. Sie können uns einen Bericht senden, um uns zu helfen uns zu verbessern, oder versuchen Sie es später erneut.';
+      'Ein unerwarteter Fehler ist aufgetreten. Bitte versuchen Sie es später erneut.';
 
   @override
   String get error_oops => 'Hoppla, etwas ist schiefgelaufen';
 
   @override
-  String get error_report_anonymously =>
+  String get error_report =>
       'Helfen Sie uns zu verbessern, indem Sie einen anonymen Bericht senden';
 
   @override
@@ -57,13 +57,13 @@ class LocalizationDeCh extends LocalizationDe {
 
   @override
   String get error_content =>
-      'Ein unerwarteter Fehler ist aufgetreten. Sie können uns einen Bericht senden, um uns zu helfen uns zu verbessern, oder versuchen Sie es später erneut.';
+      'Ein unerwarteter Fehler ist aufgetreten. Bitte versuchen Sie es später erneut.';
 
   @override
   String get error_oops => 'Hoppla, etwas ist schiefgelaufen';
 
   @override
-  String get error_report_anonymously =>
+  String get error_report =>
       'Helfen Sie uns zu verbessern, indem Sie einen anonymen Bericht senden';
 
   @override

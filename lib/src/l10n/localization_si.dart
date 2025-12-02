@@ -13,13 +13,13 @@ class LocalizationSi extends Localization {
 
   @override
   String get error_content =>
-      'අනපේක්ෂිත දෝෂයක් සිදුවිය. අපට වැඩිදියුණු වීමට උදව් කිරීම සඳහා ඔබට අපට වාර්තාවක් එවිය හැක, නැතහොත් පසුව නැවත උත්සාහ කරන්න.';
+      'අනපේක්ෂිත දෝෂයක් සිදුවිය. කරුණාකර පසුව නැවත උත්සාහ කරන්න.';
 
   @override
   String get error_oops => 'අයියෝ, යමක් වැරදී ඇත';
 
   @override
-  String get error_report_anonymously =>
+  String get error_report =>
       'නිර්නාමික වාර්තාවක් එවීමෙන් අපට වැඩිදියුණු වීමට උදව් කරන්න';
 
   @override

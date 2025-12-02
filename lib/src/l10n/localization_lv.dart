@@ -13,13 +13,13 @@ class LocalizationLv extends Localization {
 
   @override
   String get error_content =>
-      'Notika neparedzēta kļūda. Jūs varat nosūtīt mums ziņojumu, lai palīdzētu mums uzlaboties, vai mēģiniet vēlāk.';
+      'Notika neparedzēta kļūda. Lūdzu, mēģiniet vēlāk.';
 
   @override
   String get error_oops => 'Ak vai, kaut kas nogāja greizi';
 
   @override
-  String get error_report_anonymously =>
+  String get error_report =>
       'Palīdziet mums uzlaboties, nosūtot anonīmu ziņojumu';
 
   @override

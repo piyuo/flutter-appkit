@@ -13,13 +13,13 @@ class LocalizationUk extends Localization {
 
   @override
   String get error_content =>
-      'Сталася неочікувана помилка. Ви можете надіслати нам звіт, щоб допомогти нам покращитися, або спробуйте ще раз пізніше.';
+      'Сталася неочікувана помилка. Будь ласка, спробуйте ще раз пізніше.';
 
   @override
   String get error_oops => 'Упс, щось пішло не так';
 
   @override
-  String get error_report_anonymously =>
+  String get error_report =>
       'Допоможіть нам покращитися, надіславши анонімний звіт';
 
   @override

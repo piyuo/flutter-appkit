@@ -13,13 +13,13 @@ class LocalizationIt extends Localization {
 
   @override
   String get error_content =>
-      'Si è verificato un errore imprevisto. Puoi inviarci un rapporto per aiutarci a migliorare, o riprova più tardi.';
+      'Si è verificato un errore imprevisto. Riprova più tardi.';
 
   @override
   String get error_oops => 'Ops, qualcosa è andato storto';
 
   @override
-  String get error_report_anonymously =>
+  String get error_report =>
       'Aiutaci a migliorare inviando un rapporto anonimo';
 
   @override

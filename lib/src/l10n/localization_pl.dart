@@ -13,13 +13,13 @@ class LocalizationPl extends Localization {
 
   @override
   String get error_content =>
-      'Wystąpił nieoczekiwany błąd. Możesz wysłać nam raport, aby pomóc nam się poprawić, lub spróbować ponownie później.';
+      'Wystąpił nieoczekiwany błąd. Spróbuj ponownie później.';
 
   @override
   String get error_oops => 'Ups, coś poszło nie tak';
 
   @override
-  String get error_report_anonymously =>
+  String get error_report =>
       'Pomóż nam się poprawić, wysyłając anonimowy raport';
 
   @override

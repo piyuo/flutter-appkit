@@ -13,14 +13,13 @@ class LocalizationSk extends Localization {
 
   @override
   String get error_content =>
-      'Vyskytla sa neočakávaná chyba. Môžete nám poslať správu, ktorá nám pomôže sa zlepšiť, alebo to skúste neskôr znovu.';
+      'Vyskytla sa neočakávaná chyba. Skúste to prosím neskôr.';
 
   @override
   String get error_oops => 'Ups, niečo sa pokazilo';
 
   @override
-  String get error_report_anonymously =>
-      'Pomôžte nám zlepšiť sa zaslaním anonymnej správy';
+  String get error_report => 'Pomôžte nám zlepšiť sa zaslaním anonymnej správy';
 
   @override
   String get language => 'Systémový jazyk';

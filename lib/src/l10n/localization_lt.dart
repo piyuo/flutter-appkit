@@ -13,13 +13,13 @@ class LocalizationLt extends Localization {
 
   @override
   String get error_content =>
-      'Įvyko netikėta klaida. Galite atsiųsti mums ataskatą, kad padėtumėte mums tobulėti, arba bandyti dar kartą vėliau.';
+      'Įvyko netikėta klaida. Bandykite dar kartą vėliau.';
 
   @override
   String get error_oops => 'Oi, kažkas nutiko';
 
   @override
-  String get error_report_anonymously =>
+  String get error_report =>
       'Padėkite mums tobulėti siųsdami anoniminę ataskaitą';
 
   @override

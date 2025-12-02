@@ -13,13 +13,13 @@ class LocalizationFr extends Localization {
 
   @override
   String get error_content =>
-      'Une erreur inattendue s\'est produite. Vous pouvez nous envoyer un rapport pour nous aider à nous améliorer, ou réessayer plus tard.';
+      'Une erreur inattendue s\'est produite. Veuillez réessayer plus tard.';
 
   @override
   String get error_oops => 'Oups, quelque chose s\'est mal passé';
 
   @override
-  String get error_report_anonymously =>
+  String get error_report =>
       'Aidez-nous à nous améliorer en envoyant un rapport anonyme';
 
   @override
@@ -35,13 +35,13 @@ class LocalizationFrBe extends LocalizationFr {
 
   @override
   String get error_content =>
-      'Une erreur inattendue s\'est produite. Vous pouvez nous envoyer un rapport pour nous aider à nous améliorer, ou réessayer plus tard.';
+      'Une erreur inattendue s\'est produite. Veuillez réessayer plus tard.';
 
   @override
   String get error_oops => 'Oups, quelque chose s\'est mal passé';
 
   @override
-  String get error_report_anonymously =>
+  String get error_report =>
       'Aidez-nous à nous améliorer en envoyant un rapport anonyme';
 
   @override
@@ -57,13 +57,13 @@ class LocalizationFrCa extends LocalizationFr {
 
   @override
   String get error_content =>
-      'Une erreur inattendue est survenue. Vous pouvez nous envoyer un rapport pour nous aider à nous améliorer, ou réessayer plus tard.';
+      'Une erreur inattendue s\'est produite. Veuillez réessayer plus tard.';
 
   @override
   String get error_oops => 'Oups, quelque chose s\'est mal passé';
 
   @override
-  String get error_report_anonymously =>
+  String get error_report =>
       'Aidez-nous à améliorer en envoyant un rapport anonyme';
 
   @override
@@ -79,13 +79,13 @@ class LocalizationFrCh extends LocalizationFr {
 
   @override
   String get error_content =>
-      'Une erreur inattendue s\'est produite. Vous pouvez nous envoyer un rapport pour nous aider à nous améliorer, ou réessayer plus tard.';
+      'Une erreur inattendue s\'est produite. Veuillez réessayer plus tard.';
 
   @override
   String get error_oops => 'Oups, quelque chose s\'est mal passé';
 
   @override
-  String get error_report_anonymously =>
+  String get error_report =>
       'Aidez-nous à nous améliorer en envoyant un rapport anonyme';
 
   @override

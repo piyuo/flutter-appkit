@@ -13,13 +13,13 @@ class LocalizationRu extends Localization {
 
   @override
   String get error_content =>
-      'Произошла непредвиденная ошибка. Вы можете отправить нам отчет, чтобы помочь нам улучшиться, или попробуйте снова позже.';
+      'Произошла непредвиденная ошибка. Пожалуйста, попробуйте снова позже.';
 
   @override
   String get error_oops => 'Упс, что-то пошло не так';
 
   @override
-  String get error_report_anonymously =>
+  String get error_report =>
       'Помогите нам улучшиться, отправив анонимный отчет';
 
   @override
@@ -35,13 +35,13 @@ class LocalizationRuKz extends LocalizationRu {
 
   @override
   String get error_content =>
-      'Произошла непредвиденная ошибка. Вы можете отправить нам отчет, чтобы помочь нам улучшиться, или попробуйте снова позже.';
+      'Произошла непредвиденная ошибка. Пожалуйста, попробуйте снова позже.';
 
   @override
   String get error_oops => 'Упс, что-то пошло не так';
 
   @override
-  String get error_report_anonymously =>
+  String get error_report =>
       'Помогите нам улучшиться, отправив анонимный отчет';
 
   @override
@@ -57,13 +57,13 @@ class LocalizationRuUa extends LocalizationRu {
 
   @override
   String get error_content =>
-      'Произошла непредвиденная ошибка. Вы можете отправить нам отчет, чтобы помочь нам улучшиться, или попробуйте снова позже.';
+      'Произошла непредвиденная ошибка. Пожалуйста, попробуйте снова позже.';
 
   @override
   String get error_oops => 'Упс, что-то пошло не так';
 
   @override
-  String get error_report_anonymously =>
+  String get error_report =>
       'Помогите нам улучшиться, отправив анонимный отчет';
 
   @override

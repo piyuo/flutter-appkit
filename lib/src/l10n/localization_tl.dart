@@ -13,13 +13,13 @@ class LocalizationTl extends Localization {
 
   @override
   String get error_content =>
-      'Mayroong hindi inaasahang error na nangyari. Maaari kang magpadala sa amin ng ulat para matulungan kaming mapabuti, o subukan ulit mamaya.';
+      'Mayroong hindi inaasahang error na nangyari. Pakisubukan ulit mamaya.';
 
   @override
   String get error_oops => 'Oops, may mali na nangyari';
 
   @override
-  String get error_report_anonymously =>
+  String get error_report =>
       'Tulungang mapabuti kami sa pamamagitan ng pagpapadala ng anonymous na ulat';
 
   @override

@@ -12,14 +12,13 @@ class LocalizationMn extends Localization {
   String get close => 'Хаах';
 
   @override
-  String get error_content =>
-      'Гэнэтийн алдаа гарлаа. Та бидэнд сайжруулахад туслахын тулд тайлан илгээж болно, эсвэл дараа дахин оролдоно уу.';
+  String get error_content => 'Гэнэтийн алдаа гарлаа. Дараа дахин оролдоно уу.';
 
   @override
   String get error_oops => 'Өө, ямар нэгэн зүйл буруу болсон';
 
   @override
-  String get error_report_anonymously =>
+  String get error_report =>
       'Нэрээ нууцалсан тайлан илгээж сайжруулахад тусалаарай';
 
   @override

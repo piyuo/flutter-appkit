@@ -12,14 +12,13 @@ class LocalizationNb extends Localization {
   String get close => 'Lukk';
 
   @override
-  String get error_content =>
-      'Det oppstod en uventet feil. Du kan sende oss en rapport for å hjelpe oss å bli bedre, eller prøv igjen senere.';
+  String get error_content => 'Det oppstod en uventet feil. Prøv igjen senere.';
 
   @override
   String get error_oops => 'Ups, noe gikk galt';
 
   @override
-  String get error_report_anonymously =>
+  String get error_report =>
       'Hjelp oss å bli bedre ved å sende en anonym rapport';
 
   @override

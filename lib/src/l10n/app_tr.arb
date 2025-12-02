@@ -1,7 +1,7 @@
 {
   "close": "Kapat",
-  "error_content": "Beklenmeyen bir hata oluştu. Gelişmemize yardımcı olmak için bize rapor gönderebilirsiniz veya daha sonra tekrar deneyebilirsiniz.",
+  "error_content": "Beklenmeyen bir hata oluştu. Lütfen daha sonra tekrar deneyin.",
   "error_oops": "Hata, bir şeyler yanlış gitti",
-  "error_report_anonymously": "Anonim rapor göndererek gelişmemize yardımcı olun",
+  "error_report": "Anonim rapor göndererek gelişmemize yardımcı olun",
   "language": "Sistem Dili"
 }

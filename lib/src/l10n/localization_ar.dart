@@ -13,14 +13,13 @@ class LocalizationAr extends Localization {
 
   @override
   String get error_content =>
-      'حدث خطأ غير متوقع. يمكنك إرسال تقرير لنا لمساعدتنا في التحسين، أو حاول مرة أخرى لاحقاً.';
+      'حدث خطأ غير متوقع. يرجى المحاولة مرة أخرى لاحقاً.';
 
   @override
   String get error_oops => 'عفواً، حدث خطأ ما';
 
   @override
-  String get error_report_anonymously =>
-      'ساعدنا في التحسين عن طريق إرسال تقرير مجهول';
+  String get error_report => 'ساعدنا في التحسين عن طريق إرسال تقرير مجهول';
 
   @override
   String get language => 'لغة النظام';
@@ -35,14 +34,13 @@ class LocalizationArAe extends LocalizationAr {
 
   @override
   String get error_content =>
-      'حدث خطأ غير متوقع. يمكنك إرسال تقرير لنا لمساعدتنا في التحسين، أو حاول مرة أخرى لاحقاً.';
+      'حدث خطأ غير متوقع. يرجى المحاولة مرة أخرى لاحقاً.';
 
   @override
   String get error_oops => 'عفواً، حدث خطأ ما';
 
   @override
-  String get error_report_anonymously =>
-      'ساعدنا في التحسين عن طريق إرسال تقرير مجهول';
+  String get error_report => 'ساعدنا في التحسين عن طريق إرسال تقرير مجهول';
 
   @override
   String get language => 'لغة النظام';
@@ -57,14 +55,13 @@ class LocalizationArDz extends LocalizationAr {
 
   @override
   String get error_content =>
-      'حدث خطأ غير متوقع. يمكنك إرسال تقرير لنا لمساعدتنا في التحسين، أو حاول مرة أخرى لاحقاً.';
+      'حدث خطأ غير متوقع. يرجى المحاولة مرة أخرى لاحقاً.';
 
   @override
   String get error_oops => 'عفواً، حدث خطأ ما';
 
   @override
-  String get error_report_anonymously =>
-      'ساعدنا في التحسين عن طريق إرسال تقرير مجهول';
+  String get error_report => 'ساعدنا في التحسين عن طريق إرسال تقرير مجهول';
 
   @override
   String get language => 'لغة النظام';
@@ -79,14 +76,13 @@ class LocalizationArEg extends LocalizationAr {
 
   @override
   String get error_content =>
-      'حدث خطأ غير متوقع. يمكنك إرسال تقرير لنا لمساعدتنا في التحسين، أو حاول مرة أخرى لاحقاً.';
+      'حدث خطأ غير متوقع. يرجى المحاولة مرة أخرى لاحقاً.';
 
   @override
   String get error_oops => 'عفواً، حدث خطأ ما';
 
   @override
-  String get error_report_anonymously =>
-      'ساعدنا في التحسين عن طريق إرسال تقرير مجهول';
+  String get error_report => 'ساعدنا في التحسين عن طريق إرسال تقرير مجهول';
 
   @override
   String get language => 'لغة النظام';

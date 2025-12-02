@@ -20,36 +20,37 @@ import 'package:talker_flutter/talker_flutter.dart';
 
 import 'app.dart'; // Import to access isSentryEnabled
 
+final _logger = TalkerLogger(
+  settings: TalkerLoggerSettings(
+    enableColors: false,
+    lineSymbol: '',
+  ),
+  formatter: CleanLogFormatter(),
+  output: (message) => debugPrint(message),
+);
+
 final talker = Talker(
   settings: TalkerSettings(
-    useConsoleLogs: true,
+    useConsoleLogs: false,
   ),
-  logger: TalkerLogger(
-    settings: TalkerLoggerSettings(
-      enableColors: false,
-      lineSymbol: '',
-      //level: kDebugMode ? LogLevel.info : LogLevel.error,
-    ),
-    formatter: CleanLogFormatter(),
-  ),
-);
+  logger: _logger,
+)..configure(observer: ConsoleLoggerObserver(_logger));
 
 /// Custom log formatter for Talker that outputs clean, borderless log lines.
 ///
-/// Format: [level] | HH:mm:ss SSSms | message
+/// Format: [LEVEL] HH:mm:ss | message
 class CleanLogFormatter extends LoggerFormatter {
   @override
   String fmt(LogDetails details, TalkerLoggerSettings settings) {
     final time = DateTime.now();
-    final level = details.level.toString().toLowerCase();
+    final level = details.level.toString().split('.').last.toUpperCase();
     final message = details.message?.toString() ?? '';
 
     final timeStr = '${time.hour.toString().padLeft(2, '0')}:'
         '${time.minute.toString().padLeft(2, '0')}:'
-        '${time.second.toString().padLeft(2, '0')} '
-        '${time.millisecond.toString().padLeft(3, '0')}ms';
+        '${time.second.toString().padLeft(2, '0')}';
 
-    return '[$level] | $timeStr | $message';
+    return '[$level] $timeStr | $message';
   }
 }
 
@@ -123,5 +124,42 @@ void logError(
       // Ignore Sentry errors to prevent cascading failures
       debugPrint('Sentry error reporting failed: $ex');
     }
+  }
+}
+
+/// Observer that logs Talker events to the console using a custom logger.
+class ConsoleLoggerObserver extends TalkerObserver {
+  final TalkerLogger logger;
+  ConsoleLoggerObserver(this.logger);
+
+  @override
+  void onLog(TalkerData log) {
+    _log(log);
+  }
+
+  @override
+  void onError(TalkerError err) {
+    _log(err);
+  }
+
+  @override
+  void onException(TalkerException err) {
+    _log(err);
+  }
+
+  void _log(TalkerData data) {
+    var msg = data.message?.toString() ?? '';
+    if (data is TalkerError) {
+      msg += '\n${data.exception}';
+      if (data.stackTrace != null) {
+        msg += '\n${data.stackTrace}';
+      }
+    } else if (data is TalkerException) {
+      msg += '\n${data.exception}';
+      if (data.stackTrace != null) {
+        msg += '\n${data.stackTrace}';
+      }
+    }
+    logger.log(msg, level: data.logLevel);
   }
 }

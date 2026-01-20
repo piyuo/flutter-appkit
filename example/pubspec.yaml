@@ -45,9 +45,11 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  mockito: ^5.5.0
+  mockito: ^5.6.3
   flutter_lints: ^6.0.0
-  analyzer: ^7.7.1
+  analyzer: ^8.4.0
+dependency_overrides:
+  analyzer: ^10.0.1
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.4.1](https://github.com/piyuo/flutter-appkit/compare/v2.4.0...v2.4.1) (2026-01-20)
+
+
+### Bug Fixes
+
+* change error handling order to print to console before showing user dialog [#234](https://github.com/piyuo/flutter-appkit/issues/234) ([01bd046](https://github.com/piyuo/flutter-appkit/commit/01bd046af8f02f6bdd7e7e6068f7cb3c02c805d0))
+* update dependencies for analyzer to 10.0.0 [#234](https://github.com/piyuo/flutter-appkit/issues/234) ([c498ad6](https://github.com/piyuo/flutter-appkit/commit/c498ad638c9787856519ae3c270c27d8ec2455c9))
+
 ## [2.4.0](https://github.com/piyuo/flutter-appkit/compare/v2.3.5...v2.4.0) (2025-12-02)
 
 

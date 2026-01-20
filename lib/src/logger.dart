@@ -115,9 +115,20 @@ void logError(
   bool sendToSentry = true,
   StackTrace? stackTrace,
 }) {
-  talker.handle(exception, stackTrace);
+  printErrorToConsole(exception, stackTrace);
+  if (sendToSentry) {
+    sendErrorToSentry(exception, stackTrace);
+  }
+}
 
-  if (isSentryEnabled && sendToSentry) {
+/// Prints an error and optional stack trace to the console using Talker.
+void printErrorToConsole(dynamic exception, StackTrace? stackTrace) {
+  talker.handle(exception, stackTrace);
+}
+
+/// Sends an error to Sentry if enabled.
+void sendErrorToSentry(dynamic exception, StackTrace? stackTrace) {
+  if (isSentryEnabled) {
     try {
       Sentry.captureException(exception, stackTrace: stackTrace);
     } catch (ex) {

@@ -30,11 +30,12 @@ dev_dependencies:
   sentry_dart_plugin: ^3.1.1
   flutter_test:
     sdk: flutter
-  mockito: ^5.5.0
+  mockito: ^5.6.3
   flutter_lints: ^6.0.0
-  analyzer: ^7.7.1
-  build_runner: ^2.6.0
- #dependency_overrides:
+  build_runner: ^2.10.5
+  analyzer: ^8.4.0
+dependency_overrides:
+  analyzer: ^10.0.1
   #meta: ^1.11.0 #cause flutter_test blocked
 
 # The following section is specific to Flutter.

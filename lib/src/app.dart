@@ -185,6 +185,7 @@ Future<void> catched(dynamic e, StackTrace? stack, [bool Function(Object)? error
   if (e == null) {
     return;
   }
+  printErrorToConsole(e, stack);
 
   try {
     // Check if callback is provided and evaluate whether to show error
@@ -196,10 +197,9 @@ Future<void> catched(dynamic e, StackTrace? stack, [bool Function(Object)? error
     // Only show error dialog if callback allows it
     if (shouldShowError) {
       final reportAnonymously = await showError(e, stack);
-      logError(e, stackTrace: stack, sendToSentry: reportAnonymously);
-    } else {
-      // Still log the error but don't show dialog
-      logError(e, stackTrace: stack, sendToSentry: false);
+      if (reportAnonymously) {
+        sendErrorToSentry(e, stack);
+      }
     }
   } catch (ex) {
     // Log the error and also print to console for debugging

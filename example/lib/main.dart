@@ -95,9 +95,9 @@ class _MyHomePageState extends State<MyHomePage> {
             ElevatedButton(
               onPressed: () {
                 // Second call with same error - will be suppressed
-                throw MyException2('Repeated error message');
+                throw OutOfMemoryError();
               },
-              child: const Text('Throw Same Error Again (Suppressed)'),
+              child: const Text('Throw Error'),
             ),
             const SizedBox(height: 10),
             ElevatedButton(

@@ -9,8 +9,8 @@ import 'language_dropdown.dart';
 // Security: Use environment variables for sensitive data like Sentry DSN
 // Never hardcode API keys, tokens, or other sensitive information in source code
 // Environment variables are loaded from .env file using flutter_dotenv package
-main() async {
-  await appkit.appRun((locale) => ExampleApp(locale: locale));
+void main() {
+  appkit.appRun((locale) => ExampleApp(locale: locale), observeRiverPod: false);
 }
 
 class ExampleApp extends ConsumerWidget {
@@ -86,27 +86,12 @@ class _MyHomePageState extends State<MyHomePage> {
             const SizedBox(height: 10),
             ElevatedButton(
               onPressed: () {
-                // First call - will show dialog
-                throw MyException2('Repeated error message');
-              },
-              child: const Text('Throw Error First Time'),
-            ),
-            const SizedBox(height: 10),
-            ElevatedButton(
-              onPressed: () {
                 // Second call with same error - will be suppressed
                 throw OutOfMemoryError();
               },
               child: const Text('Throw Error'),
             ),
             const SizedBox(height: 10),
-            ElevatedButton(
-              onPressed: () async {
-                // This demonstrates different error types are not suppressed
-                throw ArgumentError('Different error type');
-              },
-              child: const Text('Throw Different Error Type'),
-            ),
             const SizedBox(height: 10),
             ElevatedButton(
               onPressed: () async {

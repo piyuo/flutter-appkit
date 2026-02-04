@@ -93,13 +93,17 @@ bool get isSentryEnabled {
 ///   return true; // Show other errors
 /// });
 /// ```
-Future<void> appRun(Widget Function(Locale?) suspect, {bool Function(Object)? errorCallback}) async {
+Future<void> appRun(
+  Widget Function(Locale?) suspect, {
+  bool Function(Object)? errorCallback,
+  bool observeRiverPod = true,
+}) async {
   runZonedGuarded<Future<void>>(
     () async {
       // Load environment variables from .env file
       await envInit();
       final appContent = ProviderScope(observers: [
-        if (kDebugMode) TalkerRiverpodObserver(talker: talker),
+        if (observeRiverPod) TalkerRiverpodObserver(talker: talker),
       ], child: _LocaleAwareApp(suspect: suspect));
 
       _setupErrorHandlers(errorCallback);

@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.5.0](https://github.com/piyuo/flutter-appkit/compare/v2.4.1...v2.5.0) (2026-02-04)
+
+
+### Features
+
+* update appRun function to include observeRiverPod [#237](https://github.com/piyuo/flutter-appkit/issues/237) ([acac2ea](https://github.com/piyuo/flutter-appkit/commit/acac2ea8c3bab6542110923b2531130e1efe45ca))
+
+
+### Bug Fixes
+
+* unexpected error dialog shows message but console [#237](https://github.com/piyuo/flutter-appkit/issues/237) ([bcc603f](https://github.com/piyuo/flutter-appkit/commit/bcc603fb02098bdb1f8ff91b3c8f10792efbac2e))
+
 ## [2.4.1](https://github.com/piyuo/flutter-appkit/compare/v2.4.0...v2.4.1) (2026-01-20)
 
 

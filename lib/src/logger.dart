@@ -123,7 +123,7 @@ void logError(
 
 /// Prints an error and optional stack trace to the console using Talker.
 void printErrorToConsole(dynamic exception, StackTrace? stackTrace) {
-  talker.handle(exception, stackTrace);
+  talker.handle(exception, stackTrace, 'unexpected error:$exception');
 }
 
 /// Sends an error to Sentry if enabled.

@@ -135,7 +135,7 @@ Future<void> _initWithSentry(Widget appContent) async {
       },
       appRunner: () => runApp(SentryWidget(child: appContent)),
     );
-    logInfo('Sentry is enabled, unhandled exceptions will be sent to Sentry.');
+    logInfo('Sentry is enabled.');
   } catch (e) {
     logWarning('Failed to initialize Sentry: $e. Falling back to basic error handling.');
     _initWithoutSentry(appContent);

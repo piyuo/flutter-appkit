@@ -79,9 +79,9 @@ class _MyHomePageState extends State<MyHomePage> {
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () async {
-                throw MyException2('This is a test exception');
+                assert(false, 'This is an assertion error for testing purposes');
               },
-              child: const Text('Throw Exception Once'),
+              child: const Text('Throw AssertionError/FlutterError no dialog (expected in debug mode)'),
             ),
             const SizedBox(height: 10),
             ElevatedButton(

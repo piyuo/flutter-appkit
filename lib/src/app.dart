@@ -20,6 +20,7 @@
 import 'dart:async';
 
 import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
@@ -136,6 +137,24 @@ Future<void> _initWithSentry(Widget appContent) async {
         options.diagnosticLevel = SentryLevel.error;
         // Add environment detection
         options.environment = kDebugMode ? 'development' : 'production';
+
+        // Filter out development-only errors and enforce user consent
+        options.beforeSend = (event, hint) {
+          // Never send errors in debug mode - they should only be shown on screen
+          if (kDebugMode) {
+            return null;
+          }
+
+          // Filter out development-only errors: FlutterError, AssertionError, MissingPluginException
+          // These should never reach production and aren't actionable in Sentry
+          final exception = event.throwable;
+          if (exception is FlutterError || exception is AssertionError || exception is MissingPluginException) {
+            return null;
+          }
+
+          // Only errors explicitly sent via sendErrorToSentry() (after user consent) reach here
+          return event;
+        };
       },
       appRunner: () => runApp(SentryWidget(child: appContent)),
     );
@@ -171,10 +190,10 @@ bool _isValidSentryDSN(String dsn) {
 }
 
 void _setupErrorHandlers(bool Function(Object)? errorCallback) {
-  final originalOnError = FlutterError.onError;
   FlutterError.onError = (FlutterErrorDetails details) async {
     await catched(details.exception, details.stack, errorCallback);
-    originalOnError?.call(details);
+    // Don't call original onError - Sentry overrides it for automatic capture,
+    // but we control error reporting in catched() to enforce user consent
   };
 
   PlatformDispatcher.instance.onError = (error, stack) {
@@ -183,14 +202,32 @@ void _setupErrorHandlers(bool Function(Object)? errorCallback) {
   };
 }
 
+/// Handles caught errors with filtering, logging, and optional user reporting.
+///
+/// This function implements a three-layer protection system:
+/// 1. Filters development-only errors (FlutterError, AssertionError, MissingPluginException)
+/// 2. Logs all errors to console via Talker
+/// 3. Shows error dialog and sends to Sentry only with user consent
+///
+/// Development errors are logged but never shown in dialogs (debug mode) or sent to Sentry.
+/// The [errorCallback] allows custom filtering - return false to suppress the error dialog.
 @visibleForTesting
 Future<void> catched(dynamic e, StackTrace? stack, [bool Function(Object)? errorCallback]) async {
   // Only ignore null errors for safety
   if (e == null) {
     return;
   }
-  printErrorToConsole(e, stack);
 
+  // Filter development-only errors: FlutterError, AssertionError, MissingPluginException
+  // These should only be logged to console, never shown in dialogs or sent to Sentry
+  if (e is FlutterError || e is AssertionError || e is MissingPluginException) {
+    printErrorToConsole(e, stack);
+    // In debug mode, development errors are expected - just print to console and don't show dialog
+    return;
+  }
+
+  // Log all other errors to console
+  printErrorToConsole(e, stack);
   try {
     // Check if callback is provided and evaluate whether to show error
     bool shouldShowError = true;

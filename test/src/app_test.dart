@@ -5,11 +5,14 @@
 // Test Groups:
 //   - Setup and Teardown
 //   - isSentryEnabled Tests
-//   - Catched Function Tests
-//   - appRun with error callback Tests
+//   - Catched Function Behavior Tests
+//   - appRun with Error Callback Tests (including development error filtering)
 //   - Widget Structure Tests
-//   - Error Handling Tests
+//   - Environment Logic Tests
+//   - Sentry Configuration Tests
 //   - Integration Tests
+//   - Error Resilience Tests
+//   - Widget Error Handling Tests
 // ===============================================
 
 import 'package:flutter/material.dart';
@@ -237,7 +240,7 @@ void main() {
 
         bool platformSuppressingCallback(Object e) {
           processedErrors.add(e);
-          bool shouldShow = !(e is PlatformException || e is MissingPluginException);
+          bool shouldShow = e is! PlatformException;
           callbackResults.add(shouldShow);
           return shouldShow;
         }
@@ -251,8 +254,67 @@ void main() {
         await catched(missingPluginError, null, platformSuppressingCallback);
         await catched(generalError, null, platformSuppressingCallback);
 
-        expect(processedErrors.length, equals(3));
-        expect(callbackResults, equals([false, false, true])); // Platform errors suppressed, general error shown
+        // MissingPluginException is filtered before callback, so only 2 errors reach callback
+        expect(processedErrors.length, equals(2));
+        expect(callbackResults, equals([false, true])); // Platform error suppressed, general error shown
+      });
+
+      test('should filter development-only errors (FlutterError, AssertionError, MissingPluginException)', () async {
+        // Test that development errors are filtered and don't trigger errorCallback
+        bool callbackInvoked = false;
+
+        bool testCallback(Object e) {
+          callbackInvoked = true;
+          return true;
+        }
+
+        // These errors should be filtered before reaching the callback
+        var flutterError = FlutterError('Test FlutterError');
+        var assertionError = AssertionError('Test assertion');
+        var missingPluginError = MissingPluginException('test_plugin');
+
+        await catched(flutterError, null, testCallback);
+        expect(callbackInvoked, isFalse, reason: 'FlutterError should be filtered before callback');
+
+        callbackInvoked = false;
+        await catched(assertionError, null, testCallback);
+        expect(callbackInvoked, isFalse, reason: 'AssertionError should be filtered before callback');
+
+        callbackInvoked = false;
+        await catched(missingPluginError, null, testCallback);
+        expect(callbackInvoked, isFalse, reason: 'MissingPluginException should be filtered before callback');
+
+        // Regular errors should reach the callback
+        callbackInvoked = false;
+        var regularError = Exception('Regular error');
+        await catched(regularError, null, testCallback);
+        expect(callbackInvoked, isTrue, reason: 'Regular errors should reach the callback');
+      });
+
+      test('should handle all three development error types consistently', () async {
+        // Verify that all three development error types are treated the same
+        List<Type> developmentErrorTypes = [
+          FlutterError,
+          AssertionError,
+          MissingPluginException,
+        ];
+
+        for (var errorType in developmentErrorTypes) {
+          Object testError;
+          if (errorType == FlutterError) {
+            testError = FlutterError('Test error');
+          } else if (errorType == AssertionError) {
+            testError = AssertionError('Test assertion');
+          } else {
+            testError = MissingPluginException('test_plugin');
+          }
+
+          // All should be handled without throwing
+          await catched(testError, null, null);
+        }
+
+        // If we get here, all development errors were handled correctly
+        expect(true, isTrue);
       });
     });
     group('Widget structure tests', () {

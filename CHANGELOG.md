@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.6.0](https://github.com/piyuo/flutter-appkit/compare/v2.5.0...v2.6.0) (2026-02-11)
+
+
+### Features
+
+* simplify how-to-use section in ai issue template [#243](https://github.com/piyuo/flutter-appkit/issues/243) ([0fb66ef](https://github.com/piyuo/flutter-appkit/commit/0fb66ef81d11bae23e01b63ddd8bfe8f6383ac55))
+
+
+### Bug Fixes
+
+* prevent asserterror and fluttererror to sentry [#240](https://github.com/piyuo/flutter-appkit/issues/240) ([e53f0ef](https://github.com/piyuo/flutter-appkit/commit/e53f0efcd272fd5a4ad87030c035e3738187b80e))
+
 ## [2.5.0](https://github.com/piyuo/flutter-appkit/compare/v2.4.1...v2.5.0) (2026-02-04)
 
 

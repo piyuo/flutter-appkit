@@ -5,23 +5,17 @@ body:
     attributes:
       value: |
         ---
-        ### How to use this template
-
-        1. **Type your raw idea, request, or bug below**
-        2. **Copy both your input and the AI guide** into any AI assistant (ChatGPT, Claude, Gemini, etc.)
-        3. **Let the AI generate a structured GitHub issue**
-        4. **Copy the AI-generated markdown back here**, replacing the content
-        5. **Move the first line to the Title field**
-        6. **Review and adjust if needed** — AI may over-generate or make assumptions
-        7. **Submit the issue**
-
-        The AI will act as a *translator*, turning your thoughts into a clear, structured issue using **EARS methodology** 🚀
+        ### How to use
+        1. Write your raw idea below
+        2. Copy everything into an AI tool
+        3. Paste the AI result back here
+        4. Move the first line to the title
+        5. Review and submit
 
   - type: textarea
     id: description
     attributes:
       label: AI Assist
-      description: Start with a rough idea. Precision is not required.
       value: |
 
         Start typing your raw idea, request, or bug report below.

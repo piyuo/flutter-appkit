@@ -22,27 +22,12 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:talker_riverpod_logger/talker_riverpod_logger_observer.dart';
 
 import 'env.dart';
-import 'locale_notifier.dart';
 import 'logger.dart';
 import 'show_error.dart';
-
-/// Internal widget that watches the locale provider and rebuilds when locale changes
-class _LocaleAwareApp extends ConsumerWidget {
-  const _LocaleAwareApp({required this.suspect});
-
-  final Widget Function(Locale?) suspect;
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final locale = ref.watch(localeProvider);
-    return suspect(locale);
-  }
-}
 
 // Cache the DSN validation result
 bool? _sentryEnabledCache;
@@ -94,30 +79,25 @@ bool get isSentryEnabled {
 ///   return true; // Show other errors
 /// });
 /// ```
-Future<void> appRun(
-  Widget Function(Locale?) suspect, {
-  bool Function(Object)? errorCallback,
-  bool observeRiverPod = true,
-}) async {
+Future<void> appRun(Widget widget, {bool Function(Object)? errorCallback}) async {
   runZonedGuarded<Future<void>>(
     () async {
       // Load environment variables from .env file
       await envInit();
-      final appContent = ProviderScope(observers: [
-        if (observeRiverPod) TalkerRiverpodObserver(talker: talker),
-      ], child: _LocaleAwareApp(suspect: suspect));
-
       _setupErrorHandlers(errorCallback);
 
       if (isSentryEnabled) {
-        await _initWithSentry(appContent);
+        await _initWithSentry(widget);
       } else {
-        _initWithoutSentry(appContent);
+        _initWithoutSentry(widget);
       }
     },
     (Object e, StackTrace stack) => catched(e, stack, errorCallback),
   );
 }
+
+// Provides a observer for logging riverpod events to Talker. This can be added to the ProviderScope observers list.
+TalkerRiverpodObserver riverpodObserver() => TalkerRiverpodObserver(talker: talker);
 
 /// Initializes the app with Sentry integration
 Future<void> _initWithSentry(Widget appContent) async {

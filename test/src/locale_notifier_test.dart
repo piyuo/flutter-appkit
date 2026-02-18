@@ -9,9 +9,9 @@
 // ===============================================
 
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_appkit/src/locale.dart';
-import 'package:flutter_appkit/src/locale_notifier.dart';
+import 'package:flutter_appkit/src/models/locale.dart';
 import 'package:flutter_appkit/src/preferences.dart' as preferences;
+import 'package:flutter_appkit/src/providers/locale_notifier.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 

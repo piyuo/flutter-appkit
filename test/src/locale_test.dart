@@ -10,7 +10,7 @@
 // ===============================================
 
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_appkit/src/locale.dart';
+import 'package:flutter_appkit/src/models/locale.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:intl/intl.dart';
 

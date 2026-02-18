@@ -10,7 +10,16 @@ import 'language_dropdown.dart';
 // Never hardcode API keys, tokens, or other sensitive information in source code
 // Environment variables are loaded from .env file using flutter_dotenv package
 void main() {
-  appkit.appRun((locale) => ExampleApp(locale: locale), observeRiverPod: false);
+  appkit.appRun(
+    ProviderScope(
+      observers: [
+        appkit.riverpodObserver(),
+      ],
+      child: appkit.LocaleAwareWidget(
+        builder: (locale) => ExampleApp(locale: locale),
+      ),
+    ),
+  );
 }
 
 class ExampleApp extends ConsumerWidget {

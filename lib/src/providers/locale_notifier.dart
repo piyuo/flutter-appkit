@@ -15,8 +15,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 
-import 'locale.dart';
-import 'preferences.dart';
+import '../models/locale.dart';
+import '../preferences.dart';
 
 /// Provides the current [Locale] and allows updating it.
 final localeProvider = NotifierProvider<LocaleNotifier, Locale?>(LocaleNotifier.new);

@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## [3.0.0](https://github.com/piyuo/flutter-appkit/compare/v2.6.0...v3.0.0) (2026-02-18)
+
+
+### ⚠ BREAKING CHANGES
+
+* move ProviderScope and Preferences out of app_kit #245
+
+### Features
+
+* move ProviderScope and Preferences out of app_kit [#245](https://github.com/piyuo/flutter-appkit/issues/245) ([7f61555](https://github.com/piyuo/flutter-appkit/commit/7f6155598d3f7114d49c32780d6b4ba65a58de8a))
+
 ## [2.6.0](https://github.com/piyuo/flutter-appkit/compare/v2.5.0...v2.6.0) (2026-02-11)
 
 

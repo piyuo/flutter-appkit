@@ -76,7 +76,7 @@ void main() {
     });
     test('localeEngNames contains known keys', () {
       expect(localeEngNames['fr'], 'French');
-      expect(localeEngNames['es_MX'], 'Spanish (Mexico)');
+      expect(localeEngNames['es'], 'Spanish');
     });
   });
 }

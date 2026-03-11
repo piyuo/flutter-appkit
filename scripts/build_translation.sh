@@ -17,7 +17,7 @@ PROJECT_ROOT="$(dirname "$SCRIPT_DIR")"
 
 # Default paths
 CSV_FILE="${1:-$PROJECT_ROOT/lib/src/l10n/l10n.csv}"
-OUTPUT_DIR="${2:-$PROJECT_ROOT/lib/src/l10n/}"
+OUTPUT_DIR="${2:-$PROJECT_ROOT/lib/src/l10n/generated/}"
 
 echo -e "${YELLOW}🔄 Converting CSV to ARB files...${NC}"
 echo "📄 CSV File: $CSV_FILE"

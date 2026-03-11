@@ -12,9 +12,9 @@ import 'dart:io';
 /// - csv_file_path: ../lib/src/l10n/translations.csv
 /// - output_directory: ../lib/src/l10n/
 void main(List<String> args) {
-  String csvFilePath = args.isNotEmpty ? args[0] : '../lib/src/l10n/translations.csv';
+  String csvFilePath = args.isNotEmpty ? args[0] : '../lib/src/l10n/l10n.csv';
 
-  String outputDir = args.length > 1 ? args[1] : '../lib/src/l10n/';
+  String outputDir = args.length > 1 ? args[1] : '../lib/src/l10n/generated/';
 
   // Handle absolute vs relative paths
   File csvFile;

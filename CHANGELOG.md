@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [3.1.0](https://github.com/piyuo/flutter-appkit/compare/v3.0.0...v3.1.0) (2026-03-11)
+
+
+### Features
+
+* reduce number of supported languages [#248](https://github.com/piyuo/flutter-appkit/issues/248) ([0f103a4](https://github.com/piyuo/flutter-appkit/commit/0f103a44e00bb485b37853ab38b0af49650cac4f))
+
 ## [3.0.0](https://github.com/piyuo/flutter-appkit/compare/v2.6.0...v3.0.0) (2026-02-18)
 
 

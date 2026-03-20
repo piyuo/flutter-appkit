@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [3.1.1](https://github.com/piyuo/flutter-appkit/compare/v3.1.0...v3.1.1) (2026-03-20)
+
+
+### Bug Fixes
+
+* sentry_flutter windows compatibility issue [#251](https://github.com/piyuo/flutter-appkit/issues/251) ([929c9b2](https://github.com/piyuo/flutter-appkit/commit/929c9b2d302276bcd2117095d47fdceb4c1f63d0))
+
 ## [3.1.0](https://github.com/piyuo/flutter-appkit/compare/v3.0.0...v3.1.0) (2026-03-11)
 
 

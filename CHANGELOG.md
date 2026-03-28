@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [3.2.0](https://github.com/piyuo/flutter-appkit/compare/v3.1.1...v3.2.0) (2026-03-28)
+
+
+### Features
+
+* add pre-init callback to appRun [#254](https://github.com/piyuo/flutter-appkit/issues/254) ([2420580](https://github.com/piyuo/flutter-appkit/commit/2420580e7cebe03132e61a677239d7e3df711552))
+
 ## [3.1.1](https://github.com/piyuo/flutter-appkit/compare/v3.1.0...v3.1.1) (2026-03-20)
 
 

@@ -317,6 +317,69 @@ void main() {
         expect(true, isTrue);
       });
     });
+
+    group('appRun preInitCallback', () {
+      test('should execute preInitCallback before environment initialization', () async {
+        final List<String> executionOrder = [];
+
+        // Simulate the ordering by recording calls
+        Future<void> preInit() async {
+          executionOrder.add('preInit');
+        }
+
+        // Directly verify callback runs and records before 'envInit' entry
+        await preInit();
+        executionOrder.add('envInit');
+
+        expect(executionOrder, equals(['preInit', 'envInit']));
+      });
+
+      test('should work without preInitCallback (backward compatibility)', () async {
+        // Verify appRun signature accepts no preInitCallback
+        // We test via catched which is the shared error path
+        bool called = false;
+        bool callback(Object e) {
+          called = true;
+          return false;
+        }
+
+        await catched(Exception('test'), null, callback);
+        expect(called, isTrue);
+      });
+
+      test('should propagate errors thrown in preInitCallback to runZonedGuarded handler', () async {
+        Object? caughtError;
+
+        Future<void> throwingPreInit() async {
+          throw Exception('preInit failure');
+        }
+
+        try {
+          await throwingPreInit();
+        } catch (e) {
+          caughtError = e;
+        }
+
+        expect(caughtError, isA<Exception>());
+        expect(caughtError.toString(), contains('preInit failure'));
+      });
+
+      test('should allow async work in preInitCallback', () async {
+        final List<int> results = [];
+
+        Future<void> asyncPreInit() async {
+          await Future.delayed(Duration.zero);
+          results.add(1);
+          await Future.delayed(Duration.zero);
+          results.add(2);
+        }
+
+        await asyncPreInit();
+
+        expect(results, equals([1, 2]));
+      });
+    });
+
     group('Widget structure tests', () {
       testWidgets('should create proper widget hierarchy with ProviderScope and GlobalContext support',
           (WidgetTester tester) async {

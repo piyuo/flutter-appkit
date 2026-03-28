@@ -53,6 +53,9 @@ bool get isSentryEnabled {
 /// ensuring the app rebuilds when the user switches languages.
 /// The optional [errorCallback] allows you to evaluate caught errors and decide
 /// whether to suppress or display them to the user.
+/// The optional [preInitCallback] is executed inside [runZonedGuarded] before
+/// environment variables are loaded via [envInit]. Use it for any setup that
+/// must run within the guarded zone but before the environment is available.
 ///
 /// Sentry crash reporting is automatically enabled when SENTRY_DSN environment
 /// variable is configured. App Hang tracking is disabled by default to protect
@@ -61,6 +64,7 @@ bool get isSentryEnabled {
 /// Features:
 /// - Catches all unhandled exceptions
 /// - Optional Sentry integration for crash reporting (with App Hang tracking disabled)
+/// - Optional pre-init callback executed before environment initialization
 /// - Optional error callback for custom error handling
 /// - Prevents multiple error dialogs
 /// - Logs errors using Talker
@@ -69,19 +73,31 @@ bool get isSentryEnabled {
 ///
 /// Example:
 /// ```dart
-/// await appRun((locale) => MyApp(locale: locale));
+/// await appRun(MyApp());
+///
+/// // With pre-init callback for early setup inside the guarded zone
+/// await appRun(MyApp(), preInitCallback: () async {
+///   await someEarlySetup();
+/// });
 ///
 /// // With error callback to suppress platform exceptions
-/// await appRun((locale) => MyApp(locale: locale), errorCallback: (e) {
+/// await appRun(MyApp(), errorCallback: (e) {
 ///   if (e is PlatformException || e is MissingPluginException) {
 ///     return false; // Don't show these errors to user
 ///   }
 ///   return true; // Show other errors
 /// });
 /// ```
-Future<void> appRun(Widget widget, {bool Function(Object)? errorCallback}) async {
+Future<void> appRun(
+  Widget widget, {
+  Future<void> Function()? preInitCallback,
+  bool Function(Object)? errorCallback,
+}) async {
   runZonedGuarded<Future<void>>(
     () async {
+      if (preInitCallback != null) {
+        await preInitCallback();
+      }
       // Load environment variables from .env file
       await envInit();
       _setupErrorHandlers(errorCallback);

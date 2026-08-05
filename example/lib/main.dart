@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_appkit/flutter_appkit.dart' as appkit;
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -35,12 +34,9 @@ class ExampleApp extends ConsumerWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
           brightness: Brightness.light,
-          seedColor: CupertinoColors.activeBlue,
+          seedColor: Colors.blue,
         ),
         brightness: Brightness.light,
-        cupertinoOverrideTheme: const CupertinoThemeData(
-          brightness: Brightness.light,
-        ),
         useMaterial3: true,
       ),
       home: const appkit.GlobalContext(child: MyHomePage(title: 'Flutter Demo Home Page')),
@@ -88,9 +84,32 @@ class _MyHomePageState extends State<MyHomePage> {
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () async {
-                assert(false, 'This is an assertion error for testing purposes');
+                appkit.showMessage(context, message: 'This is a test message dialog.');
               },
-              child: const Text('Throw AssertionError/FlutterError no dialog (expected in debug mode)'),
+              child: const Text('show message'),
+            ),
+            ElevatedButton(
+              onPressed: () async {
+                final ok =
+                    await appkit.showConfirm(context, message: 'You can choose OK or Cancel in this confirm dialog.');
+                if (ok == true) {
+                  appkit.logDebug('User pressed OK in confirm dialog.');
+                } else {
+                  appkit.logDebug('User pressed Cancel in confirm dialog.');
+                }
+              },
+              child: const Text('show confirm'),
+            ),
+            const SizedBox(height: 10),
+            ElevatedButton(
+              onPressed: () async {
+                try {
+                  throw MyException2('This is a custom exception for testing.');
+                } catch (e, stack) {
+                  appkit.showError(e, stack);
+                }
+              },
+              child: const Text('show error dialog'),
             ),
             const SizedBox(height: 10),
             ElevatedButton(

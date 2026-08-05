@@ -7,4 +7,5 @@ export 'src/models/locale.dart';
 export 'src/net.dart';
 export 'src/preferences.dart';
 export 'src/providers/locale_notifier.dart';
+export 'src/show_dialog.dart';
 export 'src/widgets/locale_aware_widget.dart';

@@ -15,6 +15,7 @@
 
 import 'package:flutter/foundation.dart'; // Import for kReleaseMode
 import 'package:flutter/material.dart';
+import 'package:flutter_appkit/src/show_dialog.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:talker_flutter/talker_flutter.dart';
 
@@ -116,6 +117,8 @@ void logError(
   StackTrace? stackTrace,
 }) {
   printErrorToConsole(exception, stackTrace);
+  showError(exception, stackTrace);
+
   if (sendToSentry) {
     sendErrorToSentry(exception, stackTrace);
   }

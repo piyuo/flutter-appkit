@@ -22,12 +22,12 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:liquid_glass_widgets/liquid_glass_widgets.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:talker_riverpod_logger/talker_riverpod_logger_observer.dart';
 
 import 'env.dart';
 import 'logger.dart';
-import 'show_error.dart';
 
 // Cache the DSN validation result
 bool? _sentryEnabledCache;
@@ -95,6 +95,8 @@ Future<void> appRun(
 }) async {
   runZonedGuarded<Future<void>>(
     () async {
+      WidgetsFlutterBinding.ensureInitialized();
+      await LiquidGlassWidgets.initialize();
       if (preInitCallback != null) {
         await preInitCallback();
       }
@@ -102,10 +104,11 @@ Future<void> appRun(
       await envInit();
       _setupErrorHandlers(errorCallback);
 
+      final liquidWidget = LiquidGlassWidgets.wrap(child: widget);
       if (isSentryEnabled) {
-        await _initWithSentry(widget);
+        await _initWithSentry(liquidWidget);
       } else {
-        _initWithoutSentry(widget);
+        _initWithoutSentry(liquidWidget);
       }
     },
     (Object e, StackTrace stack) => catched(e, stack, errorCallback),
@@ -221,22 +224,15 @@ Future<void> catched(dynamic e, StackTrace? stack, [bool Function(Object)? error
     // In debug mode, development errors are expected - just print to console and don't show dialog
     return;
   }
-
-  // Log all other errors to console
-  printErrorToConsole(e, stack);
   try {
-    // Check if callback is provided and evaluate whether to show error
-    bool shouldShowError = true;
+    bool errorHandled = false;
     if (errorCallback != null) {
-      shouldShowError = errorCallback(e);
+      errorHandled = !errorCallback(e);
     }
 
     // Only show error dialog if callback allows it
-    if (shouldShowError) {
-      final reportAnonymously = await showError(e, stack);
-      if (reportAnonymously) {
-        sendErrorToSentry(e, stack);
-      }
+    if (!errorHandled) {
+      logError(e, stackTrace: stack);
     }
   } catch (ex) {
     // Log the error and also print to console for debugging

@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [3.3.0](https://github.com/piyuo/flutter-appkit/compare/v3.2.0...v3.3.0) (2026-08-05)
+
+
+### Features
+
+* support glass dialog ui [#257](https://github.com/piyuo/flutter-appkit/issues/257) ([eebbb90](https://github.com/piyuo/flutter-appkit/commit/eebbb9017c234c6bc90b7d7fc9aa238f86be3035))
+
 ## [3.2.0](https://github.com/piyuo/flutter-appkit/compare/v3.1.1...v3.2.0) (2026-03-28)
 
 

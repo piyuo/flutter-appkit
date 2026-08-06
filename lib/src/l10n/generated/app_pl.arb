@@ -1,7 +1,5 @@
 {
-  "close": "Zamknij",
   "error_content": "Wystąpił nieoczekiwany błąd. Spróbuj ponownie później.",
   "error_oops": "Ups, coś poszło nie tak",
-  "error_report": "Pomóż nam się poprawić, wysyłając anonimowy raport",
   "language": "Język systemu"
 }

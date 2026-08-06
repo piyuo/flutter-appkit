@@ -9,16 +9,10 @@ class LocalizationHe extends Localization {
   LocalizationHe([String locale = 'he']) : super(locale);
 
   @override
-  String get close => 'סגור';
-
-  @override
   String get error_content => 'אירעה שגיאה בלתי צפויה. אנא נסה שוב מאוחר יותר.';
 
   @override
   String get error_oops => 'אופס, משהו השתבש';
-
-  @override
-  String get error_report => 'עזרו לנו להשתפר על ידי שליחת דוח אנונימי';
 
   @override
   String get language => 'שפת מערכת';

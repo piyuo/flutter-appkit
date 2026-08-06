@@ -1,7 +1,5 @@
 {
-  "close": "Kapat",
   "error_content": "Beklenmeyen bir hata oluştu. Lütfen daha sonra tekrar deneyin.",
   "error_oops": "Hata, bir şeyler yanlış gitti",
-  "error_report": "Anonim rapor göndererek gelişmemize yardımcı olun",
   "language": "Sistem Dili"
 }

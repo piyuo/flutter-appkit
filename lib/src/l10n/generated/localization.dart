@@ -150,12 +150,6 @@ abstract class Localization {
     Locale('zh', 'CN')
   ];
 
-  /// No description provided for @close.
-  ///
-  /// In en, this message translates to:
-  /// **'Close'**
-  String get close;
-
   /// No description provided for @error_content.
   ///
   /// In en, this message translates to:
@@ -167,12 +161,6 @@ abstract class Localization {
   /// In en, this message translates to:
   /// **'Oops, something went wrong'**
   String get error_oops;
-
-  /// No description provided for @error_report.
-  ///
-  /// In en, this message translates to:
-  /// **'Help us improve by sending an anonymous report'**
-  String get error_report;
 
   /// No description provided for @language.
   ///

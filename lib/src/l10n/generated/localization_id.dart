@@ -9,18 +9,11 @@ class LocalizationId extends Localization {
   LocalizationId([String locale = 'id']) : super(locale);
 
   @override
-  String get close => 'Tutup';
-
-  @override
   String get error_content =>
       'Terjadi kesalahan yang tidak terduga. Silakan coba lagi nanti.';
 
   @override
   String get error_oops => 'Ups, terjadi kesalahan';
-
-  @override
-  String get error_report =>
-      'Bantu kami berkembang dengan mengirim laporan anonim';
 
   @override
   String get language => 'Bahasa Sistem';

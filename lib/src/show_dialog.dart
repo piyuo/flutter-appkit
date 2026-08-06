@@ -27,19 +27,15 @@ void showMessage(BuildContext context, {required String message, String? title, 
     context: context,
     routeSettings: const RouteSettings(name: 'showMessage'),
     barrierDismissible: false,
-    barrierColor: Colors.grey.withValues(alpha: 0.5),
+    barrierColor: Colors.transparent,
     builder: (context) => DefaultTextStyle(
-        style: Theme.of(context).textTheme.bodyMedium ?? const TextStyle(color: Colors.white),
+        style: Theme.of(context).textTheme.bodyMedium ?? const TextStyle(color: Colors.grey),
         child: GlassDialog(
           title: title,
           quality: GlassQuality.standard,
-          settings: const LiquidGlassSettings(
-            glassColor: Color.fromARGB(180, 255, 255, 255),
-          ),
           maxWidth: 350,
           content: Text(message, style: const TextStyle(fontSize: 16.0)),
           actions: [
-            // Close button
             GlassDialogAction(
               label: MaterialLocalizations.of(context).okButtonLabel,
               isPrimary: true,
@@ -57,29 +53,27 @@ Future<bool> showConfirm(BuildContext context,
         context: context,
         routeSettings: const RouteSettings(name: 'showConfirm'),
         barrierDismissible: false,
-        barrierColor: Colors.grey.withValues(alpha: 0.5),
+        barrierColor: Colors.transparent,
         builder: (context) => DefaultTextStyle(
-            style: Theme.of(context).textTheme.bodyMedium ?? const TextStyle(color: Colors.white),
+            style: Theme.of(context).textTheme.bodyMedium ?? const TextStyle(color: Colors.grey),
             child: GlassDialog(
               title: title,
               quality: GlassQuality.standard,
-              settings: const LiquidGlassSettings(
-                glassColor: Color.fromARGB(180, 255, 255, 255),
-              ),
               maxWidth: 350,
               content: Text(message, style: const TextStyle(fontSize: 16.0)),
               actions: [
+                // Cancel button
                 GlassDialogAction(
                   label: MaterialLocalizations.of(context).cancelButtonLabel,
-                  onPressed: () => Navigator.of(context, rootNavigator: true).pop(),
+                  onPressed: () => Navigator.of(context, rootNavigator: true).pop(false),
                 ),
 
-                // Close button
+                // OK button
                 GlassDialogAction(
                   label: MaterialLocalizations.of(context).okButtonLabel,
                   isPrimary: true,
                   isDestructive: isDestructive,
-                  onPressed: () => Navigator.of(context, rootNavigator: true).pop(),
+                  onPressed: () => Navigator.of(context, rootNavigator: true).pop(true),
                 ),
               ],
             )),

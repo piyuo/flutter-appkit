@@ -32,11 +32,11 @@ class ExampleApp extends ConsumerWidget {
     return MaterialApp(
       title: 'flutter_appkit example',
       theme: ThemeData(
+        brightness: Brightness.light,
         colorScheme: ColorScheme.fromSeed(
           brightness: Brightness.light,
           seedColor: Colors.blue,
         ),
-        brightness: Brightness.light,
         useMaterial3: true,
       ),
       home: const appkit.GlobalContext(child: MyHomePage(title: 'Flutter Demo Home Page')),
@@ -90,8 +90,8 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             ElevatedButton(
               onPressed: () async {
-                final ok =
-                    await appkit.showConfirm(context, message: 'You can choose OK or Cancel in this confirm dialog.');
+                final ok = await appkit.showConfirm(context,
+                    message: 'You can choose OK or Cancel in this confirm dialog.', title: 'i am title');
                 if (ok == true) {
                   appkit.logDebug('User pressed OK in confirm dialog.');
                 } else {

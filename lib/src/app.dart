@@ -22,6 +22,7 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_appkit/src/show_dialog.dart';
 import 'package:liquid_glass_widgets/liquid_glass_widgets.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:talker_riverpod_logger/talker_riverpod_logger_observer.dart';
@@ -232,6 +233,7 @@ Future<void> catched(dynamic e, StackTrace? stack, [bool Function(Object)? error
 
     // Only show error dialog if callback allows it
     if (!errorHandled) {
+      showError(e, stack);
       logError(e, stackTrace: stack);
     }
   } catch (ex) {

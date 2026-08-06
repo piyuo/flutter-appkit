@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file.
 
+## [3.4.0](https://github.com/piyuo/flutter-appkit/compare/v3.3.1...v3.4.0) (2026-08-06)
+
+
+### Features
+
+* add l10n support [#267](https://github.com/piyuo/flutter-appkit/issues/267) ([53ad0dc](https://github.com/piyuo/flutter-appkit/commit/53ad0dcfc21bfbbe27953d763afa744264cfcbe6))
+
+
+### Bug Fixes
+
+* confirm message dialog color and return [#263](https://github.com/piyuo/flutter-appkit/issues/263) ([ba57aa6](https://github.com/piyuo/flutter-appkit/commit/ba57aa6ba6e0186e6cbf123bc248734390b91882))
+* showError issue [#265](https://github.com/piyuo/flutter-appkit/issues/265) ([7552ccb](https://github.com/piyuo/flutter-appkit/commit/7552ccbeccdc179d01f14e0d613da1226b8c3ebc))
+
 ## [3.3.1](https://github.com/piyuo/flutter-appkit/compare/v3.3.0...v3.3.1) (2026-08-06)
 
 

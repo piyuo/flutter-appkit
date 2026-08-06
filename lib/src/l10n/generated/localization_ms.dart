@@ -9,18 +9,11 @@ class LocalizationMs extends Localization {
   LocalizationMs([String locale = 'ms']) : super(locale);
 
   @override
-  String get close => 'Tutup';
-
-  @override
   String get error_content =>
       'Ralat tidak dijangka telah berlaku. Sila cuba lagi nanti.';
 
   @override
   String get error_oops => 'Alamak, ada sesuatu yang tidak kena';
-
-  @override
-  String get error_report =>
-      'Bantu kami bertambah baik dengan menghantar laporan tanpa nama';
 
   @override
   String get language => 'Bahasa Sistem';

@@ -9,18 +9,11 @@ class LocalizationTr extends Localization {
   LocalizationTr([String locale = 'tr']) : super(locale);
 
   @override
-  String get close => 'Kapat';
-
-  @override
   String get error_content =>
       'Beklenmeyen bir hata oluştu. Lütfen daha sonra tekrar deneyin.';
 
   @override
   String get error_oops => 'Hata, bir şeyler yanlış gitti';
-
-  @override
-  String get error_report =>
-      'Anonim rapor göndererek gelişmemize yardımcı olun';
 
   @override
   String get language => 'Sistem Dili';

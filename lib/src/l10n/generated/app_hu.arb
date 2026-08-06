@@ -1,7 +1,5 @@
 {
-  "close": "Bezárás",
   "error_content": "Váratlan hiba történt. Kérjük, próbálja újra később.",
   "error_oops": "Hoppá, valami hiba történt",
-  "error_report": "Segítsen fejleszteni egy névtelen jelentés küldésével",
   "language": "Rendszer nyelve"
 }

@@ -9,17 +9,11 @@ class LocalizationFa extends Localization {
   LocalizationFa([String locale = 'fa']) : super(locale);
 
   @override
-  String get close => 'بستن';
-
-  @override
   String get error_content =>
       'یک خطای غیرمنتظره رخ داد. لطفاً بعداً دوباره تلاش کنید.';
 
   @override
   String get error_oops => 'اوه، مشکلی پیش آمد';
-
-  @override
-  String get error_report => 'با ارسال گزارش ناشناس به بهبود ما کمک کنید';
 
   @override
   String get language => 'زبان سیستم';

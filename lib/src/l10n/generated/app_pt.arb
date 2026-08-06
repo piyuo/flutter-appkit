@@ -1,7 +1,5 @@
 {
-  "close": "Fechar",
   "error_content": "Ocorreu um erro inesperado. Por favor, tente novamente mais tarde.",
   "error_oops": "Ops, algo deu errado",
-  "error_report": "Ajude-nos a melhorar enviando um relatório anônimo",
   "language": "Língua do sistema"
 }

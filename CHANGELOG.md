@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [3.3.1](https://github.com/piyuo/flutter-appkit/compare/v3.3.0...v3.3.1) (2026-08-06)
+
+
+### Bug Fixes
+
+* remove showError from logError [#260](https://github.com/piyuo/flutter-appkit/issues/260) ([49509f0](https://github.com/piyuo/flutter-appkit/commit/49509f0428655fd68ce7df3dfbfec7d576a0ab95))
+
 ## [3.3.0](https://github.com/piyuo/flutter-appkit/compare/v3.2.0...v3.3.0) (2026-08-05)
 
 

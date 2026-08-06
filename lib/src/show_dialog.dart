@@ -16,7 +16,7 @@ void showError(dynamic e, StackTrace? stack) {
     if (stack != null) {
       debugPrint('STACK TRACE: $stack');
     }
-    debugPrint('Note: Error dialog not shown - GlobalContext not initialized (likely in test environment)');
+    debugPrint('Note: Error dialog not shown - GlobalContext not initialized (likely in develop environment)');
     return;
   }
   showMessage(globalContext, message: e.toString(), title: globalContext.l.error_content);

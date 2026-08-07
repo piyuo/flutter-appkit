@@ -1,42 +1,9 @@
-// ===============================================
-// Module: global_context_support.dart
-// Description: Provides global access to BuildContext for dialogs, overlays, and localization
-//
-// Key Components:
-//   - globalContext getter: Main API for accessing global context
-//   - GlobalContext: Public wrapper widget
-//   - _GlobalContext: Internal stateful implementation
-//   - _GlobalContextState: State management and Navigator finding
-//   - Helper functions: Initialization tracking and overlay access
-//
-// Usage:
-//   1. Wrap your app: GlobalContext(child: MaterialApp(...))
-//   2. Access globally: globalContext (from anywhere in your code)
-//   3. Use for: Dialogs, overlays, localization, navigation
-// ===============================================
-
+/*
 import 'package:flutter/material.dart';
 
 /// Global key to access the GlobalContext state from anywhere in the app
 final GlobalKey<_GlobalContextState> _keyGlobalContextFinder = GlobalKey(debugLabel: 'global_context_support');
 
-/// Provides global access to a BuildContext for use throughout the application.
-///
-/// This is useful for:
-/// - Showing dialogs from non-widget code
-/// - Accessing localization from services or utilities
-/// - Displaying overlays or snackbars from business logic
-///
-/// Throws assertion errors in debug mode if GlobalContext is not properly initialized.
-///
-/// Example:
-/// ```dart
-/// // Show a dialog from anywhere
-/// showDialog(
-///   context: globalContext,
-///   builder: (context) => AlertDialog(title: Text('Global Dialog')),
-/// );
-/// ```
 BuildContext get globalContext {
   assert(
     _debugInitialized,
@@ -128,3 +95,4 @@ class _GlobalContextState extends State<_GlobalContext> {
     return widget.child;
   }
 }
+*/

@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [3.4.1](https://github.com/piyuo/flutter-appkit/compare/v3.4.0...v3.4.1) (2026-08-07)
+
+
+### Bug Fixes
+
+* remove build context from dialogs [#270](https://github.com/piyuo/flutter-appkit/issues/270) ([26dd74e](https://github.com/piyuo/flutter-appkit/commit/26dd74e5af60ce99f7acc67f3944a48d66a66d97))
+
 ## [3.4.0](https://github.com/piyuo/flutter-appkit/compare/v3.3.1...v3.4.0) (2026-08-06)
 
 

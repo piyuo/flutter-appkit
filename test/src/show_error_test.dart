@@ -13,7 +13,6 @@
 // ===============================================
 
 import 'package:flutter/material.dart';
-import 'package:flutter_appkit/src/global_context.dart';
 import 'package:flutter_appkit/src/l10n/generated/localization.dart';
 import 'package:flutter_appkit/src/preferences.dart' as preferences;
 import 'package:flutter_appkit/src/show_dialog.dart';
@@ -27,13 +26,12 @@ void main() {
     setUp(() {
       preferences.initForTest({});
       testApp = MaterialApp(
+        navigatorKey: navigatorKey,
         localizationsDelegates: Localization.localizationsDelegates,
         supportedLocales: Localization.supportedLocales,
-        home: GlobalContext(
-          child: const Scaffold(
-            body: Center(
-              child: Text('Test App'),
-            ),
+        home: const Scaffold(
+          body: Center(
+            child: Text('Test App'),
           ),
         ),
       );
@@ -216,14 +214,13 @@ void main() {
       // Reset error tracking state for this test group
 
       final testApp = MaterialApp(
+        navigatorKey: navigatorKey,
         locale: const Locale('en', 'US'),
         localizationsDelegates: Localization.localizationsDelegates,
         supportedLocales: Localization.supportedLocales,
-        home: GlobalContext(
-          child: const Scaffold(
-            body: Center(
-              child: Text('Test App'),
-            ),
+        home: const Scaffold(
+          body: Center(
+            child: Text('Test App'),
           ),
         ),
       );
@@ -247,13 +244,12 @@ void main() {
       // Reset error tracking state for this test
 
       final testApp = MaterialApp(
+        navigatorKey: navigatorKey,
         localizationsDelegates: Localization.localizationsDelegates,
         supportedLocales: Localization.supportedLocales,
-        home: GlobalContext(
-          child: const Scaffold(
-            body: Center(
-              child: Text('Test App'),
-            ),
+        home: const Scaffold(
+          body: Center(
+            child: Text('Test App'),
           ),
         ),
       );
@@ -275,13 +271,12 @@ void main() {
       // Reset error tracking state for this test
 
       final testApp = MaterialApp(
+        navigatorKey: navigatorKey,
         localizationsDelegates: Localization.localizationsDelegates,
         supportedLocales: Localization.supportedLocales,
-        home: GlobalContext(
-          child: const Scaffold(
-            body: Center(
-              child: Text('Test App'),
-            ),
+        home: const Scaffold(
+          body: Center(
+            child: Text('Test App'),
           ),
         ),
       );
@@ -307,13 +302,12 @@ void main() {
 
     setUp(() {
       testApp = MaterialApp(
+        navigatorKey: navigatorKey,
         localizationsDelegates: Localization.localizationsDelegates,
         supportedLocales: Localization.supportedLocales,
-        home: GlobalContext(
-          child: const Scaffold(
-            body: Center(
-              child: Text('Test App'),
-            ),
+        home: const Scaffold(
+          body: Center(
+            child: Text('Test App'),
           ),
         ),
       );
@@ -375,13 +369,12 @@ void main() {
 
     setUp(() {
       testApp = MaterialApp(
+        navigatorKey: navigatorKey,
         localizationsDelegates: Localization.localizationsDelegates,
         supportedLocales: Localization.supportedLocales,
-        home: GlobalContext(
-          child: const Scaffold(
-            body: Center(
-              child: Text('Test App'),
-            ),
+        home: const Scaffold(
+          body: Center(
+            child: Text('Test App'),
           ),
         ),
       );

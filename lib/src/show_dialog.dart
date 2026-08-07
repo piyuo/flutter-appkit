@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:liquid_glass_widgets/liquid_glass_widgets.dart';
 
-import 'global_context.dart';
 import 'l10n/l10n.dart';
+
+final navigatorKey = GlobalKey<NavigatorState>();
 
 /// Displays a Glass error dialog with details and an anonymous report option.
 ///
@@ -10,19 +11,21 @@ import 'l10n/l10n.dart';
 /// [stack] is the optional stack trace.
 ///
 void showError(dynamic e, StackTrace? stack) {
-  if (!isGlobalContextEnabled) {
-    // GlobalContext not available (likely in tests), print to console instead
-    debugPrint('ERROR: $e');
-    if (stack != null) {
-      debugPrint('STACK TRACE: $stack');
-    }
-    debugPrint('Note: Error dialog not shown - GlobalContext not initialized (likely in develop environment)');
+  final context = navigatorKey.currentContext;
+  if (context == null) {
+    debugPrint('Navigator is not ready.');
     return;
   }
-  showMessage(globalContext, message: e.toString(), title: globalContext.l.error_content);
+
+  showMessage(message: e.toString(), title: context.l.error_content);
 }
 
-void showMessage(BuildContext context, {required String message, String? title, bool isDestructive = false}) {
+void showMessage({required String message, String? title, bool isDestructive = false}) {
+  final context = navigatorKey.currentContext;
+  if (context == null) {
+    debugPrint('Navigator is not ready.');
+    return;
+  }
   showDialog<bool>(
     context: context,
     routeSettings: const RouteSettings(name: 'showMessage'),
@@ -47,8 +50,12 @@ void showMessage(BuildContext context, {required String message, String? title, 
   );
 }
 
-Future<bool> showConfirm(BuildContext context,
-    {required String message, String? title, bool isDestructive = false}) async {
+Future<bool> showConfirm({required String message, String? title, bool isDestructive = false}) async {
+  final context = navigatorKey.currentContext;
+  if (context == null) {
+    debugPrint('Navigator is not ready.');
+    return false;
+  }
   return await showDialog<bool>(
         context: context,
         routeSettings: const RouteSettings(name: 'showConfirm'),

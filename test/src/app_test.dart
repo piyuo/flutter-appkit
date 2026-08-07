@@ -18,7 +18,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart'; // Added for PlatformException, MissingPluginException
 import 'package:flutter_appkit/src/app.dart';
-import 'package:flutter_appkit/src/global_context.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -380,54 +379,6 @@ void main() {
       });
     });
 
-    group('Widget structure tests', () {
-      testWidgets('should create proper widget hierarchy with ProviderScope and GlobalContext support',
-          (WidgetTester tester) async {
-        Widget testWidget = ProviderScope(
-          child: GlobalContext(
-            child: const MockWidget(),
-          ),
-        );
-
-        await tester.pumpWidget(testWidget);
-        await tester.pumpAndSettle();
-
-        // Verify the widget tree structure
-        expect(find.byType(ProviderScope), findsOneWidget);
-        expect(find.byType(GlobalContext), findsOneWidget);
-        expect(find.byType(MaterialApp), findsOneWidget);
-        expect(find.text('Test App'), findsOneWidget);
-      });
-      testWidgets('should handle widget errors gracefully', (WidgetTester tester) async {
-        // Store original error handler
-        final originalOnError = FlutterError.onError;
-        Exception? capturedError;
-
-        FlutterError.onError = (FlutterErrorDetails details) {
-          if (details.exception is Exception) {
-            capturedError = details.exception as Exception;
-          }
-        };
-
-        Widget errorWidget = ProviderScope(
-          child: GlobalContext(
-            child: ThrowingWidget(
-              error: Exception('Widget error'),
-            ),
-          ),
-        );
-
-        // This should not crash the test framework
-        await tester.pumpWidget(errorWidget);
-
-        // The error should have been captured
-        expect(capturedError, isNotNull);
-
-        // Restore original error handler
-        FlutterError.onError = originalOnError;
-      });
-    });
-
     group('Environment logic tests', () {
       test('should determine Sentry enablement based on DSN presence', () {
         // Test empty DSN
@@ -491,22 +442,20 @@ void main() {
       testWidgets('should handle complete app lifecycle without errors', (WidgetTester tester) async {
         // Test a complete app setup similar to what run() does
         Widget completeApp = ProviderScope(
-          child: GlobalContext(
-            child: MaterialApp(
-              title: 'LibCLI Test App',
-              home: Scaffold(
-                appBar: AppBar(title: const Text('Test App')),
-                body: const Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text('Welcome to LibCLI Test'),
-                      SizedBox(height: 20),
-                      Text('Error handling active'),
-                      SizedBox(height: 20),
-                      Text('Testing complete app structure'),
-                    ],
-                  ),
+          child: MaterialApp(
+            title: 'LibCLI Test App',
+            home: Scaffold(
+              appBar: AppBar(title: const Text('Test App')),
+              body: const Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text('Welcome to LibCLI Test'),
+                    SizedBox(height: 20),
+                    Text('Error handling active'),
+                    SizedBox(height: 20),
+                    Text('Testing complete app structure'),
+                  ],
                 ),
               ),
             ),
@@ -518,7 +467,6 @@ void main() {
 
         // Verify complete app structure
         expect(find.byType(ProviderScope), findsOneWidget);
-        expect(find.byType(GlobalContext), findsOneWidget);
         expect(find.byType(MaterialApp), findsOneWidget);
         expect(find.byType(Scaffold), findsOneWidget);
         expect(find.byType(AppBar), findsOneWidget);
@@ -534,12 +482,10 @@ void main() {
         Widget buildApp() {
           rebuildCount++;
           return ProviderScope(
-            child: GlobalContext(
-              child: MaterialApp(
-                home: Scaffold(
-                  body: Center(
-                    child: Text('Rebuild count: $rebuildCount'),
-                  ),
+            child: MaterialApp(
+              home: Scaffold(
+                body: Center(
+                  child: Text('Rebuild count: $rebuildCount'),
                 ),
               ),
             ),
@@ -554,18 +500,15 @@ void main() {
 
         // Verify the structure remains consistent
         expect(find.byType(ProviderScope), findsOneWidget);
-        expect(find.byType(GlobalContext), findsOneWidget);
       });
 
       testWidgets('should handle rapid widget changes', (WidgetTester tester) async {
         for (int i = 0; i < 5; i++) {
           Widget dynamicApp = ProviderScope(
-            child: GlobalContext(
-              child: MaterialApp(
-                home: Scaffold(
-                  body: Center(
-                    child: Text('Dynamic content $i'),
-                  ),
+            child: MaterialApp(
+              home: Scaffold(
+                body: Center(
+                  child: Text('Dynamic content $i'),
                 ),
               ),
             ),
@@ -624,12 +567,10 @@ void main() {
 
         // Create widget that throws during build
         Widget errorProneWidget = ProviderScope(
-          child: GlobalContext(
-            child: Builder(
-              builder: (context) {
-                throw Exception('Build time error');
-              },
-            ),
+          child: Builder(
+            builder: (context) {
+              throw Exception('Build time error');
+            },
           ),
         );
 
@@ -648,20 +589,18 @@ void main() {
 
         Widget conditionalErrorWidget() {
           return ProviderScope(
-            child: GlobalContext(
-              child: MaterialApp(
-                home: Scaffold(
-                  body: Builder(
-                    builder: (context) {
-                      if (shouldThrow) {
-                        shouldThrow = false; // Only throw once
-                        throw Exception('Transient error');
-                      }
-                      return const Center(
-                        child: Text('Error recovered'),
-                      );
-                    },
-                  ),
+            child: MaterialApp(
+              home: Scaffold(
+                body: Builder(
+                  builder: (context) {
+                    if (shouldThrow) {
+                      shouldThrow = false; // Only throw once
+                      throw Exception('Transient error');
+                    }
+                    return const Center(
+                      child: Text('Error recovered'),
+                    );
+                  },
                 ),
               ),
             ),

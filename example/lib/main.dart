@@ -30,6 +30,7 @@ class ExampleApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return MaterialApp(
+      navigatorKey: appkit.navigatorKey,
       title: 'flutter_appkit example',
       theme: ThemeData(
         brightness: Brightness.light,
@@ -39,7 +40,7 @@ class ExampleApp extends ConsumerWidget {
         ),
         useMaterial3: true,
       ),
-      home: const appkit.GlobalContext(child: MyHomePage(title: 'Flutter Demo Home Page')),
+      home: const MyHomePage(title: 'Flutter Demo Home Page'),
       locale: locale,
       localeResolutionCallback: appkit.localeResolutionCallback,
       localizationsDelegates: const [
@@ -84,13 +85,13 @@ class _MyHomePageState extends State<MyHomePage> {
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () async {
-                appkit.showMessage(context, message: 'This is a test message dialog.');
+                appkit.showMessage(message: 'This is a test message dialog.');
               },
               child: const Text('show message'),
             ),
             ElevatedButton(
               onPressed: () async {
-                final ok = await appkit.showConfirm(context,
+                final ok = await appkit.showConfirm(
                     message: 'You can choose OK or Cancel in this confirm dialog.', title: 'i am title');
                 if (ok == true) {
                   appkit.logDebug('User pressed OK in confirm dialog.');

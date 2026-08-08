@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [3.4.4](https://github.com/piyuo/flutter-appkit/compare/v3.4.3...v3.4.4) (2026-08-08)
+
+
+### Bug Fixes
+
+* riverpod version issue [#279](https://github.com/piyuo/flutter-appkit/issues/279) ([464e129](https://github.com/piyuo/flutter-appkit/commit/464e1295f98b182d092317e27e9a94d023750f76))
+
 ## [3.4.3](https://github.com/piyuo/flutter-appkit/compare/v3.4.2...v3.4.3) (2026-08-08)
 
 

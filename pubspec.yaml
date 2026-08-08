@@ -33,7 +33,7 @@ dev_dependencies:
   build_runner: ^2.15.1
   flutter_test:
     sdk: flutter
-  mockito: ^5.8.1
+  mockito: ^5.6.4
   flutter_lints: ^6.0.0
 #dependency_overrides:
   #analyzer: ^10.0.1

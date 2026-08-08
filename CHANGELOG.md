@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [3.4.3](https://github.com/piyuo/flutter-appkit/compare/v3.4.2...v3.4.3) (2026-08-08)
+
+
+### Bug Fixes
+
+* downgrade mockito to 5.6.4 ([8c95bea](https://github.com/piyuo/flutter-appkit/commit/8c95bea5175106561b6911059b8a281ee717b85d))
+
 ## [3.4.2](https://github.com/piyuo/flutter-appkit/compare/v3.4.1...v3.4.2) (2026-08-08)
 
 

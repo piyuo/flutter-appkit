@@ -20,7 +20,8 @@ dependencies:
   intl: ^0.20.2
   shared_preferences: ^2.5.5
   url_launcher: ^6.3.2
-  flutter_riverpod: ^3.4.2
+  flutter_riverpod: ^3.3.2 # block by analyzer
+  riverpod_annotation: ^4.0.3 # block by analyzer
   talker: ^5.1.20
   talker_flutter: ^5.1.20
   talker_riverpod_logger: ^5.1.20
@@ -28,16 +29,15 @@ dependencies:
   universal_io: ^2.3.1
   liquid_glass_widgets: ^0.29.2
 dev_dependencies:
-  analyzer: ^12.1.0
+  analyzer: ^12.1.0 # block by test
   sentry_dart_plugin: ^3.2.1
   build_runner: ^2.15.1
   flutter_test:
     sdk: flutter
-  mockito: ^5.6.4
+  mockito: ^5.6.4 # block by analyzer
   flutter_lints: ^6.0.0
-#dependency_overrides:
-  #analyzer: ^10.0.1
-  #meta: ^1.11.0 #cause flutter_test blocked
+  riverpod_generator: ^4.0.4 # block by analyzer
+
 
 # The following section is specific to Flutter.
 flutter:

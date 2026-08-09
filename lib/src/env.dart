@@ -7,11 +7,9 @@
 // 4. Utility Functions
 // ============================================================================
 
+import 'package:flutter/foundation.dart';
+import 'package:flutter_appkit/src/logger.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-
-// ============================================================================
-// 2. Environment Initialization
-// ============================================================================
 
 /// Initializes the environment variables by loading from a .env file.
 ///
@@ -28,19 +26,28 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 /// without throwing an exception, allowing the app to run with default configurations.
 /// Returns normally if the file loads successfully or if dotenv is already initialized.
 Future<void> envInit({String fileName = '.env'}) async {
-  try {
-    if (!dotenv.isInitialized) {
-      await dotenv.load(fileName: fileName);
+  if (dotenv.isInitialized) {
+    if (kDebugMode) {
+      logDebug('[env] initialized, skipping load for "$fileName"');
     }
-  } catch (e) {
-    // Log the warning but don't throw - allow graceful continuation
-    // This handles cases where .env file is missing or unreadable
-    // which is a valid scenario for development/deployment flexibility
-    // Users can still access environment variables through system environment
-    // or use default values with envGet()
+    return;
+  }
+
+  try {
+    await dotenv.load(fileName: fileName);
+    if (kDebugMode) {
+      logDebug('[env] loaded "$fileName" successfully '
+          '(${dotenv.env.length} keys: ${dotenv.env.keys.join(", ")})');
+    }
+  } catch (e, stackTrace) {
+    // Still swallow it so the app can continue with defaults,
+    // but log everything needed to diagnose why.
+    logDebug(
+      '[env]: FAILED to load "$fileName" — app will continue with '
+      'default configuration. error: $e, stackTrace: $stackTrace',
+    );
   }
 }
-
 // ============================================================================
 // 3. Environment Variable Access
 // ============================================================================

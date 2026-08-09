@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [3.5.0](https://github.com/piyuo/flutter-appkit/compare/v3.4.4...v3.5.0) (2026-08-09)
+
+
+### Features
+
+* add debug info on dotenv load fail [#282](https://github.com/piyuo/flutter-appkit/issues/282) ([9120492](https://github.com/piyuo/flutter-appkit/commit/9120492e1c9c976959a7d19370d2d7308961edfe))
+
 ## [3.4.4](https://github.com/piyuo/flutter-appkit/compare/v3.4.3...v3.4.4) (2026-08-08)
 
 

@@ -122,7 +122,6 @@ TalkerRiverpodObserver riverpodObserver() => TalkerRiverpodObserver(talker: talk
 /// Initializes the app with Sentry integration
 Future<void> _initWithSentry(Widget appContent) async {
   final sentryDSN = envGet('SENTRY_DSN');
-
   try {
     await SentryFlutter.init(
       (options) {
@@ -130,37 +129,25 @@ Future<void> _initWithSentry(Widget appContent) async {
         options.sendDefaultPii = true;
         // Reduce debug noise in console
         options.debug = false;
-        // Disable App Hang tracking to to protect user's privacy,
-        // we must get user's permission in order to send sentry error report.
-        options.enableAppHangTracking = false;
-        // Optional: Set log level to reduce warnings
-        options.diagnosticLevel = SentryLevel.error;
+        options.enableAppHangTracking = true;
+        options.diagnosticLevel = kDebugMode ? SentryLevel.warning : SentryLevel.error;
         // Add environment detection
         options.environment = kDebugMode ? 'development' : 'production';
-
-        // Filter out development-only errors and enforce user consent
+        // Enable Tombstone collection on Android to get richer crash reports
+        options.enableTombstone = true;
         options.beforeSend = (event, hint) {
           // Never send errors in debug mode - they should only be shown on screen
           if (kDebugMode) {
             return null;
           }
-
-          // Filter out development-only errors: FlutterError, AssertionError, MissingPluginException
-          // These should never reach production and aren't actionable in Sentry
-          final exception = event.throwable;
-          if (exception is FlutterError || exception is AssertionError || exception is MissingPluginException) {
-            return null;
-          }
-
-          // Only errors explicitly sent via sendErrorToSentry() (after user consent) reach here
           return event;
         };
       },
       appRunner: () => runApp(SentryWidget(child: appContent)),
     );
-    logInfo('Sentry is enabled.');
+    logInfo('[appkit-app] Sentry is enabled.');
   } catch (e) {
-    logWarning('Failed to initialize Sentry: $e. Falling back to basic error handling.');
+    logWarning('[appkit-app] failed to initialize Sentry: $e. Falling back to basic error handling.');
     _initWithoutSentry(appContent);
   }
 }
@@ -238,6 +225,6 @@ Future<void> catched(dynamic e, StackTrace? stack, [bool Function(Object)? error
     }
   } catch (ex) {
     // Log the error and also print to console for debugging
-    debugPrint('Error dialog display failed: $ex');
+    debugPrint('[appkit-app] failed to display error dialog: $ex');
   }
 }

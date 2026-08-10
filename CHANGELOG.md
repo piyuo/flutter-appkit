@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [3.6.0](https://github.com/piyuo/flutter-appkit/compare/v3.5.0...v3.6.0) (2026-08-10)
+
+
+### Features
+
+* enable tombstone collection for sentry [#285](https://github.com/piyuo/flutter-appkit/issues/285) ([56b4e03](https://github.com/piyuo/flutter-appkit/commit/56b4e03c0646fe5468864e6cc58b8d00866b4641))
+
 ## [3.5.0](https://github.com/piyuo/flutter-appkit/compare/v3.4.4...v3.5.0) (2026-08-09)
 
 

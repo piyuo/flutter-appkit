@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [3.7.0](https://github.com/piyuo/flutter-appkit/compare/v3.6.0...v3.7.0) (2026-08-12)
+
+
+### Features
+
+* add milliseconds to log timestamps [#288](https://github.com/piyuo/flutter-appkit/issues/288) ([5533dbf](https://github.com/piyuo/flutter-appkit/commit/5533dbfa4675d436e657d60073adcee0ee9c16f1))
+
 ## [3.6.0](https://github.com/piyuo/flutter-appkit/compare/v3.5.0...v3.6.0) (2026-08-10)
 
 

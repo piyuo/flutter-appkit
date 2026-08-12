@@ -104,13 +104,9 @@ class _MyHomePageState extends State<MyHomePage> {
             const SizedBox(height: 10),
             ElevatedButton(
               onPressed: () async {
-                try {
-                  throw MyException2('This is a custom exception for testing.');
-                } catch (e, stack) {
-                  appkit.showError(e, stack);
-                }
+                appkit.logInfo('this is a test log info message');
               },
-              child: const Text('show error dialog'),
+              child: const Text('show log info'),
             ),
             const SizedBox(height: 10),
             ElevatedButton(
@@ -136,7 +132,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 appkit.logDebug('Debug log example');
                 appkit.logInfo('Info log example');
                 appkit.logWarning('Warning log example');
-                appkit.logCritical('Critical log example');
+                appkit.logFatal('Fatal log example');
                 appkit.logError('Error log example');
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(content: Text('Log functions called! Check console.')),

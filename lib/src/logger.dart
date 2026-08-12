@@ -13,6 +13,8 @@
 //     - error(dynamic, StackTrace?) - Error logging with Sentry
 // ===============================================
 
+import 'dart:isolate';
+
 import 'package:flutter/foundation.dart'; // Import for kReleaseMode
 import 'package:flutter/material.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
@@ -26,115 +28,257 @@ final _logger = TalkerLogger(
     lineSymbol: '',
   ),
   formatter: CleanLogFormatter(),
-  output: (message) => debugPrint(message),
+  output: debugPrint,
 );
 
 final talker = Talker(
   settings: TalkerSettings(
     useConsoleLogs: false,
   ),
-  logger: _logger,
-)..configure(observer: ConsoleLoggerObserver(_logger));
+)..configure(
+    observer: ConsoleLoggerObserver(_logger),
+  );
 
-/// Custom log formatter for Talker that outputs clean, borderless log lines.
+/// Custom log formatter for Talker.
 ///
-/// Format: [LEVEL] HH:mm:ss | message
+/// Format:
+/// [LEVEL][isolate] HH:mm:ss.SSS | message
+///
+/// Example:
+/// [INFO][main] 16:03:12.123 | Camera stream started
+/// [ERROR][vision-worker] 16:03:15.456 | Frame processing failed
 class CleanLogFormatter extends LoggerFormatter {
   @override
-  String fmt(LogDetails details, TalkerLoggerSettings settings) {
-    final time = DateTime.now();
+  String fmt(
+    LogDetails details,
+    TalkerLoggerSettings settings,
+  ) {
+    final now = DateTime.now();
+
     final level = details.level.toString().split('.').last.toUpperCase();
+
     final message = details.message?.toString() ?? '';
 
-    final timeStr = '${time.hour.toString().padLeft(2, '0')}:'
-        '${time.minute.toString().padLeft(2, '0')}:'
-        '${time.second.toString().padLeft(2, '0')}';
+    final timeStr = '${now.hour.toString().padLeft(2, '0')}:'
+        '${now.minute.toString().padLeft(2, '0')}:'
+        '${now.second.toString().padLeft(2, '0')}.'
+        '${now.millisecond.toString().padLeft(3, '0')}';
 
-    return '[$level] $timeStr | $message';
+    final isolateInfo = _getIsolateInfo();
+
+    return '[$level] $timeStr | $message [$isolateInfo]';
+  }
+
+  String _getIsolateInfo() {
+    try {
+      final debugName = Isolate.current.debugName;
+
+      if (debugName == null || debugName.isEmpty) {
+        return 'isolate';
+      }
+
+      return debugName;
+    } catch (_) {
+      return 'unknown';
+    }
   }
 }
 
 /// Opens the Talker console screen as a modal route for in-app log viewing.
-///
-/// [context] - The BuildContext to use for navigation.
 void logShowConsole(BuildContext context) {
-  Navigator.of(context).push(MaterialPageRoute(
-    builder: (context) => TalkerScreen(talker: talker, appBarTitle: 'Console'),
-  ));
+  Navigator.of(context).push(
+    MaterialPageRoute(
+      builder: (_) => TalkerScreen(
+        talker: talker,
+        appBarTitle: 'Console',
+      ),
+    ),
+  );
 }
 
-/// Log a debug-level message for development and troubleshooting.
+/// Logs a debug message.
 ///
-/// [message] - The message to log at debug level.
+/// Debug messages are only written during debug builds.
+///
+/// Example:
+///   logDebug('Camera stream starting');
 void logDebug(String message) {
-  if (!kReleaseMode) {
+  if (kDebugMode) {
     talker.debug(message);
   }
 }
 
-/// Log an info-level message for general application flow and status updates.
+/// Logs an informational message.
 ///
-/// [message] - The message to log at info level.
+/// Also records the message as a Sentry breadcrumb when Sentry is enabled.
+///
+/// Info messages are intentionally NOT sent to Sentry as events.
 void logInfo(String message) {
   talker.info(message);
+
+  _addSentryBreadcrumb(
+    message: message,
+    level: SentryLevel.info,
+  );
 }
 
-/// Log a warning-level message for potential issues that do not stop execution.
+/// Logs a warning message.
 ///
-/// [message] - The warning message to log.
+/// Warnings are intentionally NOT sent to Sentry as events,
+/// but are recorded as breadcrumbs for later error investigation.
 void logWarning(String message) {
   talker.warning(message);
+
+  _addSentryBreadcrumb(
+    message: message,
+    level: SentryLevel.warning,
+  );
 }
 
-/// Log a critical-level message for serious issues, and send to Sentry if enabled.
+/// Logs a fatal/critical message.
 ///
-/// [message] - The critical message to log and report.
+/// A fatal message is sent to Sentry as a message event.
 ///
-/// If Sentry is enabled, this will also send the message as a fatal event.
-void logCritical(String message) {
+/// Use this only when the condition represents a serious application
+/// failure, rather than a normal recoverable error.
+void logFatal(
+  String message, {
+  bool sendToSentry = true,
+}) {
   talker.critical(message);
 
-  if (isSentryEnabled) {
+  if (sendToSentry && isSentryEnabled) {
     try {
-      Sentry.captureMessage(message, level: SentryLevel.fatal);
+      Sentry.captureMessage(
+        message,
+        level: SentryLevel.fatal,
+      );
     } catch (ex) {
-      // Ignore Sentry errors to prevent cascading failures
-      debugPrint('Sentry critical message reporting failed: $ex');
+      // Never allow logging/reporting to cause another application failure.
+      debugPrint(
+        'Sentry fatal message reporting failed: $ex',
+      );
     }
   }
 }
 
-/// Log an error or exception, optionally with a stack trace, and send to Sentry if enabled.
+/// Logs an error/exception and optionally reports it to Sentry.
 ///
-/// [exception] - The error or exception object to log.
-/// [stackTrace] - Optional stack trace for context.
+/// [exception] is the error or exception object.
 ///
-/// If Sentry is enabled, this will also report the exception and stack trace.
+/// [stackTrace] is the optional stack trace associated with the error.
+///
+/// [context] provides additional information about where/why the error
+/// occurred. It is included in both the local log and Sentry.
+///
+/// [sendToSentry] controls whether the exception is sent to Sentry.
+///
+/// Example:
+///   logError(
+///     exception,
+///     stackTrace: stackTrace,
+///     context: 'CameraNotifier._startStream',
+///   );
 void logError(
-  dynamic exception, {
-  bool sendToSentry = true,
+  Object exception, {
   StackTrace? stackTrace,
+  String? context,
+  bool sendToSentry = true,
 }) {
-  printErrorToConsole(exception, stackTrace);
+  printErrorToConsole(
+    exception,
+    stackTrace,
+    context: context,
+  );
+
   if (sendToSentry) {
-    sendErrorToSentry(exception, stackTrace);
+    sendErrorToSentry(
+      exception,
+      stackTrace,
+      context: context,
+    );
   }
 }
 
 /// Prints an error and optional stack trace to the console using Talker.
-void printErrorToConsole(dynamic exception, StackTrace? stackTrace) {
-  talker.handle(exception, stackTrace, 'unexpected error:$exception');
+void printErrorToConsole(
+  Object exception,
+  StackTrace? stackTrace, {
+  String? context,
+}) {
+  final message = context == null || context.isEmpty ? 'Unexpected error' : context;
+
+  talker.handle(
+    exception,
+    stackTrace,
+    message,
+  );
 }
 
-/// Sends an error to Sentry if enabled.
-void sendErrorToSentry(dynamic exception, StackTrace? stackTrace) {
-  if (isSentryEnabled) {
-    try {
-      Sentry.captureException(exception, stackTrace: stackTrace);
-    } catch (ex) {
-      // Ignore Sentry errors to prevent cascading failures
-      debugPrint('Sentry error reporting failed: $ex');
+/// Sends an error/exception to Sentry if enabled.
+///
+/// [context] is added as a Sentry tag/breadcrumb so the error is easier
+/// to identify in Sentry.
+void sendErrorToSentry(
+  Object exception,
+  StackTrace? stackTrace, {
+  String? context,
+}) {
+  if (!isSentryEnabled) {
+    return;
+  }
+
+  try {
+    if (context != null && context.isNotEmpty) {
+      Sentry.addBreadcrumb(
+        Breadcrumb(
+          message: context,
+          category: 'error.context',
+          level: SentryLevel.error,
+        ),
+      );
     }
+
+    Sentry.captureException(
+      exception,
+      stackTrace: stackTrace,
+    );
+  } catch (ex) {
+    // Never allow Sentry reporting to cause another application failure.
+    debugPrint(
+      'Sentry error reporting failed: $ex',
+    );
+  }
+}
+
+/// Adds a breadcrumb to the current Sentry scope.
+///
+/// Breadcrumbs are useful for reconstructing what the application was
+/// doing immediately before an error occurred.
+///
+/// Info/warning logs are recorded as breadcrumbs rather than individual
+/// Sentry events to avoid generating excessive Sentry events.
+void _addSentryBreadcrumb({
+  required String message,
+  required SentryLevel level,
+}) {
+  if (!isSentryEnabled) {
+    return;
+  }
+
+  try {
+    Sentry.addBreadcrumb(
+      Breadcrumb(
+        message: message,
+        category: 'app',
+        level: level,
+      ),
+    );
+  } catch (ex) {
+    // Logging must never interfere with application execution.
+    debugPrint(
+      'Sentry breadcrumb failed: $ex',
+    );
   }
 }
 

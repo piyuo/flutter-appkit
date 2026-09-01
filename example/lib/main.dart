@@ -10,6 +10,7 @@ import 'language_dropdown.dart';
 // Environment variables are loaded from .env file using flutter_dotenv package
 void main() {
   appkit.appRun(
+    enableLiquidGlass: false,
     ProviderScope(
       observers: [
         appkit.riverpodObserver(),

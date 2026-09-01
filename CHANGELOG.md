@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [3.7.1](https://github.com/piyuo/flutter-appkit/compare/v3.7.0...v3.7.1) (2026-09-01)
+
+
+### Bug Fixes
+
+* duplicate sentry breadcrumbs on loginfo [#291](https://github.com/piyuo/flutter-appkit/issues/291) ([f5342d5](https://github.com/piyuo/flutter-appkit/commit/f5342d5fb7a1e7d46f56ca0d5570f81210e931b3))
+
 ## [3.7.0](https://github.com/piyuo/flutter-appkit/compare/v3.6.0...v3.7.0) (2026-08-12)
 
 

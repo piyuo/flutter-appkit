@@ -131,10 +131,6 @@ void main() {
       expect(() => logWarning('Test warning message'), returnsNormally);
     });
 
-    test('critical() logs message with critical level', () {
-      expect(() => logCritical('Test critical message'), returnsNormally);
-    });
-
     test('error() logs exception with optional stack trace', () {
       final exception = Exception('Test exception');
       final stackTrace = StackTrace.current;
@@ -150,26 +146,12 @@ void main() {
       _ensureEnvInitialized();
     });
 
-    test('critical() does not call Sentry when disabled', () {
-      _mockSentryDisabled();
-
-      // This should not throw even if Sentry is not initialized
-      expect(() => logCritical('Test critical without Sentry'), returnsNormally);
-    });
-
     test('error() does not call Sentry when disabled', () {
       _mockSentryDisabled();
       final exception = Exception('Test exception');
 
       // This should not throw even if Sentry is not initialized
       expect(() => logError(exception), returnsNormally);
-    });
-
-    test('critical() handles Sentry errors gracefully when enabled', () {
-      _mockSentryEnabled();
-
-      // Even if Sentry throws an error, critical() should handle it gracefully
-      expect(() => logCritical('Test critical with potential Sentry error'), returnsNormally);
     });
 
     test('error() handles Sentry errors gracefully when enabled', () {
@@ -253,7 +235,6 @@ void main() {
       expect(() => logDebug(''), returnsNormally);
       expect(() => logInfo('Message with émojis 🚀'), returnsNormally);
       expect(() => logWarning('Message\nwith\nnewlines'), returnsNormally);
-      expect(() => logCritical('Message with "quotes" and \'apostrophes\''), returnsNormally);
     });
 
     test('handles very long messages', () {
@@ -261,7 +242,6 @@ void main() {
       expect(() => logDebug(longMessage), returnsNormally);
       expect(() => logInfo(longMessage), returnsNormally);
       expect(() => logWarning(longMessage), returnsNormally);
-      expect(() => logCritical(longMessage), returnsNormally);
     });
   });
 
@@ -335,21 +315,8 @@ void main() {
         logDebug('Debug message');
         logInfo('Info message');
         logWarning('Warning message');
-        logCritical('Critical message');
         logError(Exception('Test exception'));
       }, returnsNormally);
-    });
-
-    test('Sentry state changes affect behavior', () {
-      _ensureEnvInitialized();
-
-      // Test with Sentry disabled
-      _mockSentryDisabled();
-      expect(() => logCritical('Test without Sentry'), returnsNormally);
-
-      // Test with Sentry enabled
-      _mockSentryEnabled();
-      expect(() => logCritical('Test with Sentry'), returnsNormally);
     });
   });
 }

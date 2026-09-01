@@ -12,20 +12,22 @@
 // ===============================================
 
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../models/locale.dart';
 import '../preferences.dart';
 
-/// Provides the current [Locale] and allows updating it.
-final localeProvider = NotifierProvider<LocaleNotifier, Locale?>(LocaleNotifier.new);
+part 'locale_notifier.g.dart';
+
+abstract interface class LocaleController {}
 
 /// Notifier for managing the app's locale.
 ///
 /// Loads the locale from preferences on initialization, allows updating,
 /// and persists changes. Also updates [Intl.defaultLocale].
-class LocaleNotifier extends Notifier<Locale?> {
+@riverpod
+class LocaleNotifier extends _$LocaleNotifier implements LocaleController {
   bool _hasBeenExplicitlySet = false;
 
   @override

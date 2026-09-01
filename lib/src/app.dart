@@ -97,7 +97,8 @@ Future<void> appRun(
   runZonedGuarded<Future<void>>(
     () async {
       WidgetsFlutterBinding.ensureInitialized();
-      await LiquidGlassWidgets.initialize();
+      _overrideDebugPrint();
+      await LiquidGlassWidgets.initialize(enablePerformanceMonitor: false);
       if (preInitCallback != null) {
         await preInitCallback();
       }
@@ -114,6 +115,18 @@ Future<void> appRun(
     },
     (Object e, StackTrace stack) => catched(e, stack, errorCallback),
   );
+}
+
+void _overrideDebugPrint() {
+  debugPrint = (String? message, {int? wrapWidth}) {
+    if (message != null) {
+      if (message.contains('[LiquidGlass]')) {
+        return; // Drop the log
+      }
+    }
+    // Pass all other logs through normally
+    debugPrintThrottled(message, wrapWidth: wrapWidth);
+  };
 }
 
 // Provides a observer for logging riverpod events to Talker. This can be added to the ProviderScope observers list.
@@ -145,7 +158,7 @@ Future<void> _initWithSentry(Widget appContent) async {
       },
       appRunner: () => runApp(SentryWidget(child: appContent)),
     );
-    logInfo('[appkit-app] Sentry is enabled.');
+    logDebug('[appkit-app] Sentry is enabled.');
   } catch (e) {
     logWarning('[appkit-app] failed to initialize Sentry: $e. Falling back to basic error handling.');
     _initWithoutSentry(appContent);

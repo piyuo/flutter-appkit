@@ -112,9 +112,9 @@ class _MyHomePageState extends State<MyHomePage> {
             ElevatedButton(
               onPressed: () {
                 // Second call with same error - will be suppressed
-                throw OutOfMemoryError();
+                throw ConcurrentModificationError();
               },
-              child: const Text('Throw Error'),
+              child: const Text('Throw ConcurrentModificationError Error'),
             ),
             const SizedBox(height: 10),
             const SizedBox(height: 10),
@@ -139,6 +139,12 @@ class _MyHomePageState extends State<MyHomePage> {
                 );
               },
               child: const Text('Show Log Function Usage'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                appkit.logError('Hello Error');
+              },
+              child: const Text('Log a Hello Error'),
             ),
             const SizedBox(height: 10),
             ElevatedButton(

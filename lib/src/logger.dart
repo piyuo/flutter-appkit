@@ -55,7 +55,8 @@ class CleanLogFormatter extends LoggerFormatter {
   ) {
     final now = DateTime.now();
 
-    final level = details.level.toString().split('.').last.toUpperCase();
+    final rawLevel = details.level.toString().split('.').last.toUpperCase();
+    final level = _padLevel(rawLevel);
 
     final message = details.message?.toString() ?? '';
 
@@ -67,6 +68,16 @@ class CleanLogFormatter extends LoggerFormatter {
     final isolateInfo = _getIsolateInfo();
 
     return '[$level] $timeStr | $message [$isolateInfo]';
+  }
+
+  /// Formats log level to exactly 5 characters.
+  /// - If less than 5 characters, pads with spaces on the right
+  /// - If 5 or more characters, takes first 4 chars and pads to 5
+  String _padLevel(String level) {
+    if (level.length > 5) {
+      return level.substring(0, 4).padRight(5);
+    }
+    return level.padRight(5);
   }
 
   String _getIsolateInfo() {
@@ -115,11 +126,6 @@ void logDebug(String message) {
 /// Info messages are intentionally NOT sent to Sentry as events.
 void logInfo(String message) {
   talker.info(message);
-
-  _addSentryBreadcrumb(
-    message: message,
-    level: SentryLevel.info,
-  );
 }
 
 /// Logs a warning message.
@@ -128,11 +134,6 @@ void logInfo(String message) {
 /// but are recorded as breadcrumbs for later error investigation.
 void logWarning(String message) {
   talker.warning(message);
-
-  _addSentryBreadcrumb(
-    message: message,
-    level: SentryLevel.warning,
-  );
 }
 
 /// Logs a fatal/critical message.
@@ -182,37 +183,17 @@ void logFatal(
 void logError(
   Object exception, {
   StackTrace? stackTrace,
-  String? context,
   bool sendToSentry = true,
 }) {
-  printErrorToConsole(
-    exception,
-    stackTrace,
-    context: context,
-  );
-
+  printErrorToConsole(exception, stackTrace);
   if (sendToSentry) {
-    sendErrorToSentry(
-      exception,
-      stackTrace,
-      context: context,
-    );
+    sendErrorToSentry(exception, stackTrace);
   }
 }
 
 /// Prints an error and optional stack trace to the console using Talker.
-void printErrorToConsole(
-  Object exception,
-  StackTrace? stackTrace, {
-  String? context,
-}) {
-  final message = context == null || context.isEmpty ? 'Unexpected error' : context;
-
-  talker.handle(
-    exception,
-    stackTrace,
-    message,
-  );
+void printErrorToConsole(Object exception, StackTrace? stackTrace) {
+  talker.handle(exception, stackTrace, 'Unexpected error');
 }
 
 /// Sends an error/exception to Sentry if enabled.
@@ -251,37 +232,6 @@ void sendErrorToSentry(
   }
 }
 
-/// Adds a breadcrumb to the current Sentry scope.
-///
-/// Breadcrumbs are useful for reconstructing what the application was
-/// doing immediately before an error occurred.
-///
-/// Info/warning logs are recorded as breadcrumbs rather than individual
-/// Sentry events to avoid generating excessive Sentry events.
-void _addSentryBreadcrumb({
-  required String message,
-  required SentryLevel level,
-}) {
-  if (!isSentryEnabled) {
-    return;
-  }
-
-  try {
-    Sentry.addBreadcrumb(
-      Breadcrumb(
-        message: message,
-        category: 'app',
-        level: level,
-      ),
-    );
-  } catch (ex) {
-    // Logging must never interfere with application execution.
-    debugPrint(
-      'Sentry breadcrumb failed: $ex',
-    );
-  }
-}
-
 /// Observer that logs Talker events to the console using a custom logger.
 class ConsoleLoggerObserver extends TalkerObserver {
   final TalkerLogger logger;
@@ -305,7 +255,9 @@ class ConsoleLoggerObserver extends TalkerObserver {
   void _log(TalkerData data) {
     var msg = data.message?.toString() ?? '';
     if (data is TalkerError) {
-      msg += '\n${data.exception}';
+      if (data.exception != null) {
+        msg += '\n${data.exception}';
+      }
       if (data.stackTrace != null) {
         msg += '\n${data.stackTrace}';
       }

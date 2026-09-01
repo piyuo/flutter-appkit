@@ -12,7 +12,7 @@ environment:
   sdk: '>=3.0.0 <4.0.0'
 
 dependencies:
-  sentry_flutter: ^9.26.0
+  sentry_flutter: ^9.28.0
   flutter:
     sdk: flutter
   flutter_localizations:
@@ -20,23 +20,23 @@ dependencies:
   intl: ^0.20.2
   shared_preferences: ^2.5.5
   url_launcher: ^6.3.2
-  flutter_riverpod: ^3.3.2 # block by analyzer
-  riverpod_annotation: ^4.0.3 # block by analyzer
+  flutter_riverpod: ^3.4.2 # block by analyzer
+  riverpod_annotation: ^4.0.6 # block by analyzer
   talker: ^5.1.20
   talker_flutter: ^5.1.20
   talker_riverpod_logger: ^5.1.20
   flutter_dotenv: ^6.0.1
   universal_io: ^2.3.1
-  liquid_glass_widgets: ^0.29.2
+  liquid_glass_widgets: ^1.2.3
 dev_dependencies:
-  analyzer: ^12.1.0 # block by test
-  sentry_dart_plugin: ^3.2.1
-  build_runner: ^2.15.1
+  analyzer: ^13.3.0 # block by test
+  sentry_dart_plugin: ^3.4.0
+  build_runner: ^2.16.0
   flutter_test:
     sdk: flutter
-  mockito: ^5.6.4 # block by analyzer
+  mockito: ^5.8.1 # block by analyzer
   flutter_lints: ^6.0.0
-  riverpod_generator: ^4.0.4 # block by analyzer
+  riverpod_generator: ^4.0.8 # block by analyzer
 
 
 # The following section is specific to Flutter.
@@ -44,8 +44,8 @@ flutter:
     generate: true
     uses-material-design: true
     # To add assets to your package, add an assets section, like this:
-    assets:
-    - .env.test
+    #assets:
+    #- .env.test
 sentry:
   upload_debug_symbols: true
   upload_source_maps: true

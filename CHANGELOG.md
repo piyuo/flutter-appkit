@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [3.8.0](https://github.com/piyuo/flutter-appkit/compare/v3.7.1...v3.8.0) (2026-09-01)
+
+
+### Features
+
+* make liquid glass effect optional [#294](https://github.com/piyuo/flutter-appkit/issues/294) ([c7d6026](https://github.com/piyuo/flutter-appkit/commit/c7d60268f2df64ab682d28dfbbc49718d6d04795))
+
 ## [3.7.1](https://github.com/piyuo/flutter-appkit/compare/v3.7.0...v3.7.1) (2026-09-01)
 
 

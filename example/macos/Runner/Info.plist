@@ -28,5 +28,8 @@
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
+	<!-- TODO: Remove FLTEnableImpeller when Intel macOS support is dropped. Impeller causes brief black-screen flashes on the built-in display of Intel MacBook Pro. Skia is currently stable. -->
+	<key>FLTEnableImpeller</key>
+	<false/>
 </dict>
 </plist>

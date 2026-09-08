@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [3.8.2](https://github.com/piyuo/flutter-appkit/compare/v3.8.1...v3.8.2) (2026-09-08)
+
+
+### Bug Fixes
+
+* app init callback called too early [#300](https://github.com/piyuo/flutter-appkit/issues/300) ([77763fb](https://github.com/piyuo/flutter-appkit/commit/77763fb9c75f4a0323c8efb5375fea908d992fcc))
+
 ## [3.8.1](https://github.com/piyuo/flutter-appkit/compare/v3.8.0...v3.8.1) (2026-09-05)
 
 

@@ -32,7 +32,7 @@ final class LocaleNotifierProvider
           argument: null,
           retry: null,
           name: r'localeProvider',
-          isAutoDispose: true,
+          isAutoDispose: false,
           dependencies: null,
           $allTransitiveDependencies: null,
         );
@@ -53,7 +53,7 @@ final class LocaleNotifierProvider
   }
 }
 
-String _$localeNotifierHash() => r'5b9d62131636fddb201193411915f14dee1fb317';
+String _$localeNotifierHash() => r'0312644ef9a6dddc6a4cd711e6add560980cbb0f';
 
 /// Notifier for managing the app's locale.
 ///

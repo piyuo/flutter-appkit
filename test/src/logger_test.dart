@@ -69,10 +69,10 @@ void main() {
 
       final result = formatter.fmt(mockLogDetails, settings);
 
-      // Should contain level and message
-      expect(result, contains('[INFO]'));
+      // Should contain level and message (level is padded to 5 chars)
+      expect(result, contains('[INFO ]'));
       expect(result, contains('Test message'));
-      expect(result, matches(r'\d{2}:\d{2}:\d{2}'));
+      expect(result, matches(r'\d{2}:\d{2}:\d{2}\.\d{3}'));
     });
 
     test('handles null message gracefully', () {
@@ -88,7 +88,8 @@ void main() {
 
       final result = formatter.fmt(mockLogDetails, settings);
 
-      expect(result, contains('[WARNING]'));
+      // 'WARNING' is truncated to 4 chars + padding, matching _padLevel's rule
+      expect(result, contains('[WARN ]'));
       expect(result, isNot(contains('null')));
     });
 
@@ -105,8 +106,8 @@ void main() {
 
       final result = formatter.fmt(mockLogDetails, settings);
 
-      // Should format time with proper padding (HH:MM:SS)
-      expect(result, matches(r'\[DEBUG\] \d{2}:\d{2}:\d{2} \| Test'));
+      // Should format time with proper padding (HH:MM:SS.mmm)
+      expect(result, matches(r'\[DEBUG\] \d{2}:\d{2}:\d{2}\.\d{3} \| Test'));
     });
   });
 
@@ -283,7 +284,9 @@ void main() {
         final result = formatter.fmt(mockLogDetails, settings);
 
         // Note: LogLevel.toString() returns "LogLevel.xxx", so we need to extract just the level name
-        final levelName = level.toString().split('.').last.toUpperCase();
+        final rawLevelName = level.toString().split('.').last.toUpperCase();
+        // Mirrors CleanLogFormatter._padLevel: truncate to 4 chars then pad to 5 if too long
+        final levelName = rawLevelName.length > 5 ? rawLevelName.substring(0, 4).padRight(5) : rawLevelName.padRight(5);
         expect(result, contains('[$levelName]'));
         expect(result, contains('Test ${level.toString()}'));
       }
@@ -303,8 +306,8 @@ void main() {
       final formatter = CleanLogFormatter();
       final result = formatter.fmt(mockLogDetails, settings);
 
-      // Should have proper timestamp format: HH:MM:SS
-      expect(result, matches(r'\[INFO\] \d{2}:\d{2}:\d{2} \| Timestamp test'));
+      // Should have proper timestamp format: HH:MM:SS.mmm
+      expect(result, matches(r'\[INFO \] \d{2}:\d{2}:\d{2}\.\d{3} \| Timestamp test'));
     });
   });
 

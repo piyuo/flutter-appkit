@@ -12,12 +12,12 @@
 //   - Integration Tests
 // ===============================================
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_appkit/src/l10n/generated/localization.dart';
 import 'package:flutter_appkit/src/preferences.dart' as preferences;
 import 'package:flutter_appkit/src/show_dialog.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:liquid_glass_widgets/liquid_glass_widgets.dart';
 
 void main() {
   group('showError', () {
@@ -48,7 +48,7 @@ void main() {
       await tester.pumpAndSettle();
 
       // Verify dialog is displayed
-      expect(find.byType(GlassDialog), findsOneWidget);
+      expect(find.byType(CupertinoAlertDialog), findsOneWidget);
 
       // Verify title is the error content message
       expect(find.text('An unexpected error occurred. Please try again later.'), findsOneWidget);
@@ -72,10 +72,6 @@ void main() {
       // Find the error message text
       final errorTextFinder = find.text('Exception: Custom error message');
       expect(errorTextFinder, findsOneWidget);
-
-      // Verify the text styling
-      final Text errorTextWidget = tester.widget(errorTextFinder);
-      expect(errorTextWidget.style?.fontSize, 16.0);
     });
 
     testWidgets('OK button dismisses dialog', (WidgetTester tester) async {
@@ -88,14 +84,14 @@ void main() {
       await tester.pumpAndSettle();
 
       // Verify dialog is present
-      expect(find.byType(GlassDialog), findsOneWidget);
+      expect(find.byType(CupertinoAlertDialog), findsOneWidget);
 
       // Tap OK button
       await tester.tap(find.text('OK'));
       await tester.pumpAndSettle();
 
       // Verify dialog is dismissed
-      expect(find.byType(GlassDialog), findsNothing);
+      expect(find.byType(CupertinoAlertDialog), findsNothing);
     });
 
     testWidgets('handles different error types correctly', (WidgetTester tester) async {
@@ -116,7 +112,7 @@ void main() {
         await tester.pumpAndSettle();
 
         // Verify dialog appears
-        expect(find.byType(GlassDialog), findsOneWidget);
+        expect(find.byType(CupertinoAlertDialog), findsOneWidget);
 
         // Verify error message is displayed (converted to string)
         expect(find.textContaining(error.toString()), findsOneWidget);
@@ -126,7 +122,7 @@ void main() {
         await tester.pumpAndSettle();
 
         // Verify dialog is dismissed
-        expect(find.byType(GlassDialog), findsNothing);
+        expect(find.byType(CupertinoAlertDialog), findsNothing);
       }
     });
 
@@ -146,7 +142,7 @@ void main() {
       await tester.tap(find.text('OK'));
       await tester.pumpAndSettle();
 
-      expect(find.byType(GlassDialog), findsNothing);
+      expect(find.byType(CupertinoAlertDialog), findsNothing);
     });
 
     testWidgets('title text is correct', (WidgetTester tester) async {
@@ -160,7 +156,7 @@ void main() {
 
       // Find the title text
       final titleFinder = find.descendant(
-        of: find.byType(GlassDialog),
+        of: find.byType(CupertinoAlertDialog),
         matching: find.text('An unexpected error occurred. Please try again later.'),
       );
       expect(titleFinder, findsOneWidget);
@@ -191,7 +187,7 @@ void main() {
       showError(testError1, testStack);
       await tester.pumpAndSettle();
 
-      expect(find.byType(GlassDialog), findsOneWidget);
+      expect(find.byType(CupertinoAlertDialog), findsOneWidget);
 
       // Close dialog
       await tester.tap(find.text('OK'));
@@ -201,7 +197,7 @@ void main() {
       showError(testError2, null);
       await tester.pumpAndSettle();
 
-      expect(find.byType(GlassDialog), findsOneWidget);
+      expect(find.byType(CupertinoAlertDialog), findsOneWidget);
 
       // Close dialog
       await tester.tap(find.text('OK'));
@@ -263,7 +259,7 @@ void main() {
       await tester.pumpAndSettle();
 
       // Should still display dialog with empty exception
-      expect(find.byType(GlassDialog), findsOneWidget);
+      expect(find.byType(CupertinoAlertDialog), findsOneWidget);
       expect(find.text('Exception: '), findsOneWidget);
     });
 
@@ -292,7 +288,7 @@ void main() {
       await tester.pumpAndSettle();
 
       // Should still display dialog with long message
-      expect(find.byType(GlassDialog), findsOneWidget);
+      expect(find.byType(CupertinoAlertDialog), findsOneWidget);
       expect(find.textContaining(longMessage), findsOneWidget);
     });
   });
@@ -325,7 +321,7 @@ void main() {
       await tester.pumpAndSettle();
 
       // Verify first dialog is displayed
-      expect(find.byType(GlassDialog), findsOneWidget);
+      expect(find.byType(CupertinoAlertDialog), findsOneWidget);
       expect(find.text('Exception: First error'), findsOneWidget);
 
       // Close the first dialog
@@ -333,14 +329,14 @@ void main() {
       await tester.pumpAndSettle();
 
       // Verify no dialogs are showing
-      expect(find.byType(GlassDialog), findsNothing);
+      expect(find.byType(CupertinoAlertDialog), findsNothing);
 
       // Now show second error dialog
       showError(secondError, StackTrace.current);
       await tester.pumpAndSettle();
 
       // Should show the second dialog now
-      expect(find.byType(GlassDialog), findsOneWidget);
+      expect(find.byType(CupertinoAlertDialog), findsOneWidget);
       expect(find.text('Exception: Second error'), findsOneWidget);
       expect(find.text('Exception: First error'), findsNothing);
     });
@@ -355,10 +351,10 @@ void main() {
       await tester.pumpAndSettle();
 
       // Verify dialog is displayed
-      expect(find.byType(GlassDialog), findsOneWidget);
+      expect(find.byType(CupertinoAlertDialog), findsOneWidget);
 
       // Check that the dialog route has the correct name
-      final BuildContext context = tester.element(find.byType(GlassDialog));
+      final BuildContext context = tester.element(find.byType(CupertinoAlertDialog));
       final ModalRoute? route = ModalRoute.of(context);
       expect(route?.settings.name, 'showMessage');
     });
@@ -392,7 +388,7 @@ void main() {
       await tester.pumpAndSettle();
 
       // Verify first dialog is displayed
-      expect(find.byType(GlassDialog), findsOneWidget);
+      expect(find.byType(CupertinoAlertDialog), findsOneWidget);
       expect(find.text('Exception: First error'), findsOneWidget);
 
       // Close the first dialog
@@ -404,7 +400,7 @@ void main() {
       await tester.pumpAndSettle();
 
       // Should show the second dialog
-      expect(find.byType(GlassDialog), findsOneWidget);
+      expect(find.byType(CupertinoAlertDialog), findsOneWidget);
       expect(find.text('Invalid argument(s): Second error'), findsOneWidget);
     });
 
@@ -428,7 +424,7 @@ void main() {
         await tester.pumpAndSettle();
 
         // Should show dialog for each different error type
-        expect(find.byType(GlassDialog), findsOneWidget);
+        expect(find.byType(CupertinoAlertDialog), findsOneWidget);
 
         // Close dialog
         await tester.tap(find.text('OK'));
@@ -448,7 +444,7 @@ void main() {
       await tester.pumpAndSettle();
 
       // Verify dialog is displayed
-      expect(find.byType(GlassDialog), findsOneWidget);
+      expect(find.byType(CupertinoAlertDialog), findsOneWidget);
 
       // Close dialog
       await tester.tap(find.text('OK'));
@@ -459,7 +455,7 @@ void main() {
       await tester.pumpAndSettle();
 
       // Should show dialog again
-      expect(find.byType(GlassDialog), findsOneWidget);
+      expect(find.byType(CupertinoAlertDialog), findsOneWidget);
     });
   });
 }

@@ -95,19 +95,20 @@ Future<void> appRun(
   bool Function(Object)? errorCallback,
   bool enableLiquidGlass = true,
 }) async {
-  runZonedGuarded<Future<void>>(
+  await runZonedGuarded<Future<void>>(
     () async {
       WidgetsFlutterBinding.ensureInitialized();
       _overrideDebugPrint();
       if (enableLiquidGlass) {
         await LiquidGlassWidgets.initialize();
       }
-      if (preInitCallback != null) {
-        await preInitCallback();
-      }
       // Load environment variables from .env file
       await envInit();
       _setupErrorHandlers(errorCallback);
+
+      if (preInitCallback != null) {
+        await preInitCallback();
+      }
 
       final liquidWidget = enableLiquidGlass ? LiquidGlassWidgets.wrap(child: widget) : widget;
       if (isSentryEnabled) {

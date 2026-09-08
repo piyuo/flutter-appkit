@@ -26,7 +26,7 @@ abstract interface class LocaleController {}
 ///
 /// Loads the locale from preferences on initialization, allows updating,
 /// and persists changes. Also updates [Intl.defaultLocale].
-@riverpod
+@Riverpod(keepAlive: true)
 class LocaleNotifier extends _$LocaleNotifier implements LocaleController {
   bool _hasBeenExplicitlySet = false;
 
